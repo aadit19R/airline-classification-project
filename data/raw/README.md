@@ -4,7 +4,7 @@ All required raw files are now stored inside this project's own `data/raw` direc
 
 ## January–March 2026 extension
 
-The new final-test sources are available: [flight CSVs](flights/bts/2026/csv), [original archives](flights/bts/2026/archives) and [origin weather](weather/observations/2026). They contain 1,671,142 national rows and 228,586 ATL/ORD/DFW schedules. Each origin has weather observations on all 90 Q1 days, with boundary padding. See [the extension report](../../reports/DATA_ACQUISITION_2026_Q1.md).
+The new final-test sources are available: [flight CSVs](flights/bts/2026/csv), [original archives](flights/bts/2026/archives) and [origin weather](weather/observations/2026). They contain 1,671,142 national rows and 228,586 ATL/ORD/DFW schedules. Each origin has weather observations on all 90 Q1 days, with boundary padding. See [the dataset guide](../../DATASET_GUIDE.md).
 
 The acquisition structural audit loaded no test outcome values. The user subsequently approved excluding both versions at the two ambiguous 2026 weather timestamps, consistent with the six earlier conflicts. The preparation notebooks and both handoffs are now rebuilt for 2025 development/final refit and Q1-2026 testing. Raw report versions remain stored; no test outcome EDA is performed.
 

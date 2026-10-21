@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "verified_at_utc": "2026-10-21T20:43:41.998920+00:00",
+  "purpose": "reproduction of the completed July evaluation; no new test or selection",
+  "visible_code_lines": 190,
+  "code_cells": 45,
+  "essential_figures": 9,
+  "maximum_cell_lines": 7,
+  "median_cell_lines": 4.0,
+  "visible_classifier_fit_calls": 4,
+  "helper_fits_models": false,
+  "validation_threshold_derivations_checked": 8,
+  "fresh_kernels": 4,
+  "benign_font_cache_startup_notices": 3,
+  "errors": 0,
+  "warnings": 0,
+  "feature_columns_checked": 78,
+  "feature_rows_checked": 50000,
+  "feature_values_checked": 3900000,
+  "feature_missingness_matches": true,
+  "principal_A_B_models": 8,
+  "baseline_comparisons": 4,
+  "exact_rank_checks": 120000,
+  "review_quota_checks": 36,
+  "subgroup_rows_checked": 18,
+  "maximum_absolute_score_difference": 2.220446049250313e-16,
+  "learned_preprocessing_arrays_checked": 45,
+  "chronological_cohorts_match": true,
+  "training_only_preprocessing": true,
+  "dashboard_summaries_reconcile": true,
+  "protected_files_unchanged": 389,
+  "historical_sources_required": false,
+  "tableau_files_unchanged": 49,
+  "preexisting_selection_hash_differences": {
+    "reports/preparation_manifest.json": {
+      "selection_sha256": "2d0a3365abbcc0c2c6cd5a5927a775b18b3d77de8d10a6d3aef6640ffaa1c7e5",
+      "current_sha256": "3a0a62439e5ca88a287d20ad226061f8e6c9b28f04b6de6edc8478d74bff69b2"
+    }
+  },
+  "provenance_note": "The saved preparation manifest differs from its selection-time hash. Both processed datasets still match selection; every feature and principal prediction is checked directly here.",
+  "july_population": 87298,
+  "software": {
+    "python": "3.13.6",
+    "pandas": "3.0.3",
+    "numpy": "2.5.1",
+    "scikit-learn": "1.9.0",
+    "pyarrow": "20.0.0",
+    "joblib": "1.5.3",
+    "nbclient": "0.10.2"
+  }
+}

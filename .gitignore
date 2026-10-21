@@ -3,12 +3,16 @@
 __pycache__/
 .ipynb_checkpoints/
 *.pyc
+hyperd.log
 data/processed/*
 !data/processed/.gitkeep
 models/*
 !models/.gitkeep
 tableau/exports/*.csv
 tableau/exports/export_manifest.json
+reports/simple_reproduction/*.parquet
+reports/simple_reproduction/*.joblib
+reports/simple_reproduction/*.npz
 
 # Large raw payloads stay local; acquisition scripts and guides stay versioned.
 data/raw/**/*.csv

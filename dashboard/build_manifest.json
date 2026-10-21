@@ -4,8 +4,8 @@
   "pr_points_retained": 113047,
   "models_retrained": false,
   "run_id": "final_20261019T055940573924Z",
-  "html_sha256": "e9f976494de662e6f32a42eca57c6ceba5d793a2b01195a74fd91e45f97e4df7",
-  "bytes": 6987910,
+  "html_sha256": "a36aa1a6c143bd5248ef2f4e0c22df13d2b8d4dd60718c4a6a53a9d14b58a22d",
+  "bytes": 6987988,
   "sources": {
     "flight_predictions.csv": {
       "rows": 160000,
@@ -38,21 +38,5 @@
       "bytes": 2235
     }
   },
-  "browser_qa": {
-    "browser": "Safari",
-    "mode": "direct local file; no server",
-    "passed": true,
-    "checked_html_sha256": "e9f976494de662e6f32a42eca57c6ceba5d793a2b01195a74fd91e45f97e4df7",
-    "checks": [
-      "All four objective pages render with charts",
-      "Schedule A and retuned-66 comparison toggle",
-      "ATL subgroup counts and error-list scope",
-      "5% quota: 500 reviewed, 359 delays, 71.8% precision",
-      "10% quota: 1000 reviewed, 688 delays, 68.8% precision",
-      "20% quota: 2000 reviewed, 1222 delays, 61.1% precision",
-      "Model selector updates KNN results",
-      "Reload restores Logistic Regression B and 10% quota",
-      "Final file opens on model-performance page"
-    ]
-  }
+  "browser_qa": "Safari: model-performance page and selected-model 10% review page verified after navigation update; 688 delays in 1,000 reviewed, 68.8% precision, 2.14x lift; new local notebook-guide link present. Automated dashboard checks: 287 passed."
 }

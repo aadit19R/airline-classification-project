@@ -1,5 +1,7 @@
 # Project report
 
+For the main teaching sequence, use the [four simple notebooks](../../notebooks/simple/README.md). They explain the same preparation decisions and reproduce the completed July evaluation, with separate artifacts and direct compatibility checks. The PDF, editable report source and numerical findings remain the published originals.
+
 Open the [nine-page PDF report](output/pdf/predeparture_flight_delay_report.pdf).
 The [editable Markdown source](predeparture_flight_delay_report.md) contains the same prose, tables and figures.
 

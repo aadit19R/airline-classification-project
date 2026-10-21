@@ -1,5 +1,7 @@
 # Departure Insights · offline dashboard
 
+The [four simple notebooks](../notebooks/simple/README.md) are the main explanation and reproduction sequence. The dashboard continues to read the same frozen July exports; a link in its footer opens the notebook guide when the project folder is available. Copying the HTML file alone still preserves all dashboard functionality.
+
 Open **[departure_delay_dashboard.html](dist/departure_delay_dashboard.html)** in Safari, Chrome or Edge. Double-click the file in Finder. It is a single portable file: its charts, styling, code and study data are embedded. No account, internet, installation or local server is required.
 
 The user requested this HTML deliverable in place of Tableau/Power BI. The four pages map to the agreed ML objectives:

@@ -93,8 +93,8 @@ The study remains a historical simulation: weather delivery uses an assumed 20-m
 
 ## Reviewable files
 
-- notebooks/06_final_model_selection.ipynb: feature screen, bounded tuning, larger-fit check and final refits.
-- notebooks/07_final_july_evaluation.ipynb: frozen confirmation, comparisons, error analysis and ranking plots.
+- [Model Training](../../notebooks/simple/03_model_training.ipynb): final settings and eight A/B refits. The completed development searches remain recorded in development.json and selection.json.
+- [Evaluation and Findings](../../notebooks/simple/04_evaluation_and_findings.ipynb): reproduction of the completed July comparisons, error analysis and ranking results.
 - reports/final_models/development_audit.json: score, threshold, cohort and baseline-integrity checks.
 - tableau/exports/final_july/: six reconciled Tableau sources and the exact-run manifest.
 - models/final_flight_delay_models.joblib: final fitted pipelines.

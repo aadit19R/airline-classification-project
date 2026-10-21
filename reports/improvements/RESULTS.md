@@ -94,8 +94,8 @@ Pressure, relative traffic normalization, destination forecasts, a real-time dis
 
 ## Files and Tableau
 
-- Development: notebooks/04_model_improvements.ipynb; frozen selection: reports/improvements/selection.json.
-- Confirmation: notebooks/05_fresh_test_evaluation.ipynb; independent checks: reports/improvements/execution_audit.json.
+- Development: reports/improvements/development_summary.json; frozen selection: reports/improvements/selection.json.
+- Completed Q2 confirmation and independent checks: reports/improvements/test_results.json and execution_audit.json. The current [four-notebook workflow](../../notebooks/simple/README.md) reproduces the final July experiment.
 - Fitted pipelines: models/improved_flight_delay_models.joblib.
 - Six versioned Tableau tables: tableau/exports/improved/. Original tables remain in tableau/exports/.
 - Use F1 as the main threshold policy and keep model_version/candidate_id/cohort keys explicit. A packaged Tableau workbook is still pending.

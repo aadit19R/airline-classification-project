@@ -1,8 +1,8 @@
-Current status: development, frozen July evaluation and audits are complete. Read [RESULTS.md](RESULTS.md). The two new notebooks contain nine inline figures with no execution errors; the six final_july Tableau sources reconcile to predictions. Workbook construction remains.
+Current status: development and the completed July evaluation are recorded here. Read [RESULTS.md](RESULTS.md), or run the [four current notebooks](../../notebooks/simple/README.md) to reproduce the final features, model fits and findings. The six final_july export sources remain the frozen evaluation evidence.
 
 # Final compact-feature experiment
 
-This is a separate experiment authorized after notebook 02's exploratory feature trials. It preserves the original Q1 and Q2 results. Its code and figures are in notebooks 06 and 07.
+This is a separate experiment authorized after notebook 02's exploratory feature trials. It preserves the original Q1 and Q2 results. Its development decisions and outputs are retained in the JSON/NPZ records listed below; the current four-notebook sequence reproduces the frozen final choices.
 
 ## Decision procedure
 
@@ -20,9 +20,9 @@ A schedule-only A control uses each selected B model's exact settings, preproces
 
 On 19 October 2026, the [BTS release history](https://transtats.bts.gov/releaseinfo.asp) and [reporting table](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ) listed July 2026 as the latest month. August and September were not listed as available. July supplies a one-month fresh confirmation, not a full-quarter or year-round estimate.
 
-The structural acquisition audit reads schedule and weather fields only. It found 631,970 national rows, 89,701 scoped schedules, all 31 days, no new conflicting weather timestamps and no missing weather-key matches. June/July overlapping payloads agree. Raw ZIP/CSV/weather responses, requests and checksums are saved under data/raw; outcome loading is deferred until notebook 06 freezes the bundle.
+The structural acquisition audit reads schedule and weather fields only. It found 631,970 national rows, 89,701 scoped schedules, all 31 days, no new conflicting weather timestamps and no missing weather-key matches. June/July overlapping payloads agree. Raw ZIP/CSV/weather responses, requests and checksums are saved under data/raw; the original execution deferred outcome loading until the model bundle was frozen.
 
-Notebook 07 scores 10,000 shared natural-prevalence July flights. No features, settings, thresholds or model choice may change after access. Earlier April–June outcomes support lagged histories; July events can support later July queries only after the same seven-day lag. This is a sequential historical simulation under the existing availability assumptions, not evidence that BTS monthly publications could supply a live daily feed.
+The completed evaluation scored 10,000 shared natural-prevalence July flights. No features, settings, thresholds or model choice may change after access. Earlier April–June outcomes support lagged histories; July events can support later July queries only after the same seven-day lag. This is a sequential historical simulation under the existing availability assumptions, not evidence that BTS monthly publications could supply a live daily feed.
 
 Compare all four models, the retuned 66-feature reference, matched-settings schedule controls, always-on-time, always-delayed, a fixed fair coin and historical-risk ranking. Paired day-block bootstrap intervals use 300 replicates, conditional on the fitted models and only 31 dates.
 

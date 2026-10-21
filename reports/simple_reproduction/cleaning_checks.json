@@ -1,0 +1,30 @@
+{
+  "rows": 1339044,
+  "columns_checked": [
+    "flight_date",
+    "airline",
+    "flight_number",
+    "origin",
+    "destination",
+    "scheduled_departure_hhmm",
+    "departure_delay_minutes",
+    "departure_delay_15_source",
+    "cancelled",
+    "diverted",
+    "scheduled_duration_minutes",
+    "distance_miles",
+    "source_file",
+    "source_row_number",
+    "label_eligible",
+    "delayed_departure",
+    "scheduled_departure_minutes",
+    "scheduled_departure_utc",
+    "prediction_cutoff_utc",
+    "departure_outcome_event_utc",
+    "split",
+    "query_eligible",
+    "distance_miles_invalid",
+    "scheduled_duration_minutes_invalid"
+  ],
+  "exact_values_and_missingness": true
+}

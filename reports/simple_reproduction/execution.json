@@ -1,0 +1,52 @@
+{
+  "01_cleaning_and_eda.ipynb": {
+    "started_at_utc": "2026-10-21T20:35:36.132707+00:00",
+    "finished_at_utc": "2026-10-21T20:36:05.774085+00:00",
+    "seconds": 29.64139245892875,
+    "fresh_kernel": true,
+    "code_cells": 13,
+    "visible_code_lines": 48,
+    "figures": 3,
+    "errors": 0,
+    "stderr": [
+      "Matplotlib is building the font cache; this may take a moment.\n"
+    ]
+  },
+  "02_feature_engineering.ipynb": {
+    "started_at_utc": "2026-10-21T20:36:05.775243+00:00",
+    "finished_at_utc": "2026-10-21T20:36:29.509081+00:00",
+    "seconds": 23.733849082957022,
+    "fresh_kernel": true,
+    "code_cells": 12,
+    "visible_code_lines": 48,
+    "figures": 2,
+    "errors": 0,
+    "stderr": [
+      "Matplotlib is building the font cache; this may take a moment.\n"
+    ]
+  },
+  "03_model_training.ipynb": {
+    "started_at_utc": "2026-10-21T20:36:29.509966+00:00",
+    "finished_at_utc": "2026-10-21T20:41:55.911240+00:00",
+    "seconds": 326.4013460420538,
+    "fresh_kernel": true,
+    "code_cells": 9,
+    "visible_code_lines": 45,
+    "figures": 0,
+    "errors": 0,
+    "stderr": []
+  },
+  "04_evaluation_and_findings.ipynb": {
+    "started_at_utc": "2026-10-21T20:41:55.913067+00:00",
+    "finished_at_utc": "2026-10-21T20:42:45.782472+00:00",
+    "seconds": 49.869435957982205,
+    "fresh_kernel": true,
+    "code_cells": 11,
+    "visible_code_lines": 49,
+    "figures": 4,
+    "errors": 0,
+    "stderr": [
+      "Matplotlib is building the font cache; this may take a moment.\n"
+    ]
+  }
+}

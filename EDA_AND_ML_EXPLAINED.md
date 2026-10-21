@@ -6,7 +6,7 @@ The objectives require model evidence because they assess prediction. This does 
 
 Use EDA to audit missing values, joins and exclusions, understand the target balance, inspect departure patterns and choose features worth testing. Airport/time/weather charts belong in the notebook and can appear as context in Tableau. Keep outcome-driven feature choices within development periods; avoid using final evaluation findings to keep redesigning the model.
 
-The agreed sequence includes univariate analysis, bivariate analysis, missing value treatment, outlier treatment, variable creation and variable transformation. See [the detailed plan](EDA_PLAN.md) for examples and outputs. Source checks and essential parsing come first; valid extremes remain, and learned treatments are fitted on training data through the modelling pipelines.
+The agreed sequence includes univariate analysis, bivariate analysis, missing value treatment, outlier treatment, variable creation and variable transformation. See [the four-notebook guide](notebooks/simple/README.md) for examples and outputs. Source checks and essential parsing come first; valid extremes remain, and learned treatments are fitted on training data through the modelling pipelines.
 
 ## ML evaluates what can be predicted
 
