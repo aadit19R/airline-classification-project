@@ -1,0 +1,12 @@
+{
+  "request": {
+    "url": "https://mesonet.agron.iastate.edu/geojson/network.php",
+    "params": {
+      "network": "KY_ASOS"
+    }
+  },
+  "resolved_url": "https://mesonet.agron.iastate.edu/geojson/network.php?network=KY_ASOS",
+  "retrieved_at_utc": "2026-10-16T10:22:31.058687+00:00",
+  "sha256": "05fb99d1d67971e49f27d96ecc5b891501accb0da2414e3386ae581c0bfddcc5",
+  "bytes": 29732
+}

@@ -1,0 +1,208 @@
+{
+  "original_notebook_sha256": "6fc12071651846008083ad04ced9a77e3a1ed05b822b64a918020b677c3cfdab",
+  "original_cell_count": 38,
+  "original_cells_sha256": "e87a7509567640597e0ec8ad50d938f846731143a64c06e2426ec86850e4fe21",
+  "original_metadata_sha256": "715412748ed62b535264507ceadafcccbe3bf3c5b40f97a8a5a2366ed8bbbe21",
+  "notebook": "notebooks/02_feature_engineering.ipynb",
+  "status": "passed",
+  "appendix_start_cell": 38,
+  "appendix_code_cells": 10,
+  "executed_at_utc": "2026-10-19T04:55:12.423819+00:00",
+  "errors": [],
+  "stderr": [],
+  "appendix_figures": 4,
+  "development_rows": 938417,
+  "split_rows": {
+    "train": 698670,
+    "validation": 239747
+  },
+  "new_predictors": 28,
+  "existing_predictors": 66,
+  "candidate_set_sizes": {
+    "current_66": 66,
+    "current_plus_traffic": 71,
+    "current_plus_traffic_weather": 75,
+    "current_plus_history": 85,
+    "current_plus_all": 94
+  },
+  "candidate_groups": {
+    "relative_traffic": [
+      "traffic_hour_departures",
+      "traffic_expected_hour",
+      "traffic_relative_log1p",
+      "traffic_excess_hour",
+      "traffic_reference_missing_or_zero"
+    ],
+    "weather_traffic": [
+      "traffic_rain_interaction",
+      "traffic_thunder_interaction",
+      "traffic_wind_interaction",
+      "traffic_visibility_interaction"
+    ],
+    "multiscale_history": [
+      "history_origin_7d_rate",
+      "history_origin_7d_n",
+      "history_airline_origin_7d_rate",
+      "history_airline_origin_7d_n",
+      "history_airline_origin_7d_no_history",
+      "history_route_7d_rate",
+      "history_route_7d_n",
+      "history_route_7d_no_history",
+      "history_origin_42d_rate",
+      "history_origin_42d_n",
+      "history_airline_origin_42d_rate",
+      "history_airline_origin_42d_n",
+      "history_airline_origin_42d_no_history",
+      "history_route_42d_rate",
+      "history_route_42d_n",
+      "history_route_42d_no_history",
+      "history_origin_7d_minus_42d",
+      "history_airline_origin_7d_minus_42d",
+      "history_route_7d_minus_42d"
+    ]
+  },
+  "training_missing_pct": {
+    "history_airline_origin_42d_n": 0.0,
+    "history_airline_origin_42d_no_history": 0.0,
+    "history_airline_origin_42d_rate": 0.0,
+    "history_airline_origin_7d_minus_42d": 0.0,
+    "history_airline_origin_7d_n": 0.0,
+    "history_airline_origin_7d_no_history": 0.0,
+    "history_airline_origin_7d_rate": 0.0,
+    "history_origin_42d_n": 0.0,
+    "history_origin_42d_no_history": 0.0,
+    "history_origin_42d_rate": 0.0,
+    "history_origin_7d_minus_42d": 0.0,
+    "history_origin_7d_n": 0.0,
+    "history_origin_7d_no_history": 0.0,
+    "history_origin_7d_rate": 0.0,
+    "history_route_42d_n": 0.0,
+    "history_route_42d_no_history": 0.0,
+    "history_route_42d_rate": 0.0,
+    "history_route_7d_minus_42d": 0.0,
+    "history_route_7d_n": 0.0,
+    "history_route_7d_no_history": 0.0,
+    "history_route_7d_rate": 0.0,
+    "traffic_excess_hour": 0.0,
+    "traffic_expected_hour": 0.0,
+    "traffic_hour_departures": 0.0,
+    "traffic_rain_interaction": 90.58926245580889,
+    "traffic_reference_missing_or_zero": 0.0,
+    "traffic_reference_n": 0.0,
+    "traffic_relative_hour": 0.004866388996235705,
+    "traffic_relative_log1p": 0.004866388996235705,
+    "traffic_thunder_interaction": 90.58926245580889,
+    "traffic_visibility_interaction": 0.004866388996235705,
+    "traffic_wind_interaction": 0.027623914008043853
+  },
+  "training_unique": {
+    "history_airline_origin_42d_n": 20279,
+    "history_airline_origin_42d_no_history": 2,
+    "history_airline_origin_42d_rate": 406308,
+    "history_airline_origin_7d_minus_42d": 444245,
+    "history_airline_origin_7d_n": 4642,
+    "history_airline_origin_7d_no_history": 2,
+    "history_airline_origin_7d_rate": 397305,
+    "history_origin_42d_n": 11815,
+    "history_origin_42d_no_history": 1,
+    "history_origin_42d_rate": 196437,
+    "history_origin_7d_minus_42d": 289967,
+    "history_origin_7d_n": 2747,
+    "history_origin_7d_no_history": 1,
+    "history_origin_7d_rate": 170834,
+    "history_route_42d_n": 1252,
+    "history_route_42d_no_history": 2,
+    "history_route_42d_rate": 680297,
+    "history_route_7d_minus_42d": 686746,
+    "history_route_7d_n": 233,
+    "history_route_7d_no_history": 2,
+    "history_route_7d_rate": 670254,
+    "traffic_excess_hour": 904,
+    "traffic_expected_hour": 538,
+    "traffic_hour_departures": 96,
+    "traffic_rain_interaction": 971,
+    "traffic_reference_missing_or_zero": 2,
+    "traffic_reference_n": 1,
+    "traffic_relative_hour": 5203,
+    "traffic_relative_log1p": 5141,
+    "traffic_thunder_interaction": 357,
+    "traffic_visibility_interaction": 8422,
+    "traffic_wind_interaction": 19938
+  },
+  "manual_history_checks": 144,
+  "manual_traffic_checks": 48,
+  "traffic_ratio_summary": {
+    "count": 698636.0,
+    "mean": 1.061750665275666,
+    "std": 1.1074178355300657,
+    "min": 0.017804154302670624,
+    "25%": 0.9606741573033708,
+    "50%": 1.0225563909774436,
+    "75%": 1.090909090909091,
+    "max": 108.0
+  },
+  "traffic_reference_n_range": [
+    6,
+    6
+  ],
+  "traffic_zero_reference_flights": 94,
+  "all_original_input_hashes_unchanged": true,
+  "input_sha256": {
+    "data/processed/features.parquet": "27e41d1bb3c1b51b9afdfaf3579377936f520d38581bc1923a030e5f30b879f2",
+    "data/processed/flights_clean.parquet": "cbc734a8ff8ab055269f8a51dc8b1ad7b13487286a577047425a4019084c67e7",
+    "reports/preparation_manifest.json": "2d0a3365abbcc0c2c6cd5a5927a775b18b3d77de8d10a6d3aef6640ffaa1c7e5",
+    "reports/improvements/selection.json": "df56e609cce33cf00509ee826b11fec592f968e6955fc5d23ef82c38f1ec6c93",
+    "models/improved_flight_delay_models.joblib": "e7d082fe3aeb5243f805e8a1273d827d9d798f628778b31c000f88d5699694d9"
+  },
+  "no_2026_query_or_context_rows": true,
+  "no_models_fitted": true,
+  "no_datasets_written": true,
+  "history_window_days": [
+    7,
+    42
+  ],
+  "lag_days": 7,
+  "feature_helper_sha256": "d04efda1218336febf0484e6a06e9794be277915879abb8bb7c381d99bbaa1df",
+  "weather_batches": 36,
+  "created_columns": 32,
+  "audit_only_columns": [
+    "traffic_relative_hour",
+    "traffic_reference_n",
+    "history_origin_7d_no_history",
+    "history_origin_42d_no_history"
+  ],
+  "constant_training_columns": [
+    "history_origin_42d_no_history",
+    "history_origin_7d_no_history",
+    "traffic_reference_n"
+  ],
+  "repeat_scoring_guard_maintenance": {
+    "notebook": "notebooks/05_fresh_test_evaluation.ipynb",
+    "previous_sha256": "7d44d9c51ba207ec37dedcda3bf0d316c1ea7b614876d6071be7a116892789d8",
+    "reason": "Allow the authorized notebook-02 appendix while preserving every original cell and all frozen data/model checks; scoring and thresholds are unchanged.",
+    "current_sha256": "779a638ef94809562d70c80d6ccfd1cea9d12bfff8ef67859e9dd840246acf7f"
+  },
+  "appendix_source_sha256": "dc9325903b3362101beedb1214c6a5faf0a35238c67b53a4c584161b6449f68b",
+  "original_cells_and_outputs_preserved": true,
+  "original_metadata_preserved": true,
+  "total_notebook_code_cells": 30,
+  "total_notebook_figures": 17,
+  "visual_review": "Four saved figures inspected: distributions, class boxplots, weather/traffic heatmap and scatter, history plots, missingness and predictor correlations.",
+  "notebook_sha256": "51c2acac1a134049743a9fab5a5227e3930171f6742d9a42013e7549acc0686d",
+  "baseline_integrity": {
+    "checked_files": 21,
+    "documented_notebook_appendices": {
+      "notebooks/02_feature_engineering.ipynb": {
+        "original_cells_preserved": 38,
+        "original_metadata_preserved": true
+      }
+    }
+  },
+  "integrity_guard_rejects_original_cell_edits": true,
+  "integrity_guard_rejects_original_metadata_edits": true,
+  "frozen_model_and_export_reaudit": {
+    "status": "passed",
+    "reloaded_model_spot_checks": 320,
+    "metrics_curves_confusions_and_quotas_recomputed": true
+  }
+}

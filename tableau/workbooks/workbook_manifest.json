@@ -1,0 +1,31 @@
+{
+  "source_run": "final_20261019T055940573924Z",
+  "cohort_id": "11330b20078d77bfea46dd9a83da3c80ba44a5eb531cca6154d33f92110fc00d",
+  "test": "July 2026",
+  "frozen_selection": "logistic_regression/B",
+  "source_sha256": {
+    "feature_comparison.csv": "732ec4ebc51382bb596fe28517948a6481ca7ff784b062374377b255241e2c77",
+    "flight_predictions.csv": "52963e172f76e6759701c013e3e5003550252af5be54c33d54cc4c0778d4c6bf",
+    "model_metrics.csv": "e8997e3d2b388bdf82adfab9e4a138f1f0942ffd5ee458232ffd0380a857c2fc",
+    "pr_curve.csv": "0ab9f181450e771ac19647fba9de1c81060fc7a39f4ed8609286d182f8137d51",
+    "priority_curve.csv": "d7a27235c4bab2382fe4fce9f5cff343c4fb10316ddc41be67180b98d5dbc9ca",
+    "subgroup_metrics.csv": "68a14172a64cad7477572be6dad7db9ff72ca1a2eadca4e20b7a63c16dc706c6"
+  },
+  "extract_rows": {
+    "feature_comparison": 4,
+    "priority_curve": 48,
+    "pr_curve": 113047,
+    "flight_predictions": 160000,
+    "subgroup_metrics": 288,
+    "model_metrics": 16,
+    "summary": 4,
+    "confusion": 16,
+    "gains": 16,
+    "group_rates": 288,
+    "review_comparison": 18,
+    "quota_summary": 12
+  },
+  "models_retrained": false,
+  "dashboard_count": 4,
+  "notes": "Hyper presentation fields are deterministic reshapes/labels. Unsupported subgroup values remain NULL."
+}

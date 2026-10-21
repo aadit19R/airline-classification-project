@@ -1,0 +1,8 @@
+{
+  "detected_at_utc": "2026-10-19T05:59:37.124689+00:00",
+  "discarded_run_id": "final_20261019T055242676293Z",
+  "discarded_partial_configurations": 25,
+  "reason": "Prior RF anchor inherited class_weight=balanced from its estimator, omitted from saved sparse params. New helper initially inherited sklearn default None.",
+  "correction": "Explicitly restore balanced default; retain None for candidates that explicitly request None; rerun fresh kernel before July access.",
+  "july_outcomes_accessed": false
+}

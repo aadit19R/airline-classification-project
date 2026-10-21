@@ -1,0 +1,8 @@
+{
+  "checks": 287,
+  "passed": true,
+  "models": 4,
+  "source_files": 6,
+  "flight_rows": 10000,
+  "pr_points": 113047
+}

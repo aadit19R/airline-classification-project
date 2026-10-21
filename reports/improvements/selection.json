@@ -1,0 +1,3954 @@
+{
+  "run_id": "improved_20261018T204129454478Z",
+  "frozen_at_utc": "2026-10-18T21:15:50.566255+00:00",
+  "protocol_sha256": "9c946b9dbb9c8c9187bdca723e91a56d52bab8fd76cdf23e56c05fecc94a4701",
+  "feature_input_sha256": "27e41d1bb3c1b51b9afdfaf3579377936f520d38581bc1923a030e5f30b879f2",
+  "helper_sha256": "d04efda1218336febf0484e6a06e9794be277915879abb8bb7c381d99bbaa1df",
+  "weather_audit": {
+    "source_files": [
+      "data/raw/weather/observations/2025/2025_01_batch00.csv",
+      "data/raw/weather/observations/2025/2025_01_batch04.csv",
+      "data/raw/weather/observations/2025/2025_01_batch11.csv",
+      "data/raw/weather/observations/2025/2025_02_batch00.csv",
+      "data/raw/weather/observations/2025/2025_02_batch04.csv",
+      "data/raw/weather/observations/2025/2025_02_batch11.csv",
+      "data/raw/weather/observations/2025/2025_03_batch00.csv",
+      "data/raw/weather/observations/2025/2025_03_batch04.csv",
+      "data/raw/weather/observations/2025/2025_03_batch11.csv",
+      "data/raw/weather/observations/2025/2025_04_batch00.csv",
+      "data/raw/weather/observations/2025/2025_04_batch04.csv",
+      "data/raw/weather/observations/2025/2025_04_batch11.csv",
+      "data/raw/weather/observations/2025/2025_05_batch00.csv",
+      "data/raw/weather/observations/2025/2025_05_batch04.csv",
+      "data/raw/weather/observations/2025/2025_05_batch11.csv",
+      "data/raw/weather/observations/2025/2025_06_batch00.csv",
+      "data/raw/weather/observations/2025/2025_06_batch04.csv",
+      "data/raw/weather/observations/2025/2025_06_batch11.csv",
+      "data/raw/weather/observations/2025/2025_07_batch00.csv",
+      "data/raw/weather/observations/2025/2025_07_batch04.csv",
+      "data/raw/weather/observations/2025/2025_07_batch11.csv",
+      "data/raw/weather/observations/2025/2025_08_batch00.csv",
+      "data/raw/weather/observations/2025/2025_08_batch04.csv",
+      "data/raw/weather/observations/2025/2025_08_batch11.csv",
+      "data/raw/weather/observations/2025/2025_09_batch00.csv",
+      "data/raw/weather/observations/2025/2025_09_batch04.csv",
+      "data/raw/weather/observations/2025/2025_09_batch11.csv",
+      "data/raw/weather/observations/2025/2025_10_batch00.csv",
+      "data/raw/weather/observations/2025/2025_10_batch04.csv",
+      "data/raw/weather/observations/2025/2025_10_batch11.csv",
+      "data/raw/weather/observations/2025/2025_11_batch00.csv",
+      "data/raw/weather/observations/2025/2025_11_batch04.csv",
+      "data/raw/weather/observations/2025/2025_11_batch11.csv",
+      "data/raw/weather/observations/2025/2025_12_batch00.csv",
+      "data/raw/weather/observations/2025/2025_12_batch04.csv",
+      "data/raw/weather/observations/2025/2025_12_batch11.csv"
+    ],
+    "excluded_conflicts": [
+      {
+        "station": "DFW",
+        "valid": "2025-05-06 16:50"
+      },
+      {
+        "station": "ATL",
+        "valid": "2025-06-14 23:40"
+      },
+      {
+        "station": "ORD",
+        "valid": "2025-07-20 09:10"
+      },
+      {
+        "station": "ORD",
+        "valid": "2025-11-30 14:20"
+      },
+      {
+        "station": "DFW",
+        "valid": "2025-12-23 14:50"
+      },
+      {
+        "station": "ORD",
+        "valid": "2025-12-28 16:50"
+      }
+    ],
+    "usable_reports": 31087
+  },
+  "cohort_hashes": {
+    "Apr\u2013Jun": {
+      "train20k": "6e5e0f11042365623ece95c35f0dc8fdbb77a5682d676dae4f694b0775c42a31",
+      "train40k": "4f597b7f06cc5d628974031e6a8059f1cb3798f15c756fcced45005138a62b95",
+      "validation": "08b08c4bc9f3c061380a2ecc5472a0fde14f51d642ae5c88e6edb485c40b4d55"
+    },
+    "Jul\u2013Sep": {
+      "train20k": "88d107040448689b1a3b63700694f6502d1dc81db05b48ebb072970134e903fa",
+      "train40k": "b6dde343a3930ac86c5c30c7fb06593249a410e5cc15693327eb0e7d2f84f27f",
+      "validation": "a64f952041de7aec941754c02e38610030a8af582ada02bde2cbf144a0dc8924"
+    },
+    "Oct\u2013Dec": {
+      "train20k": "c8f8213be7de9713b595a64c28e4785cb43e2477df18015cf53bada59668eee7",
+      "train40k": "d44df01d1a7ee3a9be3ab22378908c58874068e3a86491e0e14d8f2d2e82d1c7",
+      "validation": "0f15f9051043a663c5a3e34ee17ce1d9982ea59af0180d74cbf6601a5f6705a3"
+    }
+  },
+  "refit_cohort_fingerprint": "b1abcb9a4d830d8a5dffb9ebc59c238c25cfb45c1ceb2435074992801f188524",
+  "chosen_feature_package": "time_flight_weather",
+  "chosen_training_rows": 40000,
+  "selected_model_id": "logistic_regression",
+  "selected_feature_set": "B",
+  "choices": [
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.01
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3919504226256498,
+          "fit_seconds": 0.12782587495166808,
+          "score_seconds": 0.008427290944382548
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4221907012907211,
+          "fit_seconds": 0.12211837503127754,
+          "score_seconds": 0.008020415902137756
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3868714167925552,
+          "fit_seconds": 0.12060270796064287,
+          "score_seconds": 0.008430375019088387
+        }
+      ],
+      "mean_ap": 0.40033751356964203,
+      "ap_sd": 0.019095036926979045,
+      "mean_fit_seconds": 0.12351565264786284,
+      "columns": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "departure_sin2",
+        "departure_cos2",
+        "month_sin2",
+        "month_cos2",
+        "atl_departure_sin",
+        "atl_departure_cos",
+        "atl_departure_sin2",
+        "atl_departure_cos2",
+        "ord_departure_sin",
+        "ord_departure_cos",
+        "ord_departure_sin2",
+        "ord_departure_cos2",
+        "dfw_departure_sin",
+        "dfw_departure_cos",
+        "dfw_departure_sin2",
+        "dfw_departure_cos2"
+      ],
+      "thresholds": {
+        "F1": 0.15079519497972485,
+        "F0.5": 0.22818296704499133
+      }
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.03
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4502192688285024,
+          "fit_seconds": 0.31579408305697143,
+          "score_seconds": 0.010879042092710733
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4668720951146591,
+          "fit_seconds": 0.3097197910537943,
+          "score_seconds": 0.012174707953818142
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4290876206533292,
+          "fit_seconds": 0.3410665000556037,
+          "score_seconds": 0.01288345898501575
+        }
+      ],
+      "mean_ap": 0.44872632819883024,
+      "ap_sd": 0.018936427365596628,
+      "mean_fit_seconds": 0.32219345805545646,
+      "columns": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "temperature_f",
+        "wind_knots",
+        "gust_knots",
+        "visibility_miles",
+        "precip_inches",
+        "precip_trace",
+        "ceiling_ft",
+        "no_ceiling_reported",
+        "cloud_coverage_missing",
+        "rain_reported",
+        "frozen_precip_reported",
+        "fog_or_mist_reported",
+        "thunder_reported",
+        "condition_codes_missing",
+        "ceiling_height_missing",
+        "weather_age_minutes",
+        "weather_report_missing",
+        "history_origin_rate",
+        "history_origin_n",
+        "history_origin_no_history",
+        "history_airline_origin_rate",
+        "history_airline_origin_n",
+        "history_airline_origin_no_history",
+        "history_route_rate",
+        "history_route_n",
+        "history_route_no_history",
+        "airport_scheduled_departures_prior_60m",
+        "departure_sin2",
+        "departure_cos2",
+        "month_sin2",
+        "month_cos2",
+        "atl_departure_sin",
+        "atl_departure_cos",
+        "atl_departure_sin2",
+        "atl_departure_cos2",
+        "ord_departure_sin",
+        "ord_departure_cos",
+        "ord_departure_sin2",
+        "ord_departure_cos2",
+        "dfw_departure_sin",
+        "dfw_departure_cos",
+        "dfw_departure_sin2",
+        "dfw_departure_cos2",
+        "history_flight_rate",
+        "history_flight_n",
+        "history_flight_no_history",
+        "dewpoint_spread_f",
+        "wind_east_knots",
+        "wind_north_knots",
+        "freezing_wet",
+        "prior3h_report_n",
+        "prior3h_precip_known_n",
+        "prior3h_wet_fraction",
+        "prior3h_visibility_min",
+        "prior3h_gust_max",
+        "prior3h_visibility_change"
+      ],
+      "thresholds": {
+        "F1": 0.1577291697408321,
+        "F0.5": 0.22963203657804848
+      }
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.38559030376099185,
+          "fit_seconds": 0.07278770802076906,
+          "score_seconds": 3.29047675000038
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.42469817023316364,
+          "fit_seconds": 0.07806774997152388,
+          "score_seconds": 3.175244375015609
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3453380850556992,
+          "fit_seconds": 0.0786369580309838,
+          "score_seconds": 3.4062309579458088
+        }
+      ],
+      "mean_ap": 0.3852088530166182,
+      "ap_sd": 0.03968141767057209,
+      "mean_fit_seconds": 0.07649747200775892,
+      "columns": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "departure_sin2",
+        "departure_cos2",
+        "month_sin2",
+        "month_cos2",
+        "atl_departure_sin",
+        "atl_departure_cos",
+        "atl_departure_sin2",
+        "atl_departure_cos2",
+        "ord_departure_sin",
+        "ord_departure_cos",
+        "ord_departure_sin2",
+        "ord_departure_cos2",
+        "dfw_departure_sin",
+        "dfw_departure_cos",
+        "dfw_departure_sin2",
+        "dfw_departure_cos2"
+      ],
+      "thresholds": {
+        "F1": 0.1996388882834846,
+        "F0.5": 0.24026126187143704
+      }
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.41973707393995885,
+          "fit_seconds": 0.15576129197143018,
+          "score_seconds": 5.53713091602549
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4539059641827328,
+          "fit_seconds": 0.15641325002070516,
+          "score_seconds": 5.4175021660048515
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.378716664691476,
+          "fit_seconds": 0.1539624580182135,
+          "score_seconds": 5.525290208985098
+        }
+      ],
+      "mean_ap": 0.4174532342713892,
+      "ap_sd": 0.03764664171237956,
+      "mean_fit_seconds": 0.15537900000344962,
+      "columns": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "temperature_f",
+        "wind_knots",
+        "gust_knots",
+        "visibility_miles",
+        "precip_inches",
+        "precip_trace",
+        "ceiling_ft",
+        "no_ceiling_reported",
+        "cloud_coverage_missing",
+        "rain_reported",
+        "frozen_precip_reported",
+        "fog_or_mist_reported",
+        "thunder_reported",
+        "condition_codes_missing",
+        "ceiling_height_missing",
+        "weather_age_minutes",
+        "weather_report_missing",
+        "history_origin_rate",
+        "history_origin_n",
+        "history_origin_no_history",
+        "history_airline_origin_rate",
+        "history_airline_origin_n",
+        "history_airline_origin_no_history",
+        "history_route_rate",
+        "history_route_n",
+        "history_route_no_history",
+        "airport_scheduled_departures_prior_60m",
+        "departure_sin2",
+        "departure_cos2",
+        "month_sin2",
+        "month_cos2",
+        "atl_departure_sin",
+        "atl_departure_cos",
+        "atl_departure_sin2",
+        "atl_departure_cos2",
+        "ord_departure_sin",
+        "ord_departure_cos",
+        "ord_departure_sin2",
+        "ord_departure_cos2",
+        "dfw_departure_sin",
+        "dfw_departure_cos",
+        "dfw_departure_sin2",
+        "dfw_departure_cos2",
+        "history_flight_rate",
+        "history_flight_n",
+        "history_flight_no_history",
+        "dewpoint_spread_f",
+        "wind_east_knots",
+        "wind_north_knots",
+        "freezing_wet",
+        "prior3h_report_n",
+        "prior3h_precip_known_n",
+        "prior3h_wet_fraction",
+        "prior3h_visibility_min",
+        "prior3h_gust_max",
+        "prior3h_visibility_change"
+      ],
+      "thresholds": {
+        "F1": 0.19568488540966072,
+        "F0.5": 0.22572306082272262
+      }
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.1
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.32166375201657127,
+          "fit_seconds": 53.2915992080234,
+          "score_seconds": 2.627739666029811
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.40863785372851,
+          "fit_seconds": 50.65440137498081,
+          "score_seconds": 2.8781767920590937
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.31506266549126455,
+          "fit_seconds": 49.41491824993864,
+          "score_seconds": 3.108896500081755
+        }
+      ],
+      "mean_ap": 0.34845475707878193,
+      "ap_sd": 0.05222449068771786,
+      "mean_fit_seconds": 51.120306277647614,
+      "columns": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "departure_sin2",
+        "departure_cos2",
+        "month_sin2",
+        "month_cos2",
+        "atl_departure_sin",
+        "atl_departure_cos",
+        "atl_departure_sin2",
+        "atl_departure_cos2",
+        "ord_departure_sin",
+        "ord_departure_cos",
+        "ord_departure_sin2",
+        "ord_departure_cos2",
+        "dfw_departure_sin",
+        "dfw_departure_cos",
+        "dfw_departure_sin2",
+        "dfw_departure_cos2"
+      ],
+      "thresholds": {
+        "F1": -1.1783368006459647,
+        "F0.5": -0.9775444924544531
+      }
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "C": 1.0
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.43663214473554035,
+          "fit_seconds": 201.8089543749811,
+          "score_seconds": 6.248144041979685
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46663265441056456,
+          "fit_seconds": 181.61283245799132,
+          "score_seconds": 6.6349023330258206
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.38147059123815796,
+          "fit_seconds": 190.3966442089295,
+          "score_seconds": 6.916436999919824
+        }
+      ],
+      "mean_ap": 0.4282451301280876,
+      "ap_sd": 0.04319607344961417,
+      "mean_fit_seconds": 191.27281034730063,
+      "columns": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "temperature_f",
+        "wind_knots",
+        "gust_knots",
+        "visibility_miles",
+        "precip_inches",
+        "precip_trace",
+        "ceiling_ft",
+        "no_ceiling_reported",
+        "cloud_coverage_missing",
+        "rain_reported",
+        "frozen_precip_reported",
+        "fog_or_mist_reported",
+        "thunder_reported",
+        "condition_codes_missing",
+        "ceiling_height_missing",
+        "weather_age_minutes",
+        "weather_report_missing",
+        "history_origin_rate",
+        "history_origin_n",
+        "history_origin_no_history",
+        "history_airline_origin_rate",
+        "history_airline_origin_n",
+        "history_airline_origin_no_history",
+        "history_route_rate",
+        "history_route_n",
+        "history_route_no_history",
+        "airport_scheduled_departures_prior_60m",
+        "departure_sin2",
+        "departure_cos2",
+        "month_sin2",
+        "month_cos2",
+        "atl_departure_sin",
+        "atl_departure_cos",
+        "atl_departure_sin2",
+        "atl_departure_cos2",
+        "ord_departure_sin",
+        "ord_departure_cos",
+        "ord_departure_sin2",
+        "ord_departure_cos2",
+        "dfw_departure_sin",
+        "dfw_departure_cos",
+        "dfw_departure_sin2",
+        "dfw_departure_cos2",
+        "history_flight_rate",
+        "history_flight_n",
+        "history_flight_no_history",
+        "dewpoint_spread_f",
+        "wind_east_knots",
+        "wind_north_knots",
+        "freezing_wet",
+        "prior3h_report_n",
+        "prior3h_precip_known_n",
+        "prior3h_wet_fraction",
+        "prior3h_visibility_min",
+        "prior3h_gust_max",
+        "prior3h_visibility_change"
+      ],
+      "thresholds": {
+        "F1": -0.9580129272973517,
+        "F0.5": -0.8390937150843946
+      }
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 20
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3934912207025889,
+          "fit_seconds": 2.084060207940638,
+          "score_seconds": 0.03227929200511426
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.40960517820319153,
+          "fit_seconds": 2.1199534999905154,
+          "score_seconds": 0.033049290999770164
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3687094844387673,
+          "fit_seconds": 2.1375325000844896,
+          "score_seconds": 0.03217333403881639
+        }
+      ],
+      "mean_ap": 0.39060196111484924,
+      "ap_sd": 0.020600371546222206,
+      "mean_fit_seconds": 2.1138487360052145,
+      "columns": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "departure_sin2",
+        "departure_cos2",
+        "month_sin2",
+        "month_cos2",
+        "atl_departure_sin",
+        "atl_departure_cos",
+        "atl_departure_sin2",
+        "atl_departure_cos2",
+        "ord_departure_sin",
+        "ord_departure_cos",
+        "ord_departure_sin2",
+        "ord_departure_cos2",
+        "dfw_departure_sin",
+        "dfw_departure_cos",
+        "dfw_departure_sin2",
+        "dfw_departure_cos2"
+      ],
+      "thresholds": {
+        "F1": 0.44648218040959164,
+        "F0.5": 0.5401248253466334
+      }
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.43750774645981483,
+          "fit_seconds": 6.74584704102017,
+          "score_seconds": 0.04824020806699991
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4731059141635511,
+          "fit_seconds": 7.001529207918793,
+          "score_seconds": 0.04553100001066923
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4172222941987019,
+          "fit_seconds": 7.461453582975082,
+          "score_seconds": 0.048278999980539083
+        }
+      ],
+      "mean_ap": 0.44261198494068926,
+      "ap_sd": 0.02828930333087318,
+      "mean_fit_seconds": 7.069609943971348,
+      "columns": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "temperature_f",
+        "wind_knots",
+        "gust_knots",
+        "visibility_miles",
+        "precip_inches",
+        "precip_trace",
+        "ceiling_ft",
+        "no_ceiling_reported",
+        "cloud_coverage_missing",
+        "rain_reported",
+        "frozen_precip_reported",
+        "fog_or_mist_reported",
+        "thunder_reported",
+        "condition_codes_missing",
+        "ceiling_height_missing",
+        "weather_age_minutes",
+        "weather_report_missing",
+        "history_origin_rate",
+        "history_origin_n",
+        "history_origin_no_history",
+        "history_airline_origin_rate",
+        "history_airline_origin_n",
+        "history_airline_origin_no_history",
+        "history_route_rate",
+        "history_route_n",
+        "history_route_no_history",
+        "airport_scheduled_departures_prior_60m",
+        "departure_sin2",
+        "departure_cos2",
+        "month_sin2",
+        "month_cos2",
+        "atl_departure_sin",
+        "atl_departure_cos",
+        "atl_departure_sin2",
+        "atl_departure_cos2",
+        "ord_departure_sin",
+        "ord_departure_cos",
+        "ord_departure_sin2",
+        "ord_departure_cos2",
+        "dfw_departure_sin",
+        "dfw_departure_cos",
+        "dfw_departure_sin2",
+        "dfw_departure_cos2",
+        "history_flight_rate",
+        "history_flight_n",
+        "history_flight_no_history",
+        "dewpoint_spread_f",
+        "wind_east_knots",
+        "wind_north_knots",
+        "freezing_wet",
+        "prior3h_report_n",
+        "prior3h_precip_known_n",
+        "prior3h_wet_fraction",
+        "prior3h_visibility_min",
+        "prior3h_gust_max",
+        "prior3h_visibility_change"
+      ],
+      "thresholds": {
+        "F1": 0.412146961557224,
+        "F0.5": 0.5128040864693995
+      }
+    }
+  ],
+  "development_runs": [
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "original",
+      "params": {
+        "C": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3822618345642714,
+          "fit_seconds": 0.04425849998369813,
+          "score_seconds": 0.0047525420086458325
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.38714473643802116,
+          "fit_seconds": 0.03988095803651959,
+          "score_seconds": 0.004819125053472817
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.35980111693136413,
+          "fit_seconds": 0.03703695791773498,
+          "score_seconds": 0.0049291669856756926
+        }
+      ],
+      "mean_ap": 0.37640256264455224,
+      "ap_sd": 0.014583095779124396,
+      "mean_fit_seconds": 0.04039213864598423
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3896256920902214,
+          "fit_seconds": 0.03218983404804021,
+          "score_seconds": 0.005317333969287574
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.3971044354110269,
+          "fit_seconds": 0.03055274998769164,
+          "score_seconds": 0.005366500001400709
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3585399217789575,
+          "fit_seconds": 0.03241133305709809,
+          "score_seconds": 0.005232708994299173
+        }
+      ],
+      "mean_ap": 0.381756683093402,
+      "ap_sd": 0.020451073440373158,
+      "mean_fit_seconds": 0.03171797236427665
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.03
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.38703013301573397,
+          "fit_seconds": 0.03344629204366356,
+          "score_seconds": 0.005212209071032703
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.39231428153948694,
+          "fit_seconds": 0.03690637496765703,
+          "score_seconds": 0.0058224169770255685
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3604938092288532,
+          "fit_seconds": 0.0353192079346627,
+          "score_seconds": 0.005188291892409325
+        }
+      ],
+      "mean_ap": 0.3799460745946914,
+      "ap_sd": 0.01705208278488321,
+      "mean_fit_seconds": 0.035223958315327764
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3822618345642714,
+          "fit_seconds": 0.03967758396174759,
+          "score_seconds": 0.005782791995443404
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.38714473643802116,
+          "fit_seconds": 0.040191665990278125,
+          "score_seconds": 0.005260917008854449
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.35980111693136413,
+          "fit_seconds": 0.037614749977365136,
+          "score_seconds": 0.005275708972476423
+        }
+      ],
+      "mean_ap": 0.37640256264455224,
+      "ap_sd": 0.014583095779124396,
+      "mean_fit_seconds": 0.03916133330979695
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.3
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.378703323776459,
+          "fit_seconds": 0.04434000002220273,
+          "score_seconds": 0.005201249965466559
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.381929847757401,
+          "fit_seconds": 0.046812042011879385,
+          "score_seconds": 0.005487249931320548
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3570665835350014,
+          "fit_seconds": 0.044682875042781234,
+          "score_seconds": 0.00518270896282047
+        }
+      ],
+      "mean_ap": 0.3725665850229538,
+      "ap_sd": 0.013519990711712533,
+      "mean_fit_seconds": 0.04527830569228778
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 1.0
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.37709218919579157,
+          "fit_seconds": 0.05624929198529571,
+          "score_seconds": 0.005489625036716461
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.37798807513338945,
+          "fit_seconds": 0.055005333037115633,
+          "score_seconds": 0.005263708997517824
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3516416472501259,
+          "fit_seconds": 0.05219100008253008,
+          "score_seconds": 0.005147624993696809
+        }
+      ],
+      "mean_ap": 0.368907303859769,
+      "ap_sd": 0.014959205410879271,
+      "mean_fit_seconds": 0.054481875034980476
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "original",
+      "params": {
+        "C": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.44040068238297264,
+          "fit_seconds": 0.09945733298081905,
+          "score_seconds": 0.008406625012867153
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.41071252520917617,
+          "fit_seconds": 0.09871275001205504,
+          "score_seconds": 0.008158499957062304
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4254744906839136,
+          "fit_seconds": 0.08980379195418209,
+          "score_seconds": 0.008485541911795735
+        }
+      ],
+      "mean_ap": 0.4255292327586875,
+      "ap_sd": 0.014844154291002018,
+      "mean_fit_seconds": 0.09599129164901872
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4235652826222387,
+          "fit_seconds": 0.06745787500403821,
+          "score_seconds": 0.008044332964345813
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4271291233384616,
+          "fit_seconds": 0.06520379101857543,
+          "score_seconds": 0.008012000005692244
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4246607590139293,
+          "fit_seconds": 0.06513958389405161,
+          "score_seconds": 0.007785834022797644
+        }
+      ],
+      "mean_ap": 0.42511838832487653,
+      "ap_sd": 0.0018254612026363535,
+      "mean_fit_seconds": 0.06593374997222175
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.03
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.43565554553949104,
+          "fit_seconds": 0.07751554099377245,
+          "score_seconds": 0.008297082968056202
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.41653732375264535,
+          "fit_seconds": 0.07816954096779227,
+          "score_seconds": 0.007970792008563876
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4269767704873717,
+          "fit_seconds": 0.0769995420705527,
+          "score_seconds": 0.007724791066721082
+        }
+      ],
+      "mean_ap": 0.4263898799265027,
+      "ap_sd": 0.009572613617533258,
+      "mean_fit_seconds": 0.07756154134403914
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4374534459301923,
+          "fit_seconds": 0.0892409160733223,
+          "score_seconds": 0.008134666946716607
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4103754674223802,
+          "fit_seconds": 0.08897408400662243,
+          "score_seconds": 0.008474875008687377
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.42537904369041724,
+          "fit_seconds": 0.08808404195588082,
+          "score_seconds": 0.007889208965934813
+        }
+      ],
+      "mean_ap": 0.4244026523476632,
+      "ap_sd": 0.013565368961367678,
+      "mean_fit_seconds": 0.08876634734527518
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.3
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4339754905427113,
+          "fit_seconds": 0.09883570799138397,
+          "score_seconds": 0.007863500039093196
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4067774753520002,
+          "fit_seconds": 0.09980333305429667,
+          "score_seconds": 0.008223625016398728
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.42279661248462475,
+          "fit_seconds": 0.1030912499409169,
+          "score_seconds": 0.008404624997638166
+        }
+      ],
+      "mean_ap": 0.42118319279311206,
+      "ap_sd": 0.013670601665773831,
+      "mean_fit_seconds": 0.10057676366219918
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 1.0
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.431256217252147,
+          "fit_seconds": 0.12179337500128895,
+          "score_seconds": 0.007987499935552478
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.403726548280971,
+          "fit_seconds": 0.12125604203902185,
+          "score_seconds": 0.008231999934650958
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4194172929907312,
+          "fit_seconds": 0.12372666702140123,
+          "score_seconds": 0.008097334066405892
+        }
+      ],
+      "mean_ap": 0.4181333528412831,
+      "ap_sd": 0.013809672159256962,
+      "mean_fit_seconds": 0.12225869468723734
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "original",
+      "params": {
+        "n_neighbors": 31,
+        "weights": "distance"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.35896977884476505,
+          "fit_seconds": 0.02207508310675621,
+          "score_seconds": 1.3155924590537325
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.40831770514339527,
+          "fit_seconds": 0.024579874938353896,
+          "score_seconds": 1.0081434999592602
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.336190791226452,
+          "fit_seconds": 0.02257954201195389,
+          "score_seconds": 1.0933088340098038
+        }
+      ],
+      "mean_ap": 0.36782609173820413,
+      "ap_sd": 0.03687002354685181,
+      "mean_fit_seconds": 0.023078166685688
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 31,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3590122470961661,
+          "fit_seconds": 0.02274108410347253,
+          "score_seconds": 0.938761374913156
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.40831770514339527,
+          "fit_seconds": 0.02222537505440414,
+          "score_seconds": 1.025289332959801
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.336190791226452,
+          "fit_seconds": 0.02205520903225988,
+          "score_seconds": 1.273243916919455
+        }
+      ],
+      "mean_ap": 0.3678402478220044,
+      "ap_sd": 0.036864930834155756,
+      "mean_fit_seconds": 0.022340556063378852
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 61,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.37228500072622367,
+          "fit_seconds": 0.023225999902933836,
+          "score_seconds": 0.9331778329797089
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.42450976339109364,
+          "fit_seconds": 0.022836542106233537,
+          "score_seconds": 1.0471102910814807
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.35094156616462835,
+          "fit_seconds": 0.02313920797314495,
+          "score_seconds": 1.2149212500080466
+        }
+      ],
+      "mean_ap": 0.38257877676064855,
+      "ap_sd": 0.037848927059735776,
+      "mean_fit_seconds": 0.023067249994104106
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.37759648551599234,
+          "fit_seconds": 0.024346375023014843,
+          "score_seconds": 1.216272999998182
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.43442042252781254,
+          "fit_seconds": 0.023917958023957908,
+          "score_seconds": 1.0605748330708593
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3555705862632375,
+          "fit_seconds": 0.022351292078383267,
+          "score_seconds": 3.3482570830965415
+        }
+      ],
+      "mean_ap": 0.38919583143568076,
+      "ap_sd": 0.040684552216547966,
+      "mean_fit_seconds": 0.023538541708452005
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 61,
+        "weights": "distance",
+        "metric": "manhattan"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.37317062700935133,
+          "fit_seconds": 0.0739408329827711,
+          "score_seconds": 1.8353330419631675
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.41262691226999054,
+          "fit_seconds": 0.023778832983225584,
+          "score_seconds": 0.883540999959223
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.34991702693875887,
+          "fit_seconds": 0.023472042055800557,
+          "score_seconds": 0.8581615419825539
+        }
+      ],
+      "mean_ap": 0.37857152207270023,
+      "ap_sd": 0.03170188764376715,
+      "mean_fit_seconds": 0.04039723600726575
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 61,
+        "weights": "uniform",
+        "metric": "euclidean",
+        "drop_duration": true
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.36558017728178943,
+          "fit_seconds": 0.022313417051918805,
+          "score_seconds": 1.1598295000148937
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.41966727825100253,
+          "fit_seconds": 0.022091208025813103,
+          "score_seconds": 0.911120375036262
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3442824084763357,
+          "fit_seconds": 0.02117020799778402,
+          "score_seconds": 1.0801647499902174
+        }
+      ],
+      "mean_ap": 0.3765099546697092,
+      "ap_sd": 0.038862767182072634,
+      "mean_fit_seconds": 0.02185827769183864
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "original",
+      "params": {
+        "n_neighbors": 31,
+        "weights": "distance"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.39894419967706257,
+          "fit_seconds": 0.0501759999897331,
+          "score_seconds": 1.7791415000101551
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.44176007594407296,
+          "fit_seconds": 0.06083962507545948,
+          "score_seconds": 1.9451600420288742
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.37302599724400193,
+          "fit_seconds": 0.05143970809876919,
+          "score_seconds": 1.8935210830532014
+        }
+      ],
+      "mean_ap": 0.4045767576217125,
+      "ap_sd": 0.03471149197941179,
+      "mean_fit_seconds": 0.05415177772132059
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 31,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3756162029802488,
+          "fit_seconds": 0.045328833046369255,
+          "score_seconds": 1.8091748330043629
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4184711381676568,
+          "fit_seconds": 0.0441148339305073,
+          "score_seconds": 1.5476073749596253
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.360386590159329,
+          "fit_seconds": 0.04559204098768532,
+          "score_seconds": 1.676830750075169
+        }
+      ],
+      "mean_ap": 0.38482464376907816,
+      "ap_sd": 0.03011727437292371,
+      "mean_fit_seconds": 0.04501190265485396
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 61,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3897490997561889,
+          "fit_seconds": 0.04466966702602804,
+          "score_seconds": 1.5014972080243751
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4346776074015232,
+          "fit_seconds": 0.045221125008538365,
+          "score_seconds": 1.7118371250107884
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3659416486460739,
+          "fit_seconds": 0.04730954207479954,
+          "score_seconds": 1.822887207963504
+        }
+      ],
+      "mean_ap": 0.3967894519345953,
+      "ap_sd": 0.03490462613472176,
+      "mean_fit_seconds": 0.04573344470312198
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.39915056920317715,
+          "fit_seconds": 0.045279250014573336,
+          "score_seconds": 1.510784582933411
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4432101610067559,
+          "fit_seconds": 0.04465487494599074,
+          "score_seconds": 1.7166310839820653
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.37439033935678506,
+          "fit_seconds": 0.045920791919343174,
+          "score_seconds": 1.6996097089722753
+        }
+      ],
+      "mean_ap": 0.4055836898555727,
+      "ap_sd": 0.03485800831917478,
+      "mean_fit_seconds": 0.04528497229330242
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 61,
+        "weights": "distance",
+        "metric": "manhattan"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.38049305504646275,
+          "fit_seconds": 0.044036790961399674,
+          "score_seconds": 1.6939009580528364
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4313578937733509,
+          "fit_seconds": 0.04541087499819696,
+          "score_seconds": 1.7023693330120295
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.38353489760238174,
+          "fit_seconds": 0.044655249919742346,
+          "score_seconds": 1.6318607080029324
+        }
+      ],
+      "mean_ap": 0.39846194880739844,
+      "ap_sd": 0.028529293680986525,
+      "mean_fit_seconds": 0.04470097195977966
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 61,
+        "weights": "uniform",
+        "metric": "euclidean",
+        "drop_duration": true
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.38409579917440123,
+          "fit_seconds": 0.044649875024333596,
+          "score_seconds": 1.4921422499464825
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4299995952788773,
+          "fit_seconds": 0.04308554099407047,
+          "score_seconds": 1.5207633749814704
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.35918093278977653,
+          "fit_seconds": 0.043323000078089535,
+          "score_seconds": 1.645192417083308
+        }
+      ],
+      "mean_ap": 0.3910921090810184,
+      "ap_sd": 0.03592397532871835,
+      "mean_fit_seconds": 0.0436861386988312
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "original",
+      "params": {
+        "C": 10.0
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.29181377533001207,
+          "fit_seconds": 7.98089629097376,
+          "score_seconds": 0.8652351249475032
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.3659567898910565,
+          "fit_seconds": 8.737294542021118,
+          "score_seconds": 0.9348994590109214
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.2742305055705417,
+          "fit_seconds": 8.813079291023314,
+          "score_seconds": 0.9050567080266774
+        }
+      ],
+      "mean_ap": 0.3106670235972034,
+      "ap_sd": 0.0486827642649865,
+      "mean_fit_seconds": 8.510423374672731
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.001
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.25730499103384047,
+          "fit_seconds": 2.855628249933943,
+          "score_seconds": 0.6570324590429664
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4200396205684855,
+          "fit_seconds": 3.3954013750189915,
+          "score_seconds": 0.7535454590106383
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3082385736948836,
+          "fit_seconds": 3.3563852088991553,
+          "score_seconds": 0.742384499986656
+        }
+      ],
+      "mean_ap": 0.3285277284324032,
+      "ap_sd": 0.08324288115158436,
+      "mean_fit_seconds": 3.20247161128403
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3109558793073755,
+          "fit_seconds": 3.4469124999595806,
+          "score_seconds": 0.7305573340272531
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.39999142447127023,
+          "fit_seconds": 4.23115287499968,
+          "score_seconds": 0.8288998750504106
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.274137046658515,
+          "fit_seconds": 4.233778208028525,
+          "score_seconds": 0.8125021660234779
+        }
+      ],
+      "mean_ap": 0.32836145014572027,
+      "ap_sd": 0.06470739158562498,
+      "mean_fit_seconds": 3.9706145276625953
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.30162681840697014,
+          "fit_seconds": 5.297084667021409,
+          "score_seconds": 0.8562267079250887
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4369692761272269,
+          "fit_seconds": 5.499012875021435,
+          "score_seconds": 0.9025997910648584
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.2627683981380079,
+          "fit_seconds": 5.262905458919704,
+          "score_seconds": 0.8639760420192033
+        }
+      ],
+      "mean_ap": 0.3337881642240683,
+      "ap_sd": 0.09144534212647971,
+      "mean_fit_seconds": 5.353001000320849
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 1.0,
+        "gamma": 0.001
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.27345549330709096,
+          "fit_seconds": 3.0888710839208215,
+          "score_seconds": 0.6770147499628365
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.41931159596426776,
+          "fit_seconds": 3.843503625015728,
+          "score_seconds": 0.7975894169649109
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.30747734337881866,
+          "fit_seconds": 3.785420666099526,
+          "score_seconds": 0.7774884579703212
+        }
+      ],
+      "mean_ap": 0.3334148108833925,
+      "ap_sd": 0.07630900887836468,
+      "mean_fit_seconds": 3.5725984583453587
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 1.0,
+        "gamma": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3134808969299764,
+          "fit_seconds": 5.690474458038807,
+          "score_seconds": 0.837526582996361
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.3962177321301288,
+          "fit_seconds": 6.3819007920101285,
+          "score_seconds": 0.8725489170756191
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.28641277504466894,
+          "fit_seconds": 5.95534054201562,
+          "score_seconds": 0.8284798749955371
+        }
+      ],
+      "mean_ap": 0.33203713470159135,
+      "ap_sd": 0.05720605405297985,
+      "mean_fit_seconds": 6.009238597354852
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 1.0,
+        "gamma": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3024569201296923,
+          "fit_seconds": 5.832514040987007,
+          "score_seconds": 0.8732206659624353
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4308696008815125,
+          "fit_seconds": 5.853030291036703,
+          "score_seconds": 0.9200657500186935
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.25333510131946574,
+          "fit_seconds": 5.761842584004626,
+          "score_seconds": 0.8810613750247285
+        }
+      ],
+      "mean_ap": 0.3288872074435569,
+      "ap_sd": 0.09167084977956007,
+      "mean_fit_seconds": 5.815795638676112
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 10.0,
+        "gamma": 0.001
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.2840864597543542,
+          "fit_seconds": 4.669854709063657,
+          "score_seconds": 0.8185677080182359
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.37107017636422507,
+          "fit_seconds": 5.858224208001047,
+          "score_seconds": 0.8951632919488475
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.29612478141777177,
+          "fit_seconds": 5.839064874919131,
+          "score_seconds": 0.8708841669140384
+        }
+      ],
+      "mean_ap": 0.3170938058454503,
+      "ap_sd": 0.04713084688293875,
+      "mean_fit_seconds": 5.455714597327945
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 10.0,
+        "gamma": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.31257719253164734,
+          "fit_seconds": 13.100468624965288,
+          "score_seconds": 0.8263242089888081
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.3961297544219651,
+          "fit_seconds": 8.015637874952517,
+          "score_seconds": 0.845073957927525
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.2857700424295271,
+          "fit_seconds": 6.861429708078504,
+          "score_seconds": 0.8180057919817045
+        }
+      ],
+      "mean_ap": 0.33149232979437987,
+      "ap_sd": 0.05755999757656765,
+      "mean_fit_seconds": 9.325845402665436
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 10.0,
+        "gamma": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.2920558535848036,
+          "fit_seconds": 8.21171125001274,
+          "score_seconds": 0.8973870419431478
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.36633440750984314,
+          "fit_seconds": 9.062206542002968,
+          "score_seconds": 0.9354318330297247
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.2741885865070824,
+          "fit_seconds": 9.009355333982967,
+          "score_seconds": 0.9478094159858301
+        }
+      ],
+      "mean_ap": 0.31085961586724303,
+      "ap_sd": 0.04886613540120678,
+      "mean_fit_seconds": 8.761091041999558
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "original",
+      "params": {
+        "C": 1.0
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4097103010138287,
+          "fit_seconds": 8.748765084077604,
+          "score_seconds": 1.4677995409583673
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.45816938852163536,
+          "fit_seconds": 9.316852124989964,
+          "score_seconds": 1.62502912490163
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.36680537085778797,
+          "fit_seconds": 9.283582165953703,
+          "score_seconds": 1.6224021669477224
+        }
+      ],
+      "mean_ap": 0.4115616867977507,
+      "ap_sd": 0.045710137310126686,
+      "mean_fit_seconds": 9.116399791673757
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.001
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3672889432727818,
+          "fit_seconds": 6.2177698749583215,
+          "score_seconds": 1.351717457990162
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4004621141888791,
+          "fit_seconds": 7.618235707981512,
+          "score_seconds": 1.5318945000180975
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3343052746099423,
+          "fit_seconds": 7.4432744580553845,
+          "score_seconds": 1.5294639579951763
+        }
+      ],
+      "mean_ap": 0.3673521106905344,
+      "ap_sd": 0.033078465024246426,
+      "mean_fit_seconds": 7.093093346998406
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.419096932558875,
+          "fit_seconds": 8.660645083989948,
+          "score_seconds": 1.4947624580236152
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.44327757084142105,
+          "fit_seconds": 9.536789250094444,
+          "score_seconds": 1.5934938329737633
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.34367007410005546,
+          "fit_seconds": 9.022982083028182,
+          "score_seconds": 1.5534336250275373
+        }
+      ],
+      "mean_ap": 0.4020148591667838,
+      "ap_sd": 0.0519544153590422,
+      "mean_fit_seconds": 9.073472139037525
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3403902645746861,
+          "fit_seconds": 11.892906291992404,
+          "score_seconds": 1.9805265420582145
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4571162744201709,
+          "fit_seconds": 10.960459249909036,
+          "score_seconds": 2.004649040987715
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3569529821610376,
+          "fit_seconds": 11.821757875033654,
+          "score_seconds": 2.139722291030921
+        }
+      ],
+      "mean_ap": 0.3848198403852982,
+      "ap_sd": 0.06315585233436673,
+      "mean_fit_seconds": 11.558374472311698
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 1.0,
+        "gamma": 0.001
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4141262983900382,
+          "fit_seconds": 8.179762999992818,
+          "score_seconds": 1.5264999999199063
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.3949605945778645,
+          "fit_seconds": 9.32927304203622,
+          "score_seconds": 1.546303166076541
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3410604513252078,
+          "fit_seconds": 8.68941862497013,
+          "score_seconds": 1.5511720839422196
+        }
+      ],
+      "mean_ap": 0.3833824480977035,
+      "ap_sd": 0.037883962421615104,
+      "mean_fit_seconds": 8.732818222333057
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 1.0,
+        "gamma": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4192674947596363,
+          "fit_seconds": 9.466089207911864,
+          "score_seconds": 1.4613879579119384
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46101128464639557,
+          "fit_seconds": 9.58420787495561,
+          "score_seconds": 1.5646721660159528
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.34718110671942587,
+          "fit_seconds": 9.488763707922772,
+          "score_seconds": 1.5465445829322562
+        }
+      ],
+      "mean_ap": 0.4091532953751526,
+      "ap_sd": 0.05758515541016811,
+      "mean_fit_seconds": 9.513020263596749
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 1.0,
+        "gamma": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3373564843607657,
+          "fit_seconds": 15.288890165975317,
+          "score_seconds": 1.9014328330522403
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.44359176547056894,
+          "fit_seconds": 15.48658983304631,
+          "score_seconds": 2.028492375044152
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.35965122244395137,
+          "fit_seconds": 15.149845249950886,
+          "score_seconds": 1.990487499977462
+        }
+      ],
+      "mean_ap": 0.38019982409176206,
+      "ap_sd": 0.05601934942838977,
+      "mean_fit_seconds": 15.308441749657504
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 10.0,
+        "gamma": 0.001
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4155777910864837,
+          "fit_seconds": 11.779399458086118,
+          "score_seconds": 1.459470917005092
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.43180358760582593,
+          "fit_seconds": 10.84346754103899,
+          "score_seconds": 1.543826957931742
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.352146669529461,
+          "fit_seconds": 10.775412667077035,
+          "score_seconds": 1.5461527080042288
+        }
+      ],
+      "mean_ap": 0.39984268274059026,
+      "ap_sd": 0.04209514669589517,
+      "mean_fit_seconds": 11.132759888734048
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 10.0,
+        "gamma": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.41989320757178494,
+          "fit_seconds": 10.705428416025825,
+          "score_seconds": 1.477521708002314
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4502778162485412,
+          "fit_seconds": 11.139604291995056,
+          "score_seconds": 1.580686082947068
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.34506854744410387,
+          "fit_seconds": 11.481342124985531,
+          "score_seconds": 1.575524125015363
+        }
+      ],
+      "mean_ap": 0.4050798570881433,
+      "ap_sd": 0.05414632097386203,
+      "mean_fit_seconds": 11.108791611002138
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "C": 10.0,
+        "gamma": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.2777210694531047,
+          "fit_seconds": 41.27571770793293,
+          "score_seconds": 1.9693127090577036
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.357805493245266,
+          "fit_seconds": 49.90735437499825,
+          "score_seconds": 2.1148142920574173
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3234982860648276,
+          "fit_seconds": 52.93881491699722,
+          "score_seconds": 2.0731521249981597
+        }
+      ],
+      "mean_ap": 0.31967494958773274,
+      "ap_sd": 0.04017887703624176,
+      "mean_fit_seconds": 48.04062899997613
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 20
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3929578003482808,
+          "fit_seconds": 0.6825597500428557,
+          "score_seconds": 0.028842125087976456
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.423440432984827,
+          "fit_seconds": 0.7355415000347421,
+          "score_seconds": 0.030987625010311604
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3750651560369884,
+          "fit_seconds": 0.6769135829526931,
+          "score_seconds": 0.03094741702079773
+        }
+      ],
+      "mean_ap": 0.39715446312336544,
+      "ap_sd": 0.024459166763830194,
+      "mean_fit_seconds": 0.6983382776767636
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 10,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.38936038010271834,
+          "fit_seconds": 1.7835743749747053,
+          "score_seconds": 0.033004292054101825
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4265316811005574,
+          "fit_seconds": 1.9575686249881983,
+          "score_seconds": 0.03160250000655651
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3683509023546069,
+          "fit_seconds": 2.032246166956611,
+          "score_seconds": 0.031036708038300276
+        }
+      ],
+      "mean_ap": 0.3947476545192942,
+      "ap_sd": 0.02946214177721863,
+      "mean_fit_seconds": 1.924463055639838
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 30,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.38804366236403015,
+          "fit_seconds": 1.78243245894555,
+          "score_seconds": 0.032303249929100275
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4288348666690244,
+          "fit_seconds": 2.098575957934372,
+          "score_seconds": 0.03132329205982387
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.367016404120694,
+          "fit_seconds": 2.1465937910834327,
+          "score_seconds": 0.02896250004414469
+        }
+      ],
+      "mean_ap": 0.3946316443845828,
+      "ap_sd": 0.031431380947823086,
+      "mean_fit_seconds": 2.009200735987785
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 10,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3703319252467497,
+          "fit_seconds": 3.872689750045538,
+          "score_seconds": 0.044148792047053576
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4145316420314056,
+          "fit_seconds": 4.311731665977277,
+          "score_seconds": 0.041054666973650455
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3539890060818694,
+          "fit_seconds": 4.851393666001968,
+          "score_seconds": 0.04374854196794331
+        }
+      ],
+      "mean_ap": 0.3796175244533415,
+      "ap_sd": 0.031321230122691744,
+      "mean_fit_seconds": 4.345271694008261
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 30,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3810900701481065,
+          "fit_seconds": 2.975440917070955,
+          "score_seconds": 0.04466608399525285
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.42331832152375776,
+          "fit_seconds": 3.0320922089740634,
+          "score_seconds": 0.04405033297371119
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.36451077294312145,
+          "fit_seconds": 3.0199691250454634,
+          "score_seconds": 0.043880832963623106
+        }
+      ],
+      "mean_ap": 0.38963972153832854,
+      "ap_sd": 0.03032168113226441,
+      "mean_fit_seconds": 3.0091674170301608
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 10,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.36021772152027826,
+          "fit_seconds": 5.017698375042528,
+          "score_seconds": 0.045010041911154985
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.41374994059627074,
+          "fit_seconds": 5.2376130420016125,
+          "score_seconds": 0.04479395900852978
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.35623081897141917,
+          "fit_seconds": 5.216619084007107,
+          "score_seconds": 0.044061125023290515
+        }
+      ],
+      "mean_ap": 0.3767328270293227,
+      "ap_sd": 0.03211968042500999,
+      "mean_fit_seconds": 5.157310167017083
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 30,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.37583961339663097,
+          "fit_seconds": 3.0885617090389132,
+          "score_seconds": 0.044029333046637475
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4247030414411941,
+          "fit_seconds": 3.120376083999872,
+          "score_seconds": 0.04397354205138981
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.36401210431927966,
+          "fit_seconds": 3.0771584999747574,
+          "score_seconds": 0.041528958012349904
+        }
+      ],
+      "mean_ap": 0.38818491971903485,
+      "ap_sd": 0.03217378441106256,
+      "mean_fit_seconds": 3.0953654310045144
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 10,
+        "max_features": 0.5,
+        "class_weight": "balanced"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.37225986257059784,
+          "fit_seconds": 3.7781704999506474,
+          "score_seconds": 0.044164833961986005
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.41475230088628146,
+          "fit_seconds": 4.249960125074722,
+          "score_seconds": 0.0439500838983804
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.35788841498834967,
+          "fit_seconds": 4.422731457976624,
+          "score_seconds": 0.04030237498227507
+        }
+      ],
+      "mean_ap": 0.3816335261484096,
+      "ap_sd": 0.029568134139741523,
+      "mean_fit_seconds": 4.1502873610006645
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3890289058773203,
+          "fit_seconds": 1.851897667045705,
+          "score_seconds": 0.046813666936941445
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46307776677035706,
+          "fit_seconds": 1.963129583047703,
+          "score_seconds": 0.046038915985263884
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4124922408768603,
+          "fit_seconds": 1.9495016660075635,
+          "score_seconds": 0.04613600007724017
+        }
+      ],
+      "mean_ap": 0.4215329711748459,
+      "ap_sd": 0.03784322334487065,
+      "mean_fit_seconds": 1.9215096387003239
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 10,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.35850863120751714,
+          "fit_seconds": 4.743292000028305,
+          "score_seconds": 0.03439187502954155
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46335136309482083,
+          "fit_seconds": 4.889080457971431,
+          "score_seconds": 0.03410591708961874
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4024727064628417,
+          "fit_seconds": 4.937639915966429,
+          "score_seconds": 0.03599174995906651
+        }
+      ],
+      "mean_ap": 0.40811090025505986,
+      "ap_sd": 0.05264828135207471,
+      "mean_fit_seconds": 4.856670791322055
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 30,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.36768944970988254,
+          "fit_seconds": 4.564897833974101,
+          "score_seconds": 0.03225495805963874
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46207489517984834,
+          "fit_seconds": 4.632993542007171,
+          "score_seconds": 0.03295312495902181
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.39718751876583636,
+          "fit_seconds": 4.724618084030226,
+          "score_seconds": 0.034461791976355016
+        }
+      ],
+      "mean_ap": 0.4089839545518557,
+      "ap_sd": 0.04828581574418342,
+      "mean_fit_seconds": 4.640836486670499
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 10,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.34970361762423097,
+          "fit_seconds": 10.13513349997811,
+          "score_seconds": 0.04298954107798636
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.45960861928163643,
+          "fit_seconds": 11.181949624908157,
+          "score_seconds": 0.04696920793503523
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.40191070130106193,
+          "fit_seconds": 10.81398374994751,
+          "score_seconds": 0.04315583303105086
+        }
+      ],
+      "mean_ap": 0.40374097940230974,
+      "ap_sd": 0.054975356167782166,
+      "mean_fit_seconds": 10.710355624944592
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 30,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.36559091233540414,
+          "fit_seconds": 8.04291962494608,
+          "score_seconds": 0.04841662500984967
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4617797193090707,
+          "fit_seconds": 7.978175458032638,
+          "score_seconds": 0.046730791917070746
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3995870049080769,
+          "fit_seconds": 7.695187750039622,
+          "score_seconds": 0.04669033398386091
+        }
+      ],
+      "mean_ap": 0.40898587885085064,
+      "ap_sd": 0.04877833300040534,
+      "mean_fit_seconds": 7.905427611006114
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 10,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.35435302082641995,
+          "fit_seconds": 12.397334042005241,
+          "score_seconds": 0.04741370806004852
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4590809222774237,
+          "fit_seconds": 13.250459374976344,
+          "score_seconds": 0.046464000013656914
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.40311442380637796,
+          "fit_seconds": 12.375982417026535,
+          "score_seconds": 0.046992375049740076
+        }
+      ],
+      "mean_ap": 0.4055161223034072,
+      "ap_sd": 0.05240524260353884,
+      "mean_fit_seconds": 12.674591944669373
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 30,
+        "max_features": 0.5,
+        "class_weight": null
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.36561042512509523,
+          "fit_seconds": 8.29273500002455,
+          "score_seconds": 0.04757608403451741
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46081420073397683,
+          "fit_seconds": 8.773934625089169,
+          "score_seconds": 0.047342791920527816
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.39988488506047015,
+          "fit_seconds": 7.912258500000462,
+          "score_seconds": 0.04557429102715105
+        }
+      ],
+      "mean_ap": 0.40876983697318076,
+      "ap_sd": 0.0482197729195706,
+      "mean_fit_seconds": 8.32630937503806
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "original",
+      "recipe": "separate",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 10,
+        "max_features": 0.5,
+        "class_weight": "balanced"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3651014914815997,
+          "fit_seconds": 14.760297833941877,
+          "score_seconds": 0.05033312505111098
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.45828783400300754,
+          "fit_seconds": 10.45116762490943,
+          "score_seconds": 0.047279666061513126
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.39886294164257524,
+          "fit_seconds": 10.468239458044991,
+          "score_seconds": 0.04680204193573445
+        }
+      ],
+      "mean_ap": 0.4074174223757275,
+      "ap_sd": 0.04717846927984937,
+      "mean_fit_seconds": 11.893234972298766
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "time",
+      "recipe": "separate",
+      "params": {
+        "C": 0.03
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4174938860195251,
+          "fit_seconds": 0.12672741699498147,
+          "score_seconds": 0.01035666698589921
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4375351158235612,
+          "fit_seconds": 0.11827704100869596,
+          "score_seconds": 0.010338125051930547
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.42733959121196285,
+          "fit_seconds": 0.12053666694555432,
+          "score_seconds": 0.01126095897052437
+        }
+      ],
+      "mean_ap": 0.42745619768501636,
+      "ap_sd": 0.010021123730236784,
+      "mean_fit_seconds": 0.12184704164974391
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "time",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3987653341617428,
+          "fit_seconds": 0.06643050001002848,
+          "score_seconds": 2.4900735839037225
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.44670459777023763,
+          "fit_seconds": 0.06748320802580565,
+          "score_seconds": 2.3310510420706123
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3743502678296309,
+          "fit_seconds": 0.06200395792257041,
+          "score_seconds": 2.31053841591347
+        }
+      ],
+      "mean_ap": 0.4066067332538705,
+      "ap_sd": 0.03680900596430255,
+      "mean_fit_seconds": 0.06530588865280151
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "time",
+      "recipe": "original",
+      "params": {
+        "C": 1.0
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.41532838801806343,
+          "fit_seconds": 11.137484375038184,
+          "score_seconds": 2.047259207931347
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.45210865738439754,
+          "fit_seconds": 12.027051209006459,
+          "score_seconds": 2.294052666053176
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.37658318194018436,
+          "fit_seconds": 12.165612792014144,
+          "score_seconds": 2.3323524589650333
+        }
+      ],
+      "mean_ap": 0.4146734091142151,
+      "ap_sd": 0.03776699760759355,
+      "mean_fit_seconds": 11.776716125352928
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "time",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.39430279700246995,
+          "fit_seconds": 2.429562042001635,
+          "score_seconds": 0.04762495798058808
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4504836332056964,
+          "fit_seconds": 2.454921834054403,
+          "score_seconds": 0.0472204580437392
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3997976459866294,
+          "fit_seconds": 2.444498582975939,
+          "score_seconds": 0.04745683306828141
+        }
+      ],
+      "mean_ap": 0.4148613587315986,
+      "ap_sd": 0.03097189323193934,
+      "mean_fit_seconds": 2.442994153010659
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "time_flight",
+      "recipe": "separate",
+      "params": {
+        "C": 0.03
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4233395735505133,
+          "fit_seconds": 0.1271826250012964,
+          "score_seconds": 0.011232791934162378
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.44874652807407794,
+          "fit_seconds": 0.12695270800031722,
+          "score_seconds": 0.011289667105302215
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.42294237869029844,
+          "fit_seconds": 0.12536187493242323,
+          "score_seconds": 0.010548667050898075
+        }
+      ],
+      "mean_ap": 0.43167616010496324,
+      "ap_sd": 0.014784706215883302,
+      "mean_fit_seconds": 0.1264990693113456
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "time_flight",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.41204813048030764,
+          "fit_seconds": 0.07192341692280024,
+          "score_seconds": 2.3699949579313397
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4498409977541693,
+          "fit_seconds": 0.06867737497668713,
+          "score_seconds": 2.2423050419893116
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3746805399226762,
+          "fit_seconds": 0.06928850000258535,
+          "score_seconds": 2.393426707945764
+        }
+      ],
+      "mean_ap": 0.4121898893857177,
+      "ap_sd": 0.037580429442069456,
+      "mean_fit_seconds": 0.0699630973006909
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "time_flight",
+      "recipe": "original",
+      "params": {
+        "C": 1.0
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4210693999302758,
+          "fit_seconds": 11.777565875090659,
+          "score_seconds": 2.206922250101343
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.45369940913736034,
+          "fit_seconds": 12.765030874987133,
+          "score_seconds": 2.465230750036426
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.37899905386866656,
+          "fit_seconds": 12.95082279201597,
+          "score_seconds": 2.521499083028175
+        }
+      ],
+      "mean_ap": 0.4179226209787676,
+      "ap_sd": 0.0374494650515132,
+      "mean_fit_seconds": 12.497806514031254
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "time_flight",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4048887143190578,
+          "fit_seconds": 2.5813592080958188,
+          "score_seconds": 0.047776082996279
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.45450789138492487,
+          "fit_seconds": 2.688521582982503,
+          "score_seconds": 0.048774666036479175
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3964137029576935,
+          "fit_seconds": 2.6041165420319885,
+          "score_seconds": 0.04806816589552909
+        }
+      ],
+      "mean_ap": 0.4186034362205587,
+      "ap_sd": 0.03138158504411938,
+      "mean_fit_seconds": 2.6246657777034366
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.03
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.44483447311155794,
+          "fit_seconds": 0.15460929099936038,
+          "score_seconds": 0.012347250012680888
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46649374155290435,
+          "fit_seconds": 0.15872545901220292,
+          "score_seconds": 0.01253004209138453
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.42468743389618946,
+          "fit_seconds": 0.16138166701421142,
+          "score_seconds": 0.013801124994643033
+        }
+      ],
+      "mean_ap": 0.4453385495202173,
+      "ap_sd": 0.020907711728960197,
+      "mean_fit_seconds": 0.15823880567525825
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.43498318772921785,
+          "fit_seconds": 0.07972799998242408,
+          "score_seconds": 2.732454707962461
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.45969552980087663,
+          "fit_seconds": 0.08044924994464964,
+          "score_seconds": 2.6071352920262143
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3801433698510121,
+          "fit_seconds": 0.07914112508296967,
+          "score_seconds": 2.8322824999922886
+        }
+      ],
+      "mean_ap": 0.42494069579370225,
+      "ap_sd": 0.04071578651307598,
+      "mean_fit_seconds": 0.07977279167001446
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "C": 1.0
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4254001326942508,
+          "fit_seconds": 17.029893332975917,
+          "score_seconds": 3.0072139999829233
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46687538318940724,
+          "fit_seconds": 18.50303804106079,
+          "score_seconds": 3.2465918340021744
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3765472265729452,
+          "fit_seconds": 18.875117040937766,
+          "score_seconds": 3.3464632499963045
+        }
+      ],
+      "mean_ap": 0.4229409141522011,
+      "ap_sd": 0.04521426529658747,
+      "mean_fit_seconds": 18.136016138324823
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.42138276345007897,
+          "fit_seconds": 2.867559584090486,
+          "score_seconds": 0.04886504099704325
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4662177241368477,
+          "fit_seconds": 2.9326357499230653,
+          "score_seconds": 0.04788545810151845
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.41259177587339746,
+          "fit_seconds": 3.0627982090227306,
+          "score_seconds": 0.04889924998860806
+        }
+      ],
+      "mean_ap": 0.43339742115344143,
+      "ap_sd": 0.028761077545622047,
+      "mean_fit_seconds": 2.954331181012094
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.01
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.39093589674214246,
+          "fit_seconds": 0.06507424998562783,
+          "score_seconds": 0.007746208109892905
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4335268162522115,
+          "fit_seconds": 0.06033875001594424,
+          "score_seconds": 0.007349541992880404
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.38204896292366086,
+          "fit_seconds": 0.059733084053732455,
+          "score_seconds": 0.007450666977092624
+        }
+      ],
+      "mean_ap": 0.40217055863933826,
+      "ap_sd": 0.027516459924691816,
+      "mean_fit_seconds": 0.06171536135176817
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.01
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3919504226256498,
+          "fit_seconds": 0.12782587495166808,
+          "score_seconds": 0.008427290944382548
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4221907012907211,
+          "fit_seconds": 0.12211837503127754,
+          "score_seconds": 0.008020415902137756
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3868714167925552,
+          "fit_seconds": 0.12060270796064287,
+          "score_seconds": 0.008430375019088387
+        }
+      ],
+      "mean_ap": 0.40033751356964203,
+      "ap_sd": 0.019095036926979045,
+      "mean_fit_seconds": 0.12351565264786284
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.03
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.4502192688285024,
+          "fit_seconds": 0.31579408305697143,
+          "score_seconds": 0.010879042092710733
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4668720951146591,
+          "fit_seconds": 0.3097197910537943,
+          "score_seconds": 0.012174707953818142
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4290876206533292,
+          "fit_seconds": 0.3410665000556037,
+          "score_seconds": 0.01288345898501575
+        }
+      ],
+      "mean_ap": 0.44872632819883024,
+      "ap_sd": 0.018936427365596628,
+      "mean_fit_seconds": 0.32219345805545646
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3810938506996019,
+          "fit_seconds": 0.04175870807375759,
+          "score_seconds": 1.838271415908821
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.42157606745306636,
+          "fit_seconds": 0.04212529107462615,
+          "score_seconds": 1.5711145830573514
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3495480174596548,
+          "fit_seconds": 0.0397177500417456,
+          "score_seconds": 1.7608329579234123
+        }
+      ],
+      "mean_ap": 0.38407264520410767,
+      "ap_sd": 0.036106300128764285,
+      "mean_fit_seconds": 0.04120058306337645
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.38559030376099185,
+          "fit_seconds": 0.07278770802076906,
+          "score_seconds": 3.29047675000038
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.42469817023316364,
+          "fit_seconds": 0.07806774997152388,
+          "score_seconds": 3.175244375015609
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3453380850556992,
+          "fit_seconds": 0.0786369580309838,
+          "score_seconds": 3.4062309579458088
+        }
+      ],
+      "mean_ap": 0.3852088530166182,
+      "ap_sd": 0.03968141767057209,
+      "mean_fit_seconds": 0.07649747200775892
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "n_neighbors": 101,
+        "weights": "distance",
+        "metric": "euclidean"
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.41973707393995885,
+          "fit_seconds": 0.15576129197143018,
+          "score_seconds": 5.53713091602549
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4539059641827328,
+          "fit_seconds": 0.15641325002070516,
+          "score_seconds": 5.4175021660048515
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.378716664691476,
+          "fit_seconds": 0.1539624580182135,
+          "score_seconds": 5.525290208985098
+        }
+      ],
+      "mean_ap": 0.4174532342713892,
+      "ap_sd": 0.03764664171237956,
+      "mean_fit_seconds": 0.15537900000344962
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.1
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3162712724183111,
+          "fit_seconds": 7.502654541982338,
+          "score_seconds": 1.3951619170838967
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.41041942415708643,
+          "fit_seconds": 8.203260916983709,
+          "score_seconds": 1.513819915940985
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.30859502666728256,
+          "fit_seconds": 8.162761375075206,
+          "score_seconds": 1.4740348749328405
+        }
+      ],
+      "mean_ap": 0.34509524108089334,
+      "ap_sd": 0.056702450195177084,
+      "mean_fit_seconds": 7.956225611347084
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "separate",
+      "params": {
+        "C": 0.1,
+        "gamma": 0.1
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.32166375201657127,
+          "fit_seconds": 53.2915992080234,
+          "score_seconds": 2.627739666029811
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.40863785372851,
+          "fit_seconds": 50.65440137498081,
+          "score_seconds": 2.8781767920590937
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.31506266549126455,
+          "fit_seconds": 49.41491824993864,
+          "score_seconds": 3.108896500081755
+        }
+      ],
+      "mean_ap": 0.34845475707878193,
+      "ap_sd": 0.05222449068771786,
+      "mean_fit_seconds": 51.120306277647614
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "C": 1.0
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.43663214473554035,
+          "fit_seconds": 201.8089543749811,
+          "score_seconds": 6.248144041979685
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.46663265441056456,
+          "fit_seconds": 181.61283245799132,
+          "score_seconds": 6.6349023330258206
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.38147059123815796,
+          "fit_seconds": 190.3966442089295,
+          "score_seconds": 6.916436999919824
+        }
+      ],
+      "mean_ap": 0.4282451301280876,
+      "ap_sd": 0.04319607344961417,
+      "mean_fit_seconds": 191.27281034730063
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 20
+      },
+      "training_rows": 20000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.39486768970084285,
+          "fit_seconds": 0.9683010000735521,
+          "score_seconds": 0.030182542046532035
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4118280380987259,
+          "fit_seconds": 0.9260528330923989,
+          "score_seconds": 0.03217429097276181
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3684088206713509,
+          "fit_seconds": 0.9237747499719262,
+          "score_seconds": 0.032172624953091145
+        }
+      ],
+      "mean_ap": 0.39170151615697324,
+      "ap_sd": 0.021882084034292575,
+      "mean_fit_seconds": 0.9393761943792924
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 20
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.3934912207025889,
+          "fit_seconds": 2.084060207940638,
+          "score_seconds": 0.03227929200511426
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.40960517820319153,
+          "fit_seconds": 2.1199534999905154,
+          "score_seconds": 0.033049290999770164
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.3687094844387673,
+          "fit_seconds": 2.1375325000844896,
+          "score_seconds": 0.03217333403881639
+        }
+      ],
+      "mean_ap": 0.39060196111484924,
+      "ap_sd": 0.020600371546222206,
+      "mean_fit_seconds": 2.1138487360052145
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "package": "time_flight_weather",
+      "recipe": "original",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "training_rows": 40000,
+      "folds": [
+        {
+          "fold": "Apr\u2013Jun",
+          "ap": 0.43750774645981483,
+          "fit_seconds": 6.74584704102017,
+          "score_seconds": 0.04824020806699991
+        },
+        {
+          "fold": "Jul\u2013Sep",
+          "ap": 0.4731059141635511,
+          "fit_seconds": 7.001529207918793,
+          "score_seconds": 0.04553100001066923
+        },
+        {
+          "fold": "Oct\u2013Dec",
+          "ap": 0.4172222941987019,
+          "fit_seconds": 7.461453582975082,
+          "score_seconds": 0.048278999980539083
+        }
+      ],
+      "mean_ap": 0.44261198494068926,
+      "ap_sd": 0.02828930333087318,
+      "mean_fit_seconds": 7.069609943971348
+    }
+  ],
+  "latest_validation_operating_points": [
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "policy": "F1",
+      "ap": 0.3868714167925552,
+      "roc_auc": 0.65374973240222,
+      "precision": 0.3408560311284047,
+      "recall": 0.6919431279620853,
+      "f1": 0.456725755995829,
+      "f05": 0.3793521565910272,
+      "tp": 876,
+      "fp": 1694,
+      "fn": 390,
+      "tn": 2040,
+      "n": 5000,
+      "threshold": 0.15079519497972485
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "policy": "F0.5",
+      "ap": 0.3868714167925552,
+      "roc_auc": 0.65374973240222,
+      "precision": 0.4251883745963401,
+      "recall": 0.31200631911532384,
+      "f1": 0.35990888382687924,
+      "f05": 0.39642713769570453,
+      "tp": 395,
+      "fp": 534,
+      "fn": 871,
+      "tn": 3200,
+      "n": 5000,
+      "threshold": 0.22818296704499133
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "policy": "F1",
+      "ap": 0.4290876206533292,
+      "roc_auc": 0.6872482148160747,
+      "precision": 0.3700588730025231,
+      "recall": 0.6951026856240127,
+      "f1": 0.4829857299670692,
+      "f05": 0.40823900538133234,
+      "tp": 880,
+      "fp": 1498,
+      "fn": 386,
+      "tn": 2236,
+      "n": 5000,
+      "threshold": 0.1577291697408321
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "policy": "F0.5",
+      "ap": 0.4290876206533292,
+      "roc_auc": 0.6872482148160747,
+      "precision": 0.43714517437145173,
+      "recall": 0.42575039494470773,
+      "f1": 0.43137254901960786,
+      "f05": 0.43481768312358826,
+      "tp": 539,
+      "fp": 694,
+      "fn": 727,
+      "tn": 3040,
+      "n": 5000,
+      "threshold": 0.22963203657804848
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "policy": "F1",
+      "ap": 0.3453380850556992,
+      "roc_auc": 0.625924005615111,
+      "precision": 0.3235512630014859,
+      "recall": 0.6879936808846762,
+      "f1": 0.4401212733703891,
+      "f05": 0.3618913079607778,
+      "tp": 871,
+      "fp": 1821,
+      "fn": 395,
+      "tn": 1913,
+      "n": 5000,
+      "threshold": 0.1996388882834846
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "policy": "F0.5",
+      "ap": 0.3453380850556992,
+      "roc_auc": 0.625924005615111,
+      "precision": 0.35163616195230174,
+      "recall": 0.5007898894154819,
+      "f1": 0.4131638970348648,
+      "f05": 0.3739089407879217,
+      "tp": 634,
+      "fp": 1169,
+      "fn": 632,
+      "tn": 2565,
+      "n": 5000,
+      "threshold": 0.24026126187143704
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "policy": "F1",
+      "ap": 0.378716664691476,
+      "roc_auc": 0.6511734955927809,
+      "precision": 0.3396153846153846,
+      "recall": 0.6974723538704581,
+      "f1": 0.45680289705121574,
+      "f05": 0.3784501971541231,
+      "tp": 883,
+      "fp": 1717,
+      "fn": 383,
+      "tn": 2017,
+      "n": 5000,
+      "threshold": 0.19568488540966072
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "policy": "F0.5",
+      "ap": 0.378716664691476,
+      "roc_auc": 0.6511734955927809,
+      "precision": 0.35832521908471276,
+      "recall": 0.5813586097946287,
+      "f1": 0.4433734939759036,
+      "f05": 0.38810377557477327,
+      "tp": 736,
+      "fp": 1318,
+      "fn": 530,
+      "tn": 2416,
+      "n": 5000,
+      "threshold": 0.22572306082272262
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "policy": "F1",
+      "ap": 0.31506266549126455,
+      "roc_auc": 0.5437450446814254,
+      "precision": 0.253352011206724,
+      "recall": 1.0,
+      "f1": 0.404279099473096,
+      "f05": 0.29782629152159595,
+      "tp": 1266,
+      "fp": 3731,
+      "fn": 0,
+      "tn": 3,
+      "n": 5000,
+      "threshold": -1.1783368006459647
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "policy": "F0.5",
+      "ap": 0.31506266549126455,
+      "roc_auc": 0.5437450446814254,
+      "precision": 0.3539651837524178,
+      "recall": 0.2890995260663507,
+      "f1": 0.3182608695652174,
+      "f05": 0.3387634209552018,
+      "tp": 366,
+      "fp": 668,
+      "fn": 900,
+      "tn": 3066,
+      "n": 5000,
+      "threshold": -0.9775444924544531
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "policy": "F1",
+      "ap": 0.38147059123815796,
+      "roc_auc": 0.6178124082446347,
+      "precision": 0.31752817722502913,
+      "recall": 0.6453396524486572,
+      "f1": 0.42563167491534254,
+      "f05": 0.3534348503201246,
+      "tp": 817,
+      "fp": 1756,
+      "fn": 449,
+      "tn": 1978,
+      "n": 5000,
+      "threshold": -0.9580129272973517
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "policy": "F0.5",
+      "ap": 0.38147059123815796,
+      "roc_auc": 0.6178124082446347,
+      "precision": 0.397708674304419,
+      "recall": 0.38388625592417064,
+      "f1": 0.39067524115755625,
+      "f05": 0.3948651283717907,
+      "tp": 486,
+      "fp": 736,
+      "fn": 780,
+      "tn": 2998,
+      "n": 5000,
+      "threshold": -0.8390937150843946
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "policy": "F1",
+      "ap": 0.3687094844387673,
+      "roc_auc": 0.6384458894019432,
+      "precision": 0.3179771388985106,
+      "recall": 0.7251184834123223,
+      "f1": 0.4420900553816518,
+      "f05": 0.3582019665990323,
+      "tp": 918,
+      "fp": 1969,
+      "fn": 348,
+      "tn": 1765,
+      "n": 5000,
+      "threshold": 0.44648218040959164
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "policy": "F0.5",
+      "ap": 0.3687094844387673,
+      "roc_auc": 0.6384458894019432,
+      "precision": 0.3990909090909091,
+      "recall": 0.3467614533965245,
+      "f1": 0.3710904480135249,
+      "f05": 0.38739851747264387,
+      "tp": 439,
+      "fp": 661,
+      "fn": 827,
+      "tn": 3073,
+      "n": 5000,
+      "threshold": 0.5401248253466334
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "policy": "F1",
+      "ap": 0.4172222941987019,
+      "roc_auc": 0.6767313047517751,
+      "precision": 0.34914463452566097,
+      "recall": 0.7093206951026856,
+      "f1": 0.4679520583637311,
+      "f05": 0.38861000519300676,
+      "tp": 898,
+      "fp": 1674,
+      "fn": 368,
+      "tn": 2060,
+      "n": 5000,
+      "threshold": 0.412146961557224
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "policy": "F0.5",
+      "ap": 0.4172222941987019,
+      "roc_auc": 0.6767313047517751,
+      "precision": 0.447887323943662,
+      "recall": 0.3767772511848341,
+      "f1": 0.4092664092664093,
+      "f05": 0.43159609120521175,
+      "tp": 477,
+      "fp": 588,
+      "fn": 789,
+      "tn": 3146,
+      "n": 5000,
+      "threshold": 0.5128040864693995
+    }
+  ],
+  "test_outcomes_loaded": false,
+  "test_start": "2026-04-01",
+  "test_end": "2026-06-30",
+  "test_rows": 10000,
+  "threshold_primary": "F1",
+  "packages": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.9.0",
+    "pyarrow": "20.0.0",
+    "matplotlib": "3.11.1",
+    "seaborn": "0.13.2",
+    "joblib": "1.5.3"
+  },
+  "availability_note": "Historical schedule and report/outcome availability remain assumptions; seven-day outcome lag retained."
+}

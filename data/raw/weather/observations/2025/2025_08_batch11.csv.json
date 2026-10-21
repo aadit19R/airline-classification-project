@@ -1,0 +1,65 @@
+{
+  "request": {
+    "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+    "params": {
+      "station": [
+        "OAK",
+        "OKC",
+        "OMA",
+        "ONT",
+        "ORD",
+        "ORF",
+        "ORH",
+        "OTH",
+        "PABE",
+        "PABR",
+        "PACV",
+        "PADK",
+        "PADL",
+        "PADQ",
+        "PAE",
+        "PAFA",
+        "PAGS",
+        "PAJN",
+        "PAKN",
+        "PAKT"
+      ],
+      "data": [
+        "tmpf",
+        "dwpf",
+        "drct",
+        "sknt",
+        "gust",
+        "vsby",
+        "p01i",
+        "skyc1",
+        "skyc2",
+        "skyc3",
+        "skyc4",
+        "skyl1",
+        "skyl2",
+        "skyl3",
+        "skyl4",
+        "wxcodes",
+        "metar"
+      ],
+      "sts": "2025-07-30T00:00Z",
+      "ets": "2025-09-03T00:00Z",
+      "tz": "Etc/UTC",
+      "format": "onlycomma",
+      "latlon": "no",
+      "elev": "no",
+      "missing": "M",
+      "trace": "T",
+      "direct": "no",
+      "report_type": [
+        3,
+        4
+      ]
+    }
+  },
+  "resolved_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=OAK&station=OKC&station=OMA&station=ONT&station=ORD&station=ORF&station=ORH&station=OTH&station=PABE&station=PABR&station=PACV&station=PADK&station=PADL&station=PADQ&station=PAE&station=PAFA&station=PAGS&station=PAJN&station=PAKN&station=PAKT&data=tmpf&data=dwpf&data=drct&data=sknt&data=gust&data=vsby&data=p01i&data=skyc1&data=skyc2&data=skyc3&data=skyc4&data=skyl1&data=skyl2&data=skyl3&data=skyl4&data=wxcodes&data=metar&sts=2025-07-30T00%3A00Z&ets=2025-09-03T00%3A00Z&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+  "retrieved_at_utc": "2026-10-16T10:31:31.108370+00:00",
+  "sha256": "c7c30c5c1eb0a8908fa852034596f842e6c7ca7cf28e01082a88ed7ab476d75f",
+  "bytes": 3875901
+}

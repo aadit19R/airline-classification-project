@@ -1,0 +1,65 @@
+{
+  "original_files": {
+    "notebooks/01_cleaning_and_eda.ipynb": {
+      "sha256": "c9e6dbb69f3f11f0c7507bbc3a1b819fed72cbce22c3c48a39acc6b75d6937f7",
+      "backup": "reports/notebook_simplification/baseline/01_cleaning_and_eda.ipynb"
+    },
+    "notebooks/02_feature_engineering.ipynb": {
+      "sha256": "611250f6ad67146daad3f70aab5be05f3f1a9e2951ecb491833ff1d38944afe6",
+      "backup": "reports/notebook_simplification/baseline/02_feature_engineering.ipynb"
+    },
+    "notebooks/02a_deeper_training_exploration.ipynb": {
+      "sha256": "e9a1911cd7db4b74803c701dddcb4ac109e6c2c8ccc1cfe0114a0cf5844e29a8",
+      "backup": "reports/notebook_simplification/baseline/02a_deeper_training_exploration.ipynb"
+    },
+    "scripts/baseline_integrity.py": {
+      "sha256": "6bd0f7840c402f040cb798e2ad795baeaa7f1462f1de189f0b37d4ad61cf1fd7",
+      "backup": "reports/notebook_simplification/baseline/baseline_integrity.py"
+    },
+    "notebooks/04_model_improvements.ipynb": {
+      "sha256": "5386fa76cdc586590712b1a5cfcefbae11e20480e1f0a2b56a3a75f2f9e4f6df",
+      "backup": "reports/notebook_simplification/baseline/04_model_improvements.ipynb"
+    }
+  },
+  "protected_artifacts": {
+    "data/processed/features.parquet": "27e41d1bb3c1b51b9afdfaf3579377936f520d38581bc1923a030e5f30b879f2",
+    "data/processed/flights_clean.parquet": "cbc734a8ff8ab055269f8a51dc8b1ad7b13487286a577047425a4019084c67e7",
+    "models/improved_flight_delay_models.joblib": "e7d082fe3aeb5243f805e8a1273d827d9d798f628778b31c000f88d5699694d9",
+    "models/final_flight_delay_models.joblib": "0f245eab3e199546c6654993a523b09f78ded37bf6b861fa17977a2bbcecd50a",
+    "models/flight_delay_models.joblib": "34333357346f366f8a6635178fd2f04cce87fe396dd2deb98ebeef2f0385a119",
+    "reports/final_models/reference_correction.json": "fa4e689eccaf275d0dfe01ccdf746edaa980f72adc19811bfd8b80549b6165eb",
+    "reports/final_models/execution_audit.json": "92ff1b5dddb4b5faf7840b0c128a1a224cd2df53a20055fc7489ab38b8e103a3",
+    "reports/final_models/development.json": "e00f884bb26841de76e7b5746cc049b55fe2c971caae885913d18a871df09d26",
+    "reports/final_models/cohorts.json": "49ae39ac963f2571dc3ba227fa24f347fb500fc7c22936a1c76fb226bfb39163",
+    "reports/final_models/development_audit.json": "9b67841f99b4984c0101aa0440bd53fbba075826e630106f936ef1dba664bf31",
+    "reports/final_models/selection.json": "2c7c03a72e99563ae72e338c3176fa855ec1fce720b2bfe5c24f15a5ad50cd12",
+    "reports/final_models/protocol.json": "3989ec129930e4f25e2c27bb6680ffaeff742fe88c39f01df4ae767fc9ee992c",
+    "reports/final_models/test_results.json": "6a216de0a1048b6236c1b6e4aa783dacdc3490bd67b097f8f0b19db332349fe6",
+    "reports/final_models/test_access.json": "ef2cb076b36f5394e8f87983f38f91c665ecdb1820e3b2f9ea2585e741902482",
+    "reports/final_models/development_scores.npz": "f32e4c01651b9ceb85a998d46ecba76092e7dc29b9dc2f43a35209a0ce5802e5",
+    "tableau/exports/final_july/feature_comparison.csv": "732ec4ebc51382bb596fe28517948a6481ca7ff784b062374377b255241e2c77",
+    "tableau/exports/final_july/priority_curve.csv": "d7a27235c4bab2382fe4fce9f5cff343c4fb10316ddc41be67180b98d5dbc9ca",
+    "tableau/exports/final_july/pr_curve.csv": "0ab9f181450e771ac19647fba9de1c81060fc7a39f4ed8609286d182f8137d51",
+    "tableau/exports/final_july/flight_predictions.csv": "52963e172f76e6759701c013e3e5003550252af5be54c33d54cc4c0778d4c6bf",
+    "tableau/exports/final_july/subgroup_metrics.csv": "68a14172a64cad7477572be6dad7db9ff72ca1a2eadca4e20b7a63c16dc706c6",
+    "tableau/exports/final_july/model_metrics.csv": "e8997e3d2b388bdf82adfab9e4a138f1f0942ffd5ee458232ffd0380a857c2fc",
+    "tableau/exports/final_july/export_manifest.json": "b5fe4a348cb934cd1bdc6701f67a093b14b757f7c412ed0fddfb8b758f638c08",
+    "reports/improvements/raw_source_checksums.json": "81d12c7a87f8b440194fdb8b02b291aaa4aea44539bad9e1408e4eb5082c921b",
+    "reports/improvements/execution_audit.json": "91b38ee7298143eb169e518a8565f4fe333b8fea38a3369c5a68c0c80350f7eb",
+    "reports/improvements/development_summary.json": "369bbd082acbbb2bd0f55d709bdef56eabb938dfe8c9962c51172a80ec55127e",
+    "reports/improvements/baseline_fingerprints.json": "204224766de6f38d07aedbab7780c8659aa2b9963047c3a939aab56c38c9f01d",
+    "reports/improvements/weather_quality.json": "4b3ea261479ee7bd2117eeef8dd883253b92cf154b3298806376de0d0128f42d",
+    "reports/improvements/selection.json": "df56e609cce33cf00509ee826b11fec592f968e6955fc5d23ef82c38f1ec6c93",
+    "reports/improvements/protocol.json": "0663dd8b706f98c7f032aa77cdc413eeabd6e78925c3d2134246ebbbd4a6fff0",
+    "reports/improvements/feature_audit.json": "adb7177fc7a876b75d9400a7be5964b1f6813163a701871890a18c734a78ae66",
+    "reports/improvements/test_results.json": "e81ae35e7fba6dbc349db8a7bd0533f8363b7c951663e52001e1bdf96efe3db3",
+    "reports/improvements/test_access.json": "67eeee9c35e04a0d60dc5c4505c346dac52a4da3cd94343cf59d196b5961c3c8",
+    "config/project.json": "833fee4c5a3caa66464ac2f099dfc2b5e50e25cd8e7eab38e5ae9a5fd3c8da8b",
+    "reports/preparation_manifest.json": "2d0a3365abbcc0c2c6cd5a5927a775b18b3d77de8d10a6d3aef6640ffaa1c7e5",
+    "reports/broad_feature_experiments.json": "bc509c8c774fd6c1e7a937c6947484d924ba422c9e70a977966d86f749d15c97",
+    "reports/feature_engineering_extension.json": "62c25a6c06624e2c85f1d09d29c891e763007b6f84d33ba68382460fecb7d193",
+    "scripts/improvement_features.py": "d04efda1218336febf0484e6a06e9794be277915879abb8bb7c381d99bbaa1df",
+    "scripts/final_features.py": "b889cd42d3891df821ebac8170671ceceda6e7d99d002636eec510da872061d6",
+    "scripts/final_modelling.py": "f20e7b5ef2356fa9b0f4114ac88e4eea8e7284e8b9a2c8509cded16ee3ac9eb4"
+  }
+}

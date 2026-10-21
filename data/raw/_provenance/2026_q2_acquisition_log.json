@@ -1,0 +1,280 @@
+{
+  "started_at_utc": "2026-10-18T20:36:59.252642+00:00",
+  "flights": [
+    {
+      "download": {
+        "path": "data/raw/flights/bts/2026/archives/2026_04.zip",
+        "role": "raw_q2_2026_flights",
+        "method": "direct_public_download_unmodified_response",
+        "request": {
+          "url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_4.zip",
+          "params": {}
+        },
+        "source_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_4.zip",
+        "resolved_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_4.zip",
+        "started_at_utc": "2026-10-18T20:36:59.252877+00:00",
+        "retrieved_at_utc": "2026-10-18T20:37:59.968489+00:00",
+        "response_headers": {
+          "Content-Type": "application/x-zip-compressed",
+          "Content-Length": "30504623",
+          "Last-Modified": "Fri, 12 Jun 2026 13:44:18 GMT",
+          "ETag": "\"116e389171fadc1:0\""
+        },
+        "sha256": "70e685ffa6042e6c851c4f1e821d774dfe7318d3eb212ac5bfc6a53ea23f3cfb",
+        "bytes": 30504623,
+        "archive_csv_member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_4.csv",
+        "uncompressed_csv_bytes": 270478182,
+        "column_count": 110
+      },
+      "extracted_csv": {
+        "path": "data/raw/flights/bts/2026/csv/2026_04.csv",
+        "sha256": "71b1ac148bb7a344161b5eeb846aa662fae8d986b37025f8d8d92383b8c13ee7",
+        "bytes": 270478182,
+        "archive": "data/raw/flights/bts/2026/archives/2026_04.zip",
+        "member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_4.csv",
+        "crc32": 647018601
+      }
+    },
+    {
+      "download": {
+        "path": "data/raw/flights/bts/2026/archives/2026_05.zip",
+        "role": "raw_q2_2026_flights",
+        "method": "direct_public_download_unmodified_response",
+        "request": {
+          "url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_5.zip",
+          "params": {}
+        },
+        "source_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_5.zip",
+        "resolved_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_5.zip",
+        "started_at_utc": "2026-10-18T20:36:59.252987+00:00",
+        "retrieved_at_utc": "2026-10-18T20:38:00.822968+00:00",
+        "response_headers": {
+          "Content-Type": "application/x-zip-compressed",
+          "Content-Length": "31716693",
+          "Last-Modified": "Tue, 30 Jun 2026 18:02:30 GMT",
+          "ETag": "\"07f139eba8dd1:0\""
+        },
+        "sha256": "4e7b96999440afec8c92dd23bfbc68a5852e14d9a56c3d0d366f884542ea80b3",
+        "bytes": 31716693,
+        "archive_csv_member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_5.csv",
+        "uncompressed_csv_bytes": 276871221,
+        "column_count": 110
+      },
+      "extracted_csv": {
+        "path": "data/raw/flights/bts/2026/csv/2026_05.csv",
+        "sha256": "12470de43703fe0c23e25510b5af6e6e4e1d5d0aa55818dcc7d0f0b407801be8",
+        "bytes": 276871221,
+        "archive": "data/raw/flights/bts/2026/archives/2026_05.zip",
+        "member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_5.csv",
+        "crc32": 950681042
+      }
+    },
+    {
+      "download": {
+        "path": "data/raw/flights/bts/2026/archives/2026_06.zip",
+        "role": "raw_q2_2026_flights",
+        "method": "direct_public_download_unmodified_response",
+        "request": {
+          "url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_6.zip",
+          "params": {}
+        },
+        "source_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_6.zip",
+        "resolved_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_6.zip",
+        "started_at_utc": "2026-10-18T20:36:59.253074+00:00",
+        "retrieved_at_utc": "2026-10-18T20:38:01.797463+00:00",
+        "response_headers": {
+          "Content-Type": "application/x-zip-compressed",
+          "Content-Length": "31606062",
+          "Last-Modified": "Wed, 12 Aug 2026 12:15:44 GMT",
+          "ETag": "\"0187f4c542add1:0\""
+        },
+        "sha256": "acd9d03e223e079e54b77065015f0ce9b6de92f1f46148048600cc9813a47a6e",
+        "bytes": 31606062,
+        "archive_csv_member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_6.csv",
+        "uncompressed_csv_bytes": 275276886,
+        "column_count": 110
+      },
+      "extracted_csv": {
+        "path": "data/raw/flights/bts/2026/csv/2026_06.csv",
+        "sha256": "caf8ac533822bc40c11a3c56501ae95dfcba6aa0dde377637b8724cba5cb2aab",
+        "bytes": 275276886,
+        "archive": "data/raw/flights/bts/2026/archives/2026_06.zip",
+        "member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2026_6.csv",
+        "crc32": 3481101384
+      }
+    }
+  ],
+  "weather": [
+    {
+      "path": "data/raw/weather/observations/2026/2026_04_origins.csv",
+      "role": "raw_q2_2026_weather",
+      "method": "direct_public_download_unmodified_response",
+      "request": {
+        "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+        "params": {
+          "station": [
+            "ATL",
+            "ORD",
+            "DFW"
+          ],
+          "data": [
+            "tmpf",
+            "dwpf",
+            "drct",
+            "sknt",
+            "gust",
+            "vsby",
+            "p01i",
+            "skyc1",
+            "skyc2",
+            "skyc3",
+            "skyc4",
+            "skyl1",
+            "skyl2",
+            "skyl3",
+            "skyl4",
+            "wxcodes",
+            "metar"
+          ],
+          "sts": "2026-03-30T00:00Z",
+          "ets": "2026-05-03T00:00Z",
+          "tz": "Etc/UTC",
+          "format": "onlycomma",
+          "latlon": "no",
+          "elev": "no",
+          "missing": "M",
+          "trace": "T",
+          "direct": "no",
+          "report_type": [
+            3,
+            4
+          ]
+        }
+      },
+      "source_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+      "resolved_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=ATL&station=ORD&station=DFW&data=tmpf&data=dwpf&data=drct&data=sknt&data=gust&data=vsby&data=p01i&data=skyc1&data=skyc2&data=skyc3&data=skyc4&data=skyl1&data=skyl2&data=skyl3&data=skyl4&data=wxcodes&data=metar&sts=2026-03-30T00%3A00Z&ets=2026-05-03T00%3A00Z&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+      "started_at_utc": "2026-10-18T20:38:02.307530+00:00",
+      "retrieved_at_utc": "2026-10-18T20:38:05.394862+00:00",
+      "response_headers": {
+        "Content-Type": "text/plain; charset=UTF-8"
+      },
+      "sha256": "46b0c5d46e448977db523cb56a8d27d10997605bd43055f62fda8b1d5b254fb2",
+      "bytes": 556889
+    },
+    {
+      "path": "data/raw/weather/observations/2026/2026_05_origins.csv",
+      "role": "raw_q2_2026_weather",
+      "method": "direct_public_download_unmodified_response",
+      "request": {
+        "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+        "params": {
+          "station": [
+            "ATL",
+            "ORD",
+            "DFW"
+          ],
+          "data": [
+            "tmpf",
+            "dwpf",
+            "drct",
+            "sknt",
+            "gust",
+            "vsby",
+            "p01i",
+            "skyc1",
+            "skyc2",
+            "skyc3",
+            "skyc4",
+            "skyl1",
+            "skyl2",
+            "skyl3",
+            "skyl4",
+            "wxcodes",
+            "metar"
+          ],
+          "sts": "2026-04-29T00:00Z",
+          "ets": "2026-06-03T00:00Z",
+          "tz": "Etc/UTC",
+          "format": "onlycomma",
+          "latlon": "no",
+          "elev": "no",
+          "missing": "M",
+          "trace": "T",
+          "direct": "no",
+          "report_type": [
+            3,
+            4
+          ]
+        }
+      },
+      "source_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+      "resolved_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=ATL&station=ORD&station=DFW&data=tmpf&data=dwpf&data=drct&data=sknt&data=gust&data=vsby&data=p01i&data=skyc1&data=skyc2&data=skyc3&data=skyc4&data=skyl1&data=skyl2&data=skyl3&data=skyl4&data=wxcodes&data=metar&sts=2026-04-29T00%3A00Z&ets=2026-06-03T00%3A00Z&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+      "started_at_utc": "2026-10-18T20:38:05.398901+00:00",
+      "retrieved_at_utc": "2026-10-18T20:38:08.670763+00:00",
+      "response_headers": {
+        "Content-Type": "text/plain; charset=UTF-8"
+      },
+      "sha256": "acf31142db0d1c2b6d21abc9e7f65b16e66a70be5479bb12b0af3ff6fcd12561",
+      "bytes": 554384
+    },
+    {
+      "path": "data/raw/weather/observations/2026/2026_06_origins.csv",
+      "role": "raw_q2_2026_weather",
+      "method": "direct_public_download_unmodified_response",
+      "request": {
+        "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+        "params": {
+          "station": [
+            "ATL",
+            "ORD",
+            "DFW"
+          ],
+          "data": [
+            "tmpf",
+            "dwpf",
+            "drct",
+            "sknt",
+            "gust",
+            "vsby",
+            "p01i",
+            "skyc1",
+            "skyc2",
+            "skyc3",
+            "skyc4",
+            "skyl1",
+            "skyl2",
+            "skyl3",
+            "skyl4",
+            "wxcodes",
+            "metar"
+          ],
+          "sts": "2026-05-30T00:00Z",
+          "ets": "2026-07-03T00:00Z",
+          "tz": "Etc/UTC",
+          "format": "onlycomma",
+          "latlon": "no",
+          "elev": "no",
+          "missing": "M",
+          "trace": "T",
+          "direct": "no",
+          "report_type": [
+            3,
+            4
+          ]
+        }
+      },
+      "source_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+      "resolved_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=ATL&station=ORD&station=DFW&data=tmpf&data=dwpf&data=drct&data=sknt&data=gust&data=vsby&data=p01i&data=skyc1&data=skyc2&data=skyc3&data=skyc4&data=skyl1&data=skyl2&data=skyl3&data=skyl4&data=wxcodes&data=metar&sts=2026-05-30T00%3A00Z&ets=2026-07-03T00%3A00Z&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+      "started_at_utc": "2026-10-18T20:38:08.674076+00:00",
+      "retrieved_at_utc": "2026-10-18T20:38:11.845990+00:00",
+      "response_headers": {
+        "Content-Type": "text/plain; charset=UTF-8"
+      },
+      "sha256": "792ff0c1c949e6829dd98f9a6bf8eedfe1b654bf9e37a64489425040ca9e1faf",
+      "bytes": 541259
+    }
+  ],
+  "failures": [],
+  "policy": "New direct raw sources only; no prior cleaned data or test outcome analysis.",
+  "completed_at_utc": "2026-10-18T20:38:11.850229+00:00"
+}

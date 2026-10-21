@@ -1,0 +1,82 @@
+{
+  "status": "passed",
+  "verified_at_utc": "2026-10-20T21:29:11.446476+00:00",
+  "method": "Fresh in-process Jupyter kernel in a new Python process per notebook; isolated project copy.",
+  "notebooks": {
+    "notebooks/01_cleaning_and_eda.ipynb": {
+      "code_cells_before": 23,
+      "code_cells_after": 15,
+      "visible_lines_before": 443,
+      "visible_lines_after": 200,
+      "saved_outputs_exactly_preserved": true,
+      "fresh_figures_byte_identical": 13,
+      "fresh_code_cells_executed": 15,
+      "fresh_non_timing_stdout_cells_matched": 15,
+      "errors": 0,
+      "stderr_outputs": 0,
+      "original_markdown_retained": true,
+      "executed_copy": "/private/tmp/preparation_simplification_check_20261021/verification_runs/01_cleaning_and_eda.ipynb"
+    },
+    "notebooks/02_feature_engineering.ipynb": {
+      "code_cells_before": 43,
+      "code_cells_after": 29,
+      "visible_lines_before": 1353,
+      "visible_lines_after": 353,
+      "saved_outputs_exactly_preserved": true,
+      "fresh_figures_byte_identical": 21,
+      "fresh_code_cells_executed": 29,
+      "fresh_non_timing_stdout_cells_matched": 27,
+      "errors": 0,
+      "stderr_outputs": 0,
+      "original_markdown_retained": true,
+      "executed_copy": "/private/tmp/preparation_simplification_check_20261021/verification_runs/02_feature_engineering.ipynb"
+    },
+    "notebooks/02a_deeper_training_exploration.ipynb": {
+      "code_cells_before": 11,
+      "code_cells_after": 10,
+      "visible_lines_before": 311,
+      "visible_lines_after": 81,
+      "saved_outputs_exactly_preserved": true,
+      "fresh_figures_byte_identical": 7,
+      "fresh_code_cells_executed": 10,
+      "fresh_non_timing_stdout_cells_matched": 10,
+      "errors": 0,
+      "stderr_outputs": 0,
+      "original_markdown_retained": true,
+      "executed_copy": "/private/tmp/preparation_simplification_check_20261021/verification_runs/02a_deeper_training_exploration.ipynb"
+    }
+  },
+  "isolated_validation_root": "/private/tmp/preparation_simplification_check_20261021",
+  "development_fits_reexecuted_and_matched": 90,
+  "comparison_exclusions": {
+    "runtime_fields": [
+      "completed_at_utc",
+      "started_at_utc",
+      "fit_seconds"
+    ],
+    "post_execution_audit_fields": [
+      "implementation_notes",
+      "implemented_candidates_without_correlation_filter",
+      "independent_audit",
+      "plot_refresh",
+      "status"
+    ],
+    "stdout": "Only root-path/whitespace normalization; model timing tables reconciled through the exact numerical JSON results."
+  },
+  "parquet_outputs_byte_identical": [
+    "flights_clean.parquet",
+    "features.parquet"
+  ],
+  "protected_artifacts_unchanged": 39,
+  "standalone_candidate_appendix": {
+    "fresh_kernel_passed": true,
+    "code_cells": 6,
+    "figures": 4
+  },
+  "notebook04_compatibility_only": {
+    "saved_outputs_unchanged": true,
+    "changes": "Use documented revision-aware baseline checks; report byte equality separately from content preservation."
+  },
+  "extracted_function_bodies_ast_verified": 42,
+  "original_iqr_helper_deduplicated_without_change": true
+}

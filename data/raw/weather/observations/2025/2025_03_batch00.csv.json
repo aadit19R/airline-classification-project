@@ -1,0 +1,65 @@
+{
+  "request": {
+    "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+    "params": {
+      "station": [
+        "ABE",
+        "ABI",
+        "ABQ",
+        "ABR",
+        "ABY",
+        "ACK",
+        "ACT",
+        "ACV",
+        "ACY",
+        "AEX",
+        "AGS",
+        "ALB",
+        "ALO",
+        "AMA",
+        "APN",
+        "ASE",
+        "ATL",
+        "ATW",
+        "ATY",
+        "AUS"
+      ],
+      "data": [
+        "tmpf",
+        "dwpf",
+        "drct",
+        "sknt",
+        "gust",
+        "vsby",
+        "p01i",
+        "skyc1",
+        "skyc2",
+        "skyc3",
+        "skyc4",
+        "skyl1",
+        "skyl2",
+        "skyl3",
+        "skyl4",
+        "wxcodes",
+        "metar"
+      ],
+      "sts": "2025-02-27T00:00Z",
+      "ets": "2025-04-03T00:00Z",
+      "tz": "Etc/UTC",
+      "format": "onlycomma",
+      "latlon": "no",
+      "elev": "no",
+      "missing": "M",
+      "trace": "T",
+      "direct": "no",
+      "report_type": [
+        3,
+        4
+      ]
+    }
+  },
+  "resolved_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=ABE&station=ABI&station=ABQ&station=ABR&station=ABY&station=ACK&station=ACT&station=ACV&station=ACY&station=AEX&station=AGS&station=ALB&station=ALO&station=AMA&station=APN&station=ASE&station=ATL&station=ATW&station=ATY&station=AUS&data=tmpf&data=dwpf&data=drct&data=sknt&data=gust&data=vsby&data=p01i&data=skyc1&data=skyc2&data=skyc3&data=skyc4&data=skyl1&data=skyl2&data=skyl3&data=skyl4&data=wxcodes&data=metar&sts=2025-02-27T00%3A00Z&ets=2025-04-03T00%3A00Z&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+  "retrieved_at_utc": "2026-10-16T10:25:12.678869+00:00",
+  "sha256": "13bd7a270e82c097e5f31085b0cef473c61319b01ffa24d3a9d33223edbc174e",
+  "bytes": 3644307
+}

@@ -1,0 +1,13 @@
+{
+  "run_id": "improved_20261018T204129454478Z",
+  "selection_sha256": "df56e609cce33cf00509ee826b11fec592f968e6955fc5d23ef82c38f1ec6c93",
+  "model_sha256": "e7d082fe3aeb5243f805e8a1273d827d9d798f628778b31c000f88d5699694d9",
+  "model_path": "models/improved_flight_delay_models.joblib",
+  "completed_at_utc": "2026-10-18T21:20:06.536194+00:00",
+  "baseline_files_unchanged": true,
+  "fresh_test_evaluated": false,
+  "total_distinct_cv_configurations": 84,
+  "cv_fit_count": 252,
+  "chosen_feature_package": "time_flight_weather",
+  "chosen_training_rows": 40000
+}

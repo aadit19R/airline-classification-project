@@ -1,0 +1,39 @@
+{
+  "first_outcomes_load_started_at_utc": "2026-10-18T21:20:19.400814+00:00",
+  "test_protocol_sha256": "35f34b3489ab0c392f9f51443ba21ca2b6290317afa5523a06b58d1576e1c036",
+  "protocol": {
+    "inputs": {
+      "models/improved_flight_delay_models.joblib": "e7d082fe3aeb5243f805e8a1273d827d9d798f628778b31c000f88d5699694d9",
+      "reports/improvements/selection.json": "df56e609cce33cf00509ee826b11fec592f968e6955fc5d23ef82c38f1ec6c93",
+      "reports/improvements/weather_quality.json": "4b3ea261479ee7bd2117eeef8dd883253b92cf154b3298806376de0d0128f42d",
+      "reports/improvements/raw_source_checksums.json": "81d12c7a87f8b440194fdb8b02b291aaa4aea44539bad9e1408e4eb5082c921b",
+      "scripts/improvement_features.py": "d04efda1218336febf0484e6a06e9794be277915879abb8bb7c381d99bbaa1df",
+      "scripts/fresh_test_data.py": "0cb1163dbd1f116a046fc8883463786e4843f918ae01b9123be1341c6f13b205",
+      "scripts/improvement_exports.py": "b0658cecf7c1c79a76fdd2f1a5052217648490eb171eb012c1928b26d92e8bf4",
+      "data/raw/flights/bts/2026/csv/2026_04.csv": "71b1ac148bb7a344161b5eeb846aa662fae8d986b37025f8d8d92383b8c13ee7",
+      "data/raw/flights/bts/2026/csv/2026_05.csv": "12470de43703fe0c23e25510b5af6e6e4e1d5d0aa55818dcc7d0f0b407801be8",
+      "data/raw/flights/bts/2026/csv/2026_06.csv": "caf8ac533822bc40c11a3c56501ae95dfcba6aa0dde377637b8724cba5cb2aab"
+    },
+    "test_rows": 10000,
+    "seed": 42,
+    "strata": [
+      "month",
+      "delayed_departure"
+    ],
+    "test_period": [
+      "2026-04-01",
+      "2026-06-30"
+    ],
+    "selected_before_test": [
+      "improved",
+      "logistic_regression",
+      "B"
+    ],
+    "threshold_primary": "F1",
+    "secondary_policy": "F0.5, improved models only",
+    "day_block_bootstrap_repetitions": 300,
+    "bootstrap_seed": 42,
+    "bootstrap_scope": "paired AP differences for the four B models; conditional on fitted models",
+    "no_refitting_or_retuning": true
+  }
+}

@@ -1,0 +1,17 @@
+.DS_Store
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+data/processed/*
+!data/processed/.gitkeep
+models/*
+!models/.gitkeep
+tableau/exports/*.csv
+tableau/exports/export_manifest.json
+
+# Large raw payloads stay local; acquisition scripts and guides stay versioned.
+data/raw/**/*.csv
+data/raw/**/*.zip
+data/raw/**/*.part
+data/raw/weather/stations/*.geojson

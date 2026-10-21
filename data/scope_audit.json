@@ -1,0 +1,120 @@
+{
+  "created_at_utc": "2026-10-18T14:09:34.434404+00:00",
+  "source": "Fresh audit of locally acquired unmodified official raw CSVs; replaces prior-project planning estimates.",
+  "origins": [
+    "ATL",
+    "DFW",
+    "ORD"
+  ],
+  "year": 2025,
+  "monthly": [
+    {
+      "month": "2025_01",
+      "scheduled_rows": 70648,
+      "eligible_departures": 67425,
+      "cancelled": 3223,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 176,
+      "delayed_15plus": 14779
+    },
+    {
+      "month": "2025_02",
+      "scheduled_rows": 65498,
+      "eligible_departures": 64868,
+      "cancelled": 630,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 172,
+      "delayed_15plus": 14272
+    },
+    {
+      "month": "2025_03",
+      "scheduled_rows": 78143,
+      "eligible_departures": 76878,
+      "cancelled": 1265,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 236,
+      "delayed_15plus": 17640
+    },
+    {
+      "month": "2025_04",
+      "scheduled_rows": 77315,
+      "eligible_departures": 75908,
+      "cancelled": 1407,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 166,
+      "delayed_15plus": 17272
+    },
+    {
+      "month": "2025_05",
+      "scheduled_rows": 82443,
+      "eligible_departures": 81336,
+      "cancelled": 1107,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 271,
+      "delayed_15plus": 21105
+    },
+    {
+      "month": "2025_06",
+      "scheduled_rows": 85593,
+      "eligible_departures": 83824,
+      "cancelled": 1769,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 341,
+      "delayed_15plus": 28259
+    },
+    {
+      "month": "2025_07",
+      "scheduled_rows": 88013,
+      "eligible_departures": 85870,
+      "cancelled": 2143,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 429,
+      "delayed_15plus": 29309
+    },
+    {
+      "month": "2025_08",
+      "scheduled_rows": 84534,
+      "eligible_departures": 82833,
+      "cancelled": 1701,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 238,
+      "delayed_15plus": 22622
+    },
+    {
+      "month": "2025_09",
+      "scheduled_rows": 80347,
+      "eligible_departures": 79728,
+      "cancelled": 619,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 180,
+      "delayed_15plus": 15269
+    },
+    {
+      "month": "2025_10",
+      "scheduled_rows": 85834,
+      "eligible_departures": 85383,
+      "cancelled": 451,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 154,
+      "delayed_15plus": 18437
+    },
+    {
+      "month": "2025_11",
+      "scheduled_rows": 79623,
+      "eligible_departures": 76515,
+      "cancelled": 3108,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 153,
+      "delayed_15plus": 17949
+    },
+    {
+      "month": "2025_12",
+      "scheduled_rows": 79324,
+      "eligible_departures": 77849,
+      "cancelled": 1475,
+      "unknown_departure_on_noncancelled": 0,
+      "diverted_with_known_departure": 234,
+      "delayed_15plus": 24319
+    }
+  ]
+}

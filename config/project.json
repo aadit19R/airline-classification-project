@@ -1,0 +1,898 @@
+{
+  "schema_version": "1.1",
+  "project_id": "departure_delay_classification",
+  "title": "Pre-departure Flight Delay Risk Classification",
+  "status": "models_evaluated_tableau_workbook_pending",
+  "objectives": {
+    "main": "To develop and evaluate, through a historical simulation with a two-hour pre-departure cutoff, a classification framework using Logistic Regression, KNN, SVM and Random Forest, and assess whether its predictions can reliably identify and prioritize flights at risk of departing at least 15 minutes late.",
+    "supporting": [
+      {
+        "id": "O1",
+        "title": "Select and verify a suitable classifier",
+        "statement": "To select the most suitable classifier through chronological validation and verify its delayed-flight detection performance and computational practicality on the final evaluation period.",
+        "evidence": "Validation average precision for selection; delayed-class F1, precision, recall, average precision and runtime for confirmation.",
+        "dashboard": "01_model_performance",
+        "visuals": "Model comparison bars, precision-recall curves, confusion matrix and selected-model cards.",
+        "not_eda": "Requires fitted model scores, frozen predictions and observed outcomes on later-period flights."
+      },
+      {
+        "id": "O2",
+        "title": "Measure the value of additional information",
+        "statement": "To assess whether adding origin weather, historical departure-delay patterns and scheduled airport traffic improves departure-delay classification compared with schedule features alone, using the same later-period flights and stated input-availability assumptions.",
+        "evidence": "Paired changes in average precision and F1 from A (schedule) to B (schedule plus weather/history/traffic), using identical flights.",
+        "dashboard": "02_feature_value",
+        "visuals": "Feature-set comparison matrix, incremental-gain bars and feature-coverage cards.",
+        "not_eda": "Requires controlled model retraining and evaluation; raw correlations do not establish predictive improvement."
+      },
+      {
+        "id": "O3",
+        "title": "Identify prediction strengths and failure patterns",
+        "statement": "To evaluate the reliability of the selected model across airports, airlines and departure time bands by identifying missed delays and false alerts in sufficiently supported subgroups.",
+        "evidence": "Subgroup recall, false-negative rate, false-positive rate and precision, with denominator counts and support flags.",
+        "dashboard": "03_prediction_reliability",
+        "visuals": "Error-rate heatmaps, missed-delay versus false-alert charts and supported-group detail tables.",
+        "not_eda": "Compares model predictions with actual outcomes; high observed delay frequency alone does not identify model failure."
+      },
+      {
+        "id": "O4",
+        "title": "Assess the usefulness of risk prioritization",
+        "statement": "To quantify how effectively the selected model concentrates actual delayed flights within predeclared review budgets of 5%, 10% and 20% of scored flights, compared with random prioritization and a simple historical-risk baseline.",
+        "evidence": "Delayed-flight recall, precision, lift and false alerts within the highest-ranked review quota.",
+        "dashboard": "04_risk_prioritization",
+        "visuals": "Cumulative-gains curve, capacity selector, delay-capture/lift cards and ranked flight review list.",
+        "not_eda": "Requires model scores and a retrospective ranking evaluation; it cannot be answered by counting historical delays."
+      }
+    ]
+  },
+  "scope": {
+    "origin_airports": [
+      "ATL",
+      "ORD",
+      "DFW"
+    ],
+    "prediction_horizon_minutes": 120,
+    "delay_threshold_minutes": 15,
+    "comparison_operator": ">=",
+    "exclude_cancelled": true,
+    "require_known_departure_delay": true,
+    "exclude_diverted_when_departure_known": false,
+    "development_year": 2025,
+    "test_year": 2026
+  },
+  "split": {
+    "train_start": "2025-01-01",
+    "train_end": "2025-09-30",
+    "validation_start": "2025-10-01",
+    "validation_end": "2025-12-31",
+    "test_start": "2026-01-01",
+    "test_end": "2026-03-31",
+    "refit_start": "2025-01-01",
+    "refit_end": "2025-12-31",
+    "disclosure": "2025 has been explored in earlier work. Q1 2026 is reserved for final evaluation after selection and a full-2025 refit."
+  },
+  "sampling": {
+    "seed": 42,
+    "train_rows": 20000,
+    "validation_rows": 5000,
+    "test_rows": 10000,
+    "strata": [
+      "month",
+      "delayed_departure"
+    ],
+    "same_query_ids_for_all_comparisons": true,
+    "preserve_evaluation_prevalence": true,
+    "refit_rows": 20000,
+    "refit_policy": "Independent fixed-seed proportional month x outcome sample from all eligible 2025 flights, shared across A/B and all classifiers; use only after validation choices are frozen."
+  },
+  "models": [
+    "logistic_regression",
+    "knn",
+    "svm",
+    "random_forest"
+  ],
+  "feature_sets": {
+    "A": {
+      "name": "schedule",
+      "required": true
+    },
+    "B": {
+      "name": "schedule_weather_history_traffic",
+      "required": true
+    },
+    "C": {
+      "name": "with_aircraft_rotation",
+      "required": false,
+      "planned": false,
+      "availability_gate": "Not part of current objectives, training or Tableau findings. Reopening requires a separate scope decision and historical assignment-timing evidence.",
+      "source_status": "2025_tail_numbers_acquired_in_full_raw_files",
+      "status": "excluded_from_agreed_scope"
+    }
+  },
+  "evaluation": {
+    "selection_split": "validation",
+    "selection_metric": "average_precision",
+    "threshold_selection_split": "validation",
+    "threshold_metric": "delayed_class_f1",
+    "freeze_before_test": true,
+    "capacity_fractions": [
+      0.05,
+      0.1,
+      0.2
+    ],
+    "primary_capacity_fraction": 0.1,
+    "baselines": [
+      "always_on_time",
+      "historical_risk_ranking",
+      "random_expected_ranking"
+    ],
+    "subgroup_dimensions": [
+      "origin",
+      "reporting_airline",
+      "departure_time_band"
+    ],
+    "minimum_group_rows": 200,
+    "minimum_actual_positives_for_recall": 30,
+    "minimum_actual_negatives_for_fpr": 30,
+    "minimum_predicted_positives_for_precision": 30,
+    "primary_selection_feature_sets": [
+      "A",
+      "B"
+    ],
+    "separate_scenario_feature_sets": [],
+    "rotation_selection_note": "Aircraft rotation is excluded. Select and evaluate candidates from A/B only.",
+    "study_design": "historical_simulation_with_input_availability_assumptions",
+    "live_availability_verified": false,
+    "availability_disclosure": "Weather receipt times and timely outcome-feed access are assumed, not verified by these sources. Historical schedule revisions are not reconstructed.",
+    "final_refit": "Refit finalized preprocessing and classifiers from scratch on refit_sample; retain validation-selected settings and threshold. Never select or recalibrate on test outcomes."
+  },
+  "history": {
+    "window_days": 28,
+    "lag_days": 7,
+    "outcome": "delayed_departure",
+    "availability_note": "Retrospective outcome-feed assumption; monthly BTS releases do not establish live delivery."
+  },
+  "tableau": {
+    "required": true,
+    "workbook_target": "tableau/workbooks/departure_delay_findings.twbx",
+    "export_directory": "tableau/exports",
+    "dashboards": [
+      "01_model_performance",
+      "02_feature_value",
+      "03_prediction_reliability",
+      "04_risk_prioritization"
+    ],
+    "status": "real_exports_ready_workbook_pending",
+    "csv_encoding": "utf-8",
+    "publish_requested": false
+  },
+  "model_options": {
+    "random_forest": {
+      "estimator": "sklearn.ensemble.RandomForestClassifier",
+      "initial_parameters": {
+        "n_estimators": 200,
+        "max_depth": 12,
+        "min_samples_leaf": 10,
+        "max_features": "sqrt",
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2
+      },
+      "small_validation_search": {
+        "max_depth": [
+          8,
+          16
+        ],
+        "min_samples_leaf": [
+          5,
+          20
+        ]
+      },
+      "status": "trained_and_evaluated_in_A_and_B"
+    }
+  },
+  "preprocessing": {
+    "training_only_fit": true,
+    "impute_and_encode_all_models": true,
+    "scale_numeric_for": [
+      "logistic_regression",
+      "knn",
+      "svm"
+    ],
+    "random_forest_numeric_scaling_required": false,
+    "explicit_missingness_covered_columns": [
+      "ceiling_ft",
+      "no_ceiling_reported",
+      "ceiling_height_missing",
+      "rain_reported",
+      "frozen_precip_reported",
+      "fog_or_mist_reported",
+      "thunder_reported",
+      "precip_trace"
+    ],
+    "indicator_policy": "Median impute every numeric predictor; skip redundant automatic indicators for columns represented by explicit missingness flags. Preserve automatic indicators for remaining numeric predictors, including wind and gust.",
+    "month_encoding": "Fixed 12-month sine/cosine; raw month retained for audit, sampling and Tableau."
+  },
+  "sources_manifest": "data/SOURCE_MANIFEST.json",
+  "raw_only_input_policy": true,
+  "notebook_preparation": {
+    "status": "all_three_notebooks_fresh_kernel_passed_revised_timeline",
+    "notebooks": [
+      "notebooks/01_cleaning_and_eda.ipynb",
+      "notebooks/02_feature_engineering.ipynb",
+      "notebooks/02a_deeper_training_exploration.ipynb"
+    ],
+    "frequent_inline_plots": true,
+    "intermediate_csv_exports": false,
+    "planned_reusable_data_files": [
+      "data/processed/flights_clean.parquet",
+      "data/processed/features.parquet"
+    ],
+    "shared_manifest": "reports/preparation_manifest.json",
+    "routine_choices_delegated": true,
+    "clarify_material_ambiguities_before_treatment_code": true,
+    "explicit_ipython_imports": false,
+    "reference_methodology": {
+      "reference_notebook": "../reference EDA .ipynb",
+      "reference_sha256": "47f21395092d06474ef7c9c719bf5709ee617c7488dd2aa51e615f526da1cf1c",
+      "reference_used_as_dataset": false,
+      "review": "reports/REFERENCE_EDA_REVIEW.md",
+      "methods": [
+        "head_info_describe",
+        "X_y_orientation",
+        "variable_roles_and_cardinality",
+        "percentage_frequencies",
+        "skewness",
+        "IQR_3SD_99th_percentile_diagnostics",
+        "grouped_target_summaries",
+        "before_after_transformation_comparisons"
+      ],
+      "automatic_statistical_capping": false,
+      "model_feature_lists_changed": false
+    },
+    "static_feature_dictionary": "feature_dictionary in config/project.json",
+    "simplification": {
+      "status": "complete",
+      "metrics": [
+        {
+          "notebook": "01_cleaning_and_eda.ipynb",
+          "code_characters_before": 28415,
+          "code_characters_after": 27436,
+          "figure_blocks": 13,
+          "real_data_executed": false
+        },
+        {
+          "notebook": "02_feature_engineering.ipynb",
+          "code_characters_before": 38284,
+          "code_characters_after": 33159,
+          "figure_blocks": 13,
+          "real_data_executed": true
+        }
+      ],
+      "synthetic_regression": {
+        "checks": [
+          {
+            "notebook": "01_cleaning_and_eda.ipynb",
+            "synthetic_rows": 2016,
+            "identical_printed_output": true,
+            "identical_plot_renders": 13,
+            "identical_parquet_table": true
+          },
+          {
+            "notebook": "02_feature_engineering.ipynb",
+            "synthetic_rows": 1572,
+            "identical_printed_output": true,
+            "identical_plot_renders": 13,
+            "identical_parquet_table": true
+          }
+        ],
+        "manifest_equal_except_timestamps": true
+      },
+      "real_data_execution": "Notebook 02 completed on real data in the user Python 3.13 environment; original synthetic equivalence results retained as history.",
+      "static_descriptions": "feature_dictionary in config/project.json",
+      "external_analysis_helper_files_added": false
+    },
+    "parquet_engine_fix": {
+      "engine": "pyarrow",
+      "installed_version": "20.0.0",
+      "python_version": "3.13",
+      "save_cell_restored": true,
+      "earlier_outputs_preserved": true,
+      "tested_with_existing_pandas_session": true,
+      "restart_required_for_this_fix": false,
+      "actual_handoff_executed_by_agent": true
+    },
+    "handoff_recovery": {
+      "source": "Existing notebook-01 preparation code, without regenerating EDA figures",
+      "clean_rows": 1110458,
+      "eligible_2025_queries": 938417,
+      "notebook_01_saved_outputs_preserved": true,
+      "notebook_02_startup_verified_on_real_handoff": true,
+      "weather_history_features_executed": true
+    },
+    "full_data_execution": {
+      "notebook": "notebooks/02_feature_engineering.ipynb",
+      "completed_at_utc": "2026-10-18T16:46:30.003084+00:00",
+      "fresh_kernel": true,
+      "code_cells": 20,
+      "inline_figures": 13,
+      "error_outputs": 0,
+      "stderr_outputs": 0,
+      "rows": 938417,
+      "report": "reports/NOTEBOOK_02_EXECUTION_REPORT.md",
+      "python": "3.13.6",
+      "packages": {
+        "pandas": "3.0.3",
+        "numpy": "2.5.1",
+        "pyarrow": "20.0.0",
+        "scikit-learn": "1.9.0",
+        "matplotlib": "3.11.1",
+        "seaborn": "0.13.2",
+        "nbclient": "0.10.2",
+        "nbformat": "5.10.4"
+      },
+      "applies_to": "Earlier 2025-only build; superseded by timeline_update for current row counts and splits."
+    },
+    "timeline_update": {
+      "completed_at_utc": "2026-10-18T19:54:40.314482+00:00",
+      "fresh_kernels": true,
+      "notebooks": [
+        {
+          "notebook": "01_cleaning_and_eda.ipynb",
+          "code_cells": 22,
+          "inline_figures": 13,
+          "errors": 0,
+          "stderr": 0
+        },
+        {
+          "notebook": "02_feature_engineering.ipynb",
+          "code_cells": 20,
+          "inline_figures": 13,
+          "errors": 0,
+          "stderr": 0
+        },
+        {
+          "notebook": "02a_deeper_training_exploration.ipynb",
+          "code_cells": 11,
+          "inline_figures": 7,
+          "errors": 0,
+          "stderr": 0
+        }
+      ],
+      "clean_rows": 1339044,
+      "feature_rows": 1158165,
+      "query_rows_by_split": {
+        "test": 219748,
+        "train": 698670,
+        "validation": 239747
+      },
+      "feature_counts": {
+        "A": 10,
+        "B": 37
+      },
+      "preprocessor_preview_columns": 293,
+      "classifiers_trained": false,
+      "corrections": [
+        "fixed_12_month_cyclic_encoding",
+        "selective_missingness_indicators",
+        "all_METAR_body_cloud_layers"
+      ],
+      "final_refit_sample_rows": 20000,
+      "report": "reports/PREPARATION_TIMELINE_UPDATE.md"
+    }
+  },
+  "feature_dictionary": [
+    {
+      "feature": "airline",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "Reporting airline",
+      "source": "BTS Reporting_Airline",
+      "missing_treatment": "Training-fitted constant Unknown, then one-hot encoding",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "origin",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "Origin airport code",
+      "source": "BTS Origin",
+      "missing_treatment": "Training-fitted constant Unknown, then one-hot encoding",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "destination",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "Destination airport code",
+      "source": "BTS Dest",
+      "missing_treatment": "Training-fitted constant Unknown, then one-hot encoding",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "weekday",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "Local flight-date weekday, Monday=0; categorical",
+      "source": "BTS FlightDate",
+      "missing_treatment": "Training-fitted constant Unknown, then one-hot encoding",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "distance_miles",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "Scheduled route distance, miles",
+      "source": "BTS Distance",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "scheduled_duration_minutes",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "Scheduled flight duration, minutes",
+      "source": "BTS CRSElapsedTime",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "departure_sin",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "sin(2*pi*scheduled local minute/1440)",
+      "source": "BTS CRSDepTime",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "departure_cos",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "cos(2*pi*scheduled local minute/1440)",
+      "source": "BTS CRSDepTime",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "month_sin",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "sin(2*pi*(local calendar month-1)/12); fixed cycle, not fitted on future months",
+      "source": "BTS FlightDate",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "month_cos",
+      "in_sets": [
+        "A",
+        "B"
+      ],
+      "family": "schedule",
+      "definition": "cos(2*pi*(local calendar month-1)/12); fixed cycle, not fitted on future months",
+      "source": "BTS FlightDate",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Archived schedule assumed known"
+    },
+    {
+      "feature": "temperature_f",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Origin temperature, Fahrenheit",
+      "source": "IEM tmpf",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "wind_knots",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Origin wind speed, knots",
+      "source": "IEM sknt",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "gust_knots",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Reported gust, knots; absent stays missing",
+      "source": "IEM gust",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "visibility_miles",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Reported visibility, miles",
+      "source": "IEM vsby",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "precip_inches",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Reported precipitation, inches; trace=0 plus trace flag",
+      "source": "IEM p01i",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "precip_trace",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "1 when precipitation was trace, 0 when measurable/zero; missing if unknown",
+      "source": "IEM p01i",
+      "missing_treatment": "Training-fitted median; existing explicit flags represent missingness without duplicate automatic indicators",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "ceiling_ft",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Lowest known BKN/OVC/VV height across all METAR body layers and source sky columns; unknown ceiling heights remain missing",
+      "source": "IEM METAR body before RMK, with skyc/skyl column fallback",
+      "missing_treatment": "Training-fitted median; existing explicit flags represent missingness without duplicate automatic indicators",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "no_ceiling_reported",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "1 for known coverage without ceiling layer; 0 with ceiling layer; unknown stays missing",
+      "source": "IEM METAR body before RMK, with skyc/skyl column fallback",
+      "missing_treatment": "Training-fitted median; existing explicit flags represent missingness without duplicate automatic indicators",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "cloud_coverage_missing",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "1 when no recognized cloud coverage is reported",
+      "source": "IEM METAR body before RMK, with skyc/skyl column fallback",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "rain_reported",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Rain/drizzle token present among known codes; unknown stays missing",
+      "source": "IEM wxcodes",
+      "missing_treatment": "Training-fitted median; existing explicit flags represent missingness without duplicate automatic indicators",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "frozen_precip_reported",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Snow/ice/hail-related token among known codes; unknown stays missing",
+      "source": "IEM wxcodes",
+      "missing_treatment": "Training-fitted median; existing explicit flags represent missingness without duplicate automatic indicators",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "fog_or_mist_reported",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "FG/BR token among known codes; unknown stays missing",
+      "source": "IEM wxcodes",
+      "missing_treatment": "Training-fitted median; existing explicit flags represent missingness without duplicate automatic indicators",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "thunder_reported",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "TS token among known codes; unknown stays missing",
+      "source": "IEM wxcodes",
+      "missing_treatment": "Training-fitted median; existing explicit flags represent missingness without duplicate automatic indicators",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "condition_codes_missing",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "1 when condition codes are M or blank",
+      "source": "IEM wxcodes",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "ceiling_height_missing",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "1 when a BKN/OVC/VV layer has unknown height; ceiling stays missing",
+      "source": "IEM METAR body before RMK, with skyc/skyl column fallback",
+      "missing_treatment": "Training-fitted median; existing explicit flags represent missingness without duplicate automatic indicators",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "weather_age_minutes",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "Minutes from observation to prediction cutoff",
+      "source": "Cutoff minus IEM valid",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "weather_report_missing",
+      "in_sets": [
+        "B"
+      ],
+      "family": "weather",
+      "definition": "1 when no report meets buffered cutoff and age rules",
+      "source": "Weather as-of join",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Observation + 20-minute assumed buffer <= cutoff; max age 180 minutes"
+    },
+    {
+      "feature": "history_origin_rate",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "Past-window departure-delay rate for origin; subgroup rates shrink to past origin rate",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "history_origin_n",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "Past-window eligible outcome count for origin",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "history_origin_no_history",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "1 when the past window has no eligible origin outcomes",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "history_airline_origin_rate",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "Past-window departure-delay rate for airline within origin; subgroup rates shrink to past origin rate",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "history_airline_origin_n",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "Past-window eligible outcome count for airline within origin",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "history_airline_origin_no_history",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "1 when the past window has no eligible airline within origin outcomes",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "history_route_rate",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "Past-window departure-delay rate for origin/destination route; subgroup rates shrink to past origin rate",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "history_route_n",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "Past-window eligible outcome count for origin/destination route",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "history_route_no_history",
+      "in_sets": [
+        "B"
+      ],
+      "family": "history",
+      "definition": "1 when the past window has no eligible origin/destination route outcomes",
+      "source": "Fresh raw-derived earlier departure events; 28-day window ending 7 days earlier",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Outcome event in [cutoff-35d, cutoff-7d); timely outcome feed assumed"
+    },
+    {
+      "feature": "airport_scheduled_departures_prior_60m",
+      "in_sets": [
+        "B"
+      ],
+      "family": "traffic",
+      "definition": "Origin schedule count in [scheduled departure-60m, scheduled departure)",
+      "source": "All scoped BTS schedules, including later-cancelled flights",
+      "missing_treatment": "Training-fitted median with automatic missingness indicator when missing in the fitting cohort",
+      "availability": "Archived schedule assumed known"
+    }
+  ],
+  "weather_quality": {
+    "conflict_policy": "exclude_all_versions_at_approved_conflicting_station_times",
+    "decision": "User approved excluding both versions at six 2025 and two 2026 conflicting timestamps; retain every flight query.",
+    "excluded_station_times": [
+      [
+        "ATL",
+        "2025-06-14 23:40"
+      ],
+      [
+        "DFW",
+        "2025-05-06 16:50"
+      ],
+      [
+        "DFW",
+        "2025-12-23 14:50"
+      ],
+      [
+        "ORD",
+        "2025-07-20 09:10"
+      ],
+      [
+        "ORD",
+        "2025-11-30 14:20"
+      ],
+      [
+        "ORD",
+        "2025-12-28 16:50"
+      ],
+      [
+        "ATL",
+        "2026-01-06 08:50"
+      ],
+      [
+        "ORD",
+        "2026-02-20 08:00"
+      ]
+    ],
+    "unreviewed_conflicts": "stop and clarify",
+    "fallback": "earlier observation under the existing 20-minute buffer and 180-minute maximum age; otherwise missing weather"
+  },
+  "evaluation_extension": {
+    "status": "approved_timeline_implemented_and_handoffs_rebuilt",
+    "initial_training": {
+      "start": "2025-01-01",
+      "end": "2025-09-30"
+    },
+    "validation": {
+      "start": "2025-10-01",
+      "end": "2025-12-31"
+    },
+    "final_refit": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "rule": "Independent fixed-seed proportional month x outcome sample from all eligible 2025 flights, shared across A/B and all classifiers; use only after validation choices are frozen.",
+      "sample_rows": 20000
+    },
+    "final_test": {
+      "start": "2026-01-01",
+      "end": "2026-03-31"
+    },
+    "test_outcome_policy": "No 2026 outcome EDA or feature/model/threshold selection; labels and final scoring use frozen rules.",
+    "raw_validation": "data/raw/_provenance/2026_q1_validation_report.json",
+    "weather_conflicts_pending_review": [],
+    "existing_split_and_sample_flags": "Current split, model_sample and refit_sample flags implement the approved 2025 development/Q1-2026 final-test chronology."
+  },
+  "modelling": {
+    "status": "completed",
+    "run_id": "departure_20261018T201555701606Z",
+    "notebook": "notebooks/03_classification.ipynb",
+    "selection_record": "reports/model_selection.json",
+    "results_report": "reports/MODELLING_RESULTS.md",
+    "execution_report": "reports/MODEL_EXECUTION_REPORT.md",
+    "model_bundle": "models/flight_delay_models.joblib",
+    "export_manifest": "tableau/exports/export_manifest.json",
+    "selected_model_id": "logistic_regression",
+    "selected_feature_set": "B",
+    "selection_metric": "validation average precision",
+    "threshold_metric": "validation delayed-class F1",
+    "test_metrics": {
+      "average_precision": 0.4055013595063023,
+      "precision": 0.3271709633649932,
+      "recall": 0.7606466876971609,
+      "f1": 0.4575426944971537,
+      "accuracy": 0.5426,
+      "roc_auc": 0.6684348806975904
+    },
+    "notebook_code_cells": 19,
+    "inline_figures": 12,
+    "parameter_trials": 34,
+    "final_pipelines": 8,
+    "fresh_kernel": true,
+    "errors": 0,
+    "stderr": 0,
+    "source_handoffs_unchanged": true,
+    "selection_frozen_before_test": true
+  }
+}

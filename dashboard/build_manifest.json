@@ -1,0 +1,58 @@
+{
+  "source_hashes_verified": 6,
+  "flight_and_quota_checks": 52,
+  "pr_points_retained": 113047,
+  "models_retrained": false,
+  "run_id": "final_20261019T055940573924Z",
+  "html_sha256": "e9f976494de662e6f32a42eca57c6ceba5d793a2b01195a74fd91e45f97e4df7",
+  "bytes": 6987910,
+  "sources": {
+    "flight_predictions.csv": {
+      "rows": 160000,
+      "sha256": "52963e172f76e6759701c013e3e5003550252af5be54c33d54cc4c0778d4c6bf",
+      "bytes": 74730289
+    },
+    "model_metrics.csv": {
+      "rows": 16,
+      "sha256": "e8997e3d2b388bdf82adfab9e4a138f1f0942ffd5ee458232ffd0380a857c2fc",
+      "bytes": 8332
+    },
+    "pr_curve.csv": {
+      "rows": 113047,
+      "sha256": "0ab9f181450e771ac19647fba9de1c81060fc7a39f4ed8609286d182f8137d51",
+      "bytes": 26194797
+    },
+    "priority_curve.csv": {
+      "rows": 48,
+      "sha256": "d7a27235c4bab2382fe4fce9f5cff343c4fb10316ddc41be67180b98d5dbc9ca",
+      "bytes": 15414
+    },
+    "subgroup_metrics.csv": {
+      "rows": 288,
+      "sha256": "68a14172a64cad7477572be6dad7db9ff72ca1a2eadca4e20b7a63c16dc706c6",
+      "bytes": 81473
+    },
+    "feature_comparison.csv": {
+      "rows": 4,
+      "sha256": "732ec4ebc51382bb596fe28517948a6481ca7ff784b062374377b255241e2c77",
+      "bytes": 2235
+    }
+  },
+  "browser_qa": {
+    "browser": "Safari",
+    "mode": "direct local file; no server",
+    "passed": true,
+    "checked_html_sha256": "e9f976494de662e6f32a42eca57c6ceba5d793a2b01195a74fd91e45f97e4df7",
+    "checks": [
+      "All four objective pages render with charts",
+      "Schedule A and retuned-66 comparison toggle",
+      "ATL subgroup counts and error-list scope",
+      "5% quota: 500 reviewed, 359 delays, 71.8% precision",
+      "10% quota: 1000 reviewed, 688 delays, 68.8% precision",
+      "20% quota: 2000 reviewed, 1222 delays, 61.1% precision",
+      "Model selector updates KNN results",
+      "Reload restores Logistic Regression B and 10% quota",
+      "Final file opens on model-performance page"
+    ]
+  }
+}

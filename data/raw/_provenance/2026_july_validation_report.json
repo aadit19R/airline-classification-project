@@ -1,0 +1,162 @@
+{
+  "created_at_utc": "2026-10-19T05:51:23.318433+00:00",
+  "status": "raw_july_2026_sources_acquired_and_structurally_audited",
+  "policy": "Structural/raw integrity audit only; no test outcome values, delay rates or performance inspected.",
+  "flight_files": [
+    {
+      "path": "data/raw/flights/bts/2026/csv/2026_07.csv",
+      "month": "2026-07",
+      "national_rows": 631970,
+      "column_count": 110,
+      "same_columns_as_2025": true,
+      "required_fields_present": true,
+      "columns_added_since_2025": [],
+      "columns_removed_since_2025": [],
+      "date_min": "2026-07-01",
+      "date_max": "2026-07-31",
+      "calendar_days_present": 31,
+      "scope_schedule_counts": {
+        "ATL": 28068,
+        "DFW": 28623,
+        "ORD": 33010
+      },
+      "sha256": "8bfb524f10ae2c30048e91f4cf1e4910dadca217eb68b9b12b5ac16ab3bf4c34",
+      "outcome_values_loaded": false
+    }
+  ],
+  "national_flight_rows": 631970,
+  "scope_scheduled_rows": 89701,
+  "scope_origin_rows": {
+    "ORD": 33010,
+    "DFW": 28623,
+    "ATL": 28068
+  },
+  "scope_origin_day_counts": {
+    "ATL": 31,
+    "DFW": 31,
+    "ORD": 31
+  },
+  "schedule_identity_repeated_rows": 0,
+  "missing_identity_fields": {
+    "FlightDate": 0,
+    "Reporting_Airline": 0,
+    "Flight_Number_Reporting_Airline": 0,
+    "Origin": 0,
+    "Dest": 0,
+    "CRSDepTime": 0
+  },
+  "invalid_hhmm_rows": 0,
+  "unresolved_scheduled_utc_rows": 0,
+  "timezone_sources_reused_from_project_raw": {
+    "ATL": {
+      "timezone": "America/New_York",
+      "source": "data/raw/weather/stations/GA_ASOS.geojson"
+    },
+    "ORD": {
+      "timezone": "America/Chicago",
+      "source": "data/raw/weather/stations/IL_ASOS.geojson"
+    },
+    "DFW": {
+      "timezone": "America/Chicago",
+      "source": "data/raw/weather/stations/TX_ASOS.geojson"
+    }
+  },
+  "weather_files": [
+    {
+      "path": "data/raw/weather/observations/2026/2026_07_origins.csv",
+      "rows": 2887,
+      "sha256": "7967af31740b2a5d3019e1b20e2c3a1acdd6a551599d3a7005d90927111ac158",
+      "request": {
+        "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+        "params": {
+          "station": [
+            "ATL",
+            "ORD",
+            "DFW"
+          ],
+          "data": [
+            "tmpf",
+            "dwpf",
+            "drct",
+            "sknt",
+            "gust",
+            "vsby",
+            "p01i",
+            "skyc1",
+            "skyc2",
+            "skyc3",
+            "skyc4",
+            "skyl1",
+            "skyl2",
+            "skyl3",
+            "skyl4",
+            "wxcodes",
+            "metar"
+          ],
+          "sts": "2026-06-29T00:00Z",
+          "ets": "2026-08-03T00:00Z",
+          "tz": "Etc/UTC",
+          "format": "onlycomma",
+          "latlon": "no",
+          "elev": "no",
+          "missing": "M",
+          "trace": "T",
+          "direct": "no",
+          "report_type": [
+            3,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "weather_raw_rows_including_padding_overlaps": 2887,
+  "identical_weather_overlap_versions": 0,
+  "weather_unique_payloads": 2887,
+  "station_coverage": {
+    "ATL": {
+      "july_utc_days_present": 31,
+      "july_report_versions": 882,
+      "july_unique_observation_times": 882,
+      "maximum_gap_minutes_between_july_keys": 100.0
+    },
+    "ORD": {
+      "july_utc_days_present": 31,
+      "july_report_versions": 893,
+      "july_unique_observation_times": 893,
+      "maximum_gap_minutes_between_july_keys": 88.0
+    },
+    "DFW": {
+      "july_utc_days_present": 31,
+      "july_report_versions": 781,
+      "july_unique_observation_times": 781,
+      "maximum_gap_minutes_between_july_keys": 120.0
+    }
+  },
+  "weather_conflicting_station_times": [],
+  "cross_quarter_weather_boundary_audit": {
+    "shared_observation_keys": 299,
+    "keys_with_changed_or_conflicting_payloads": [],
+    "policy": "Comparison only; both source snapshots remain unchanged."
+  },
+  "conflict_policy": "Retain raw sources; any payload selection/exclusion requires later review.",
+  "cutoff_weather_key_coverage": {
+    "scope_schedules_with_resolved_times": 89701,
+    "matched_schedule_keys": 89701,
+    "unmatched_schedule_keys": 0,
+    "min_age_minutes": 20.0,
+    "max_age_minutes": 139.0,
+    "matches_if_ambiguous_keys_excluded": 89701,
+    "fallback_check_is_diagnostic_only": true,
+    "note": "Key existence only; ambiguous payloads are not resolved by this check."
+  },
+  "test_outcome_values_loaded": false,
+  "test_outcome_rates_computed": false,
+  "required_missing_files": [],
+  "history_context": "Existing April-June 2026 schedules/outcomes support the declared rolling window; no extra 2024 downloads needed.",
+  "remaining_assumptions": [
+    "Historical weather/outcome delivery receipts and archived schedule availability remain unverified.",
+    "Final aircraft assignments remain excluded from the agreed A/B experiment."
+  ],
+  "processed_handoffs_rebuilt": false
+}

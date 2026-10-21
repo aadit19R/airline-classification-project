@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "unchanged_registered_revision_accepted": true,
+  "unauthorized_changes_rejected": {
+    "changed_data_configuration": {
+      "rejected": true,
+      "reason": "Changed frozen input: config/project.json"
+    },
+    "edited_notebook_after_verification": {
+      "rejected": true,
+      "reason": "Notebook changed after verification: notebooks/01_cleaning_and_eda.ipynb"
+    },
+    "edited_helper_after_verification": {
+      "rejected": true,
+      "reason": "Changed revision support: scripts/preparation_helpers.py"
+    }
+  }
+}

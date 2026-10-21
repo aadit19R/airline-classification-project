@@ -1,0 +1,172 @@
+{
+  "eda_period": "January to September 2025",
+  "eda_scheduled": 712534,
+  "eda_eligible": 698670,
+  "eda_delayed": 180527,
+  "eda_delay_rate": 0.25838664891865976,
+  "departure_delay": {
+    "count": 698670.0,
+    "mean": 17.131902042452086,
+    "std": 57.26501093389785,
+    "min": -60.0,
+    "25%": -5.0,
+    "50%": -1.0,
+    "75%": 16.0,
+    "max": 2364.0
+  },
+  "distance_duration_correlation": 0.9859303881450463,
+  "airline_crude": {
+    "AA": 0.33640491695236024,
+    "F9": 0.34579342479937875
+  },
+  "airline_standardized": {
+    "AA": 0.3336809342579123,
+    "F9": 0.2943640555863926
+  },
+  "airline_standardized_retained": 183589,
+  "airline_pair_total": 184702,
+  "weather_measurement_missing_fraction": {
+    "gust_knots": 0.8028081927090043,
+    "ceiling_ft": 0.47158458213462723,
+    "rain_reported": 0.9058897619763264,
+    "wind_knots": 0.0002275752501180815,
+    "visibility_miles": 0.0,
+    "temperature_f": 0.0,
+    "precip_inches": 0.0,
+    "precip_trace": 0.0,
+    "weather_age_minutes": 0.0,
+    "weather_report_missing": 0.0,
+    "condition_codes_missing": 0.0,
+    "no_ceiling_reported": 0.0
+  },
+  "weather_age_quantiles": {
+    "0.0": 20.0,
+    "0.25": 34.0,
+    "0.5": 49.0,
+    "0.75": 66.0,
+    "1.0": 139.0
+  },
+  "delay_plot_outside_zoom": 12380,
+  "visibility_at_10_miles": 0.8767386605979933,
+  "rates_origin": [
+    {
+      "origin": "ATL",
+      "n": 231994,
+      "rate": 0.2426054122
+    },
+    {
+      "origin": "DFW",
+      "n": 230516,
+      "rate": 0.2913333565
+    },
+    {
+      "origin": "ORD",
+      "n": 236160,
+      "rate": 0.2417301829
+    }
+  ],
+  "rates_month": [
+    {
+      "month": 1,
+      "n": 67425,
+      "rate": 0.2191916945
+    },
+    {
+      "month": 2,
+      "n": 64868,
+      "rate": 0.2200160326
+    },
+    {
+      "month": 3,
+      "n": 76878,
+      "rate": 0.2294544603
+    },
+    {
+      "month": 4,
+      "n": 75908,
+      "rate": 0.2275385994
+    },
+    {
+      "month": 5,
+      "n": 81336,
+      "rate": 0.2594791974
+    },
+    {
+      "month": 6,
+      "n": 83824,
+      "rate": 0.3371230197
+    },
+    {
+      "month": 7,
+      "n": 85870,
+      "rate": 0.3413182718
+    },
+    {
+      "month": 8,
+      "n": 82833,
+      "rate": 0.2731037147
+    },
+    {
+      "month": 9,
+      "n": 79728,
+      "rate": 0.1915136464
+    }
+  ],
+  "rates_departure_time_band": [
+    {
+      "departure_time_band": "00\u201305 overnight",
+      "n": 7036,
+      "rate": 0.1030415009
+    },
+    {
+      "departure_time_band": "06\u201311 morning",
+      "n": 248998,
+      "rate": 0.1650334541
+    },
+    {
+      "departure_time_band": "12\u201317 afternoon",
+      "n": 240251,
+      "rate": 0.278650245
+    },
+    {
+      "departure_time_band": "18\u201323 evening",
+      "n": 202385,
+      "rate": 0.3545865553
+    }
+  ],
+  "source_run": "final_20261019T055940573924Z",
+  "source_hashes": {
+    "flight_predictions.csv": {
+      "rows": 160000,
+      "sha256": "52963e172f76e6759701c013e3e5003550252af5be54c33d54cc4c0778d4c6bf",
+      "bytes": 74730289
+    },
+    "model_metrics.csv": {
+      "rows": 16,
+      "sha256": "e8997e3d2b388bdf82adfab9e4a138f1f0942ffd5ee458232ffd0380a857c2fc",
+      "bytes": 8332
+    },
+    "pr_curve.csv": {
+      "rows": 113047,
+      "sha256": "0ab9f181450e771ac19647fba9de1c81060fc7a39f4ed8609286d182f8137d51",
+      "bytes": 26194797
+    },
+    "priority_curve.csv": {
+      "rows": 48,
+      "sha256": "d7a27235c4bab2382fe4fce9f5cff343c4fb10316ddc41be67180b98d5dbc9ca",
+      "bytes": 15414
+    },
+    "subgroup_metrics.csv": {
+      "rows": 288,
+      "sha256": "68a14172a64cad7477572be6dad7db9ff72ca1a2eadca4e20b7a63c16dc706c6",
+      "bytes": 81473
+    },
+    "feature_comparison.csv": {
+      "rows": 4,
+      "sha256": "732ec4ebc51382bb596fe28517948a6481ca7ff784b062374377b255241e2c77",
+      "bytes": 2235
+    }
+  },
+  "model_selection_sha256": "2c7c03a72e99563ae72e338c3176fa855ec1fce720b2bfe5c24f15a5ad50cd12",
+  "model_refitting_performed": false
+}

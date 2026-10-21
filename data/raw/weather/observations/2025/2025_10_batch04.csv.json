@@ -1,0 +1,65 @@
+{
+  "request": {
+    "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+    "params": {
+      "station": [
+        "DEN",
+        "DFW",
+        "DHN",
+        "DIK",
+        "DLH",
+        "DRO",
+        "DSM",
+        "DTW",
+        "DVL",
+        "EAR",
+        "EAU",
+        "ECP",
+        "EGE",
+        "EKO",
+        "ELM",
+        "ELP",
+        "ERI",
+        "ESC",
+        "EUG",
+        "EVV"
+      ],
+      "data": [
+        "tmpf",
+        "dwpf",
+        "drct",
+        "sknt",
+        "gust",
+        "vsby",
+        "p01i",
+        "skyc1",
+        "skyc2",
+        "skyc3",
+        "skyc4",
+        "skyl1",
+        "skyl2",
+        "skyl3",
+        "skyl4",
+        "wxcodes",
+        "metar"
+      ],
+      "sts": "2025-09-29T00:00Z",
+      "ets": "2025-11-03T00:00Z",
+      "tz": "Etc/UTC",
+      "format": "onlycomma",
+      "latlon": "no",
+      "elev": "no",
+      "missing": "M",
+      "trace": "T",
+      "direct": "no",
+      "report_type": [
+        3,
+        4
+      ]
+    }
+  },
+  "resolved_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=DEN&station=DFW&station=DHN&station=DIK&station=DLH&station=DRO&station=DSM&station=DTW&station=DVL&station=EAR&station=EAU&station=ECP&station=EGE&station=EKO&station=ELM&station=ELP&station=ERI&station=ESC&station=EUG&station=EVV&data=tmpf&data=dwpf&data=drct&data=sknt&data=gust&data=vsby&data=p01i&data=skyc1&data=skyc2&data=skyc3&data=skyc4&data=skyl1&data=skyl2&data=skyl3&data=skyl4&data=wxcodes&data=metar&sts=2025-09-29T00%3A00Z&ets=2025-11-03T00%3A00Z&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+  "retrieved_at_utc": "2026-10-16T10:33:28.740995+00:00",
+  "sha256": "007fa86ab3955296c2cc0f2467388d8347ab779ae18280f1d30dc2d838a33219",
+  "bytes": 3337960
+}

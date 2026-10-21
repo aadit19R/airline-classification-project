@@ -1,0 +1,40 @@
+{
+  "verified_at_utc": "2026-10-19T08:39:41.937990+00:00",
+  "pdf": "output/pdf/predeparture_flight_delay_report.pdf",
+  "pdf_sha256": "ecffb54733c9adbe74be8206896c2cc7c1f354c2349a1fa0097cd5ed40cd09e3",
+  "pdf_bytes": 591953,
+  "page_count": 9,
+  "figure_count": 6,
+  "external_reference_links": [
+    "https://stat.cmu.edu/cmsac/sure/materials/lm_project_requirements.html",
+    "https://cs229.stanford.edu/proj2016/report/DuperierSauvestreLeaf-ModelingFlightDelays-report.pdf",
+    "https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ",
+    "https://mesonet.agron.iastate.edu/request/download.phtml",
+    "https://www.weather.gov/media/asos/aum-toc.pdf",
+    "https://ourairports.com/data/"
+  ],
+  "visual_review": {
+    "pages_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "all_pages_passed": true,
+    "notes": "All pages rendered to PNG and reviewed for readable text and graphs, page breaks and clipping. Changed pages reviewed again after final wording edits."
+  },
+  "text_and_bounds_checks_passed": true,
+  "required_finding_checks_passed": true,
+  "frozen_july_export_hashes_verified": 6,
+  "rounded_model_f1_matches_frozen_exports": true,
+  "model_refitting_performed": false,
+  "eda_period": "January-September 2025",
+  "final_fitting_period": "January-December 2025",
+  "final_confirmation": "July 2026",
+  "editable_copy": "predeparture_flight_delay_report.md"
+}

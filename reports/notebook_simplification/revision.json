@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "verified_at_utc": "2026-10-20T21:29:11.446476+00:00",
+  "notebooks": {
+    "notebooks/01_cleaning_and_eda.ipynb": {
+      "backup": "reports/notebook_simplification/baseline/01_cleaning_and_eda.ipynb",
+      "before_sha256": "c9e6dbb69f3f11f0c7507bbc3a1b819fed72cbce22c3c48a39acc6b75d6937f7",
+      "after_sha256": "4cff88a2d68c04a1a2da67aadcf3f9be2b56deb8d31ca94922d5cd253b9d37c3",
+      "outputs_sha256": "9da0a18e3c95a9ce35ef3651f06047df6a8322dd9fbbf73b017c4c6aa1e616ac"
+    },
+    "notebooks/02_feature_engineering.ipynb": {
+      "backup": "reports/notebook_simplification/baseline/02_feature_engineering.ipynb",
+      "before_sha256": "611250f6ad67146daad3f70aab5be05f3f1a9e2951ecb491833ff1d38944afe6",
+      "after_sha256": "313fd982216897b344adfb8013a11d459c65e43ecd75d1302144febfb434b562",
+      "outputs_sha256": "3a3f3ff433d05241dda1932d32c8d291a69fa573c62111f0370d2d05a951094a"
+    },
+    "notebooks/02a_deeper_training_exploration.ipynb": {
+      "backup": "reports/notebook_simplification/baseline/02a_deeper_training_exploration.ipynb",
+      "before_sha256": "e9a1911cd7db4b74803c701dddcb4ac109e6c2c8ccc1cfe0114a0cf5844e29a8",
+      "after_sha256": "1504efebd0c6ec3d4d89841f78ca862e38d47f390008fea2420f45cfa9a83ed6",
+      "outputs_sha256": "86245614a4c6f33696439b4ec97062237d2d9f8057188d03915d39ba31890475"
+    }
+  },
+  "supporting_files": {
+    "scripts/preparation_helpers.py": "d39934f0b6e88046d85f35e7f4841aa838afd9d3ee4c49835c770cfd242a838d",
+    "scripts/verify_preparation_notebooks.py": "b4b73d54e30cad44a6e2998c9472f8ee9f2f22729322c21e1ee59f292fb59e0b",
+    "reports/notebook_simplification/structure.json": "fc503a4d85d4e5607d99cb712510f4b8c3dd1faf9268e0aea1798de287c0bba8",
+    "reports/notebook_simplification/verification.json": "a11a0e21421781fa4cef020e474e6d1ce7809acf643706aff9083b4e117bc912"
+  }
+}

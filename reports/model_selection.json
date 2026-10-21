@@ -1,0 +1,768 @@
+{
+  "run_id": "departure_20261018T201555701606Z",
+  "frozen_at_utc": "2026-10-18T20:17:49.804348+00:00",
+  "protocol_sha256": "f9aa34e4f2839872539da35e4d96280cc46ef7af3b68ec301a2701746555793e",
+  "protocol": {
+    "feature_sets": {
+      "A": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos"
+      ],
+      "B": [
+        "airline",
+        "origin",
+        "destination",
+        "weekday",
+        "distance_miles",
+        "scheduled_duration_minutes",
+        "departure_sin",
+        "departure_cos",
+        "month_sin",
+        "month_cos",
+        "temperature_f",
+        "wind_knots",
+        "gust_knots",
+        "visibility_miles",
+        "precip_inches",
+        "precip_trace",
+        "ceiling_ft",
+        "no_ceiling_reported",
+        "cloud_coverage_missing",
+        "rain_reported",
+        "frozen_precip_reported",
+        "fog_or_mist_reported",
+        "thunder_reported",
+        "condition_codes_missing",
+        "ceiling_height_missing",
+        "weather_age_minutes",
+        "weather_report_missing",
+        "history_origin_rate",
+        "history_origin_n",
+        "history_origin_no_history",
+        "history_airline_origin_rate",
+        "history_airline_origin_n",
+        "history_airline_origin_no_history",
+        "history_route_rate",
+        "history_route_n",
+        "history_route_no_history",
+        "airport_scheduled_departures_prior_60m"
+      ]
+    },
+    "preprocessing": {
+      "training_only_fit": true,
+      "impute_and_encode_all_models": true,
+      "scale_numeric_for": [
+        "logistic_regression",
+        "knn",
+        "svm"
+      ],
+      "random_forest_numeric_scaling_required": false,
+      "explicit_missingness_covered_columns": [
+        "ceiling_ft",
+        "no_ceiling_reported",
+        "ceiling_height_missing",
+        "rain_reported",
+        "frozen_precip_reported",
+        "fog_or_mist_reported",
+        "thunder_reported",
+        "precip_trace"
+      ],
+      "indicator_policy": "Median impute every numeric predictor; skip redundant automatic indicators for columns represented by explicit missingness flags. Preserve automatic indicators for remaining numeric predictors, including wind and gust.",
+      "month_encoding": "Fixed 12-month sine/cosine; raw month retained for audit, sampling and Tableau."
+    },
+    "split": {
+      "train_start": "2025-01-01",
+      "train_end": "2025-09-30",
+      "validation_start": "2025-10-01",
+      "validation_end": "2025-12-31",
+      "test_start": "2026-01-01",
+      "test_end": "2026-03-31",
+      "refit_start": "2025-01-01",
+      "refit_end": "2025-12-31",
+      "disclosure": "2025 has been explored in earlier work. Q1 2026 is reserved for final evaluation after selection and a full-2025 refit."
+    },
+    "sampling": {
+      "seed": 42,
+      "train_rows": 20000,
+      "validation_rows": 5000,
+      "test_rows": 10000,
+      "strata": [
+        "month",
+        "delayed_departure"
+      ],
+      "same_query_ids_for_all_comparisons": true,
+      "preserve_evaluation_prevalence": true,
+      "refit_rows": 20000,
+      "refit_policy": "Independent fixed-seed proportional month x outcome sample from all eligible 2025 flights, shared across A/B and all classifiers; use only after validation choices are frozen."
+    },
+    "search": {
+      "logistic_regression": [
+        {
+          "C": 0.1
+        },
+        {
+          "C": 1.0
+        },
+        {
+          "C": 10.0
+        }
+      ],
+      "knn": [
+        {
+          "n_neighbors": 5,
+          "weights": "uniform"
+        },
+        {
+          "n_neighbors": 5,
+          "weights": "distance"
+        },
+        {
+          "n_neighbors": 15,
+          "weights": "uniform"
+        },
+        {
+          "n_neighbors": 15,
+          "weights": "distance"
+        },
+        {
+          "n_neighbors": 31,
+          "weights": "uniform"
+        },
+        {
+          "n_neighbors": 31,
+          "weights": "distance"
+        }
+      ],
+      "svm": [
+        {
+          "C": 0.1
+        },
+        {
+          "C": 1.0
+        },
+        {
+          "C": 10.0
+        }
+      ],
+      "random_forest": [
+        {
+          "max_depth": 12,
+          "min_samples_leaf": 10
+        },
+        {
+          "max_depth": 8,
+          "min_samples_leaf": 5
+        },
+        {
+          "max_depth": 8,
+          "min_samples_leaf": 20
+        },
+        {
+          "max_depth": 16,
+          "min_samples_leaf": 5
+        },
+        {
+          "max_depth": 16,
+          "min_samples_leaf": 20
+        }
+      ]
+    },
+    "estimator_defaults": {
+      "logistic_regression": {
+        "C": 1.0,
+        "class_weight": null,
+        "dual": false,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "l1_ratio": 0.0,
+        "max_iter": 3000,
+        "n_jobs": null,
+        "penalty": "deprecated",
+        "random_state": 42,
+        "solver": "lbfgs",
+        "tol": 0.0001,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "knn": {
+        "algorithm": "brute",
+        "leaf_size": 30,
+        "metric": "minkowski",
+        "metric_params": null,
+        "n_jobs": 2,
+        "n_neighbors": 5,
+        "p": 2,
+        "weights": "uniform"
+      },
+      "svm": {
+        "C": 1.0,
+        "break_ties": false,
+        "cache_size": 512,
+        "class_weight": null,
+        "coef0": 0.0,
+        "decision_function_shape": "ovr",
+        "degree": 3,
+        "gamma": "scale",
+        "kernel": "rbf",
+        "max_iter": -1,
+        "probability": "deprecated",
+        "random_state": 42,
+        "shrinking": true,
+        "tol": 0.001,
+        "verbose": false
+      },
+      "random_forest": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "class_weight": "balanced",
+        "criterion": "gini",
+        "max_depth": 12,
+        "max_features": "sqrt",
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 10,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 200,
+        "n_jobs": 2,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      }
+    },
+    "selection": "maximum validation AP; fixed model order then A/B breaks ties",
+    "threshold": "maximum validation delayed-class F1; highest threshold breaks ties",
+    "baseline": "always_on_time; historical airline-origin rate with origin then fit-period prevalence fallback",
+    "capacities": [
+      0.05,
+      0.1,
+      0.2
+    ],
+    "subgroup_support": {
+      "minimum_group_rows": 200,
+      "minimum_actual_positives_for_recall": 30,
+      "minimum_actual_negatives_for_fpr": 30,
+      "minimum_predicted_positives_for_precision": 30
+    }
+  },
+  "feature_input_sha256": "27e41d1bb3c1b51b9afdfaf3579377936f520d38581bc1923a030e5f30b879f2",
+  "training_cohort_fingerprint": "611439cd12eeec4ffb80ee21c730562d85f695ecd8f1c7df77c8ae542182c702",
+  "validation_cohort_fingerprint": "063c36cc45b0d54c2aa7589f88b6871d2c5d4eb610ed2883770f47f2d11ed2df",
+  "selected_model_id": "logistic_regression",
+  "selected_feature_set": "B",
+  "packages": {
+    "pandas": "3.0.3",
+    "numpy": "2.5.1",
+    "scikit-learn": "1.9.0",
+    "pyarrow": "20.0.0",
+    "matplotlib": "3.11.1",
+    "seaborn": "0.13.2",
+    "joblib": "1.5.3"
+  },
+  "trial_results": [
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "trial_number": 1,
+      "params": {
+        "C": 0.1
+      },
+      "validation_ap": 0.35980111693136413,
+      "fit_seconds": 0.04025554202962667,
+      "prediction_seconds": 0.005273250048048794
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "trial_number": 2,
+      "params": {
+        "C": 1.0
+      },
+      "validation_ap": 0.3516398621180694,
+      "fit_seconds": 0.052231250097975135,
+      "prediction_seconds": 0.004996458068490028
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "trial_number": 3,
+      "params": {
+        "C": 10.0
+      },
+      "validation_ap": 0.3492792211128388,
+      "fit_seconds": 0.07696145807858557,
+      "prediction_seconds": 0.005021166987717152
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "trial_number": 1,
+      "params": {
+        "C": 0.1
+      },
+      "validation_ap": 0.4254744906839136,
+      "fit_seconds": 0.09152458293829113,
+      "prediction_seconds": 0.008511624997481704
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "trial_number": 2,
+      "params": {
+        "C": 1.0
+      },
+      "validation_ap": 0.41958498749279766,
+      "fit_seconds": 0.13781445904169232,
+      "prediction_seconds": 0.008114625001326203
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "trial_number": 3,
+      "params": {
+        "C": 10.0
+      },
+      "validation_ap": 0.41478504942495786,
+      "fit_seconds": 0.17349479207769036,
+      "prediction_seconds": 0.008515791967511177
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "trial_number": 1,
+      "params": {
+        "n_neighbors": 5,
+        "weights": "uniform"
+      },
+      "validation_ap": 0.29069050451665557,
+      "fit_seconds": 0.022364249918609858,
+      "prediction_seconds": 1.2186076670186594
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "trial_number": 2,
+      "params": {
+        "n_neighbors": 5,
+        "weights": "distance"
+      },
+      "validation_ap": 0.2964787458086483,
+      "fit_seconds": 0.02466945897322148,
+      "prediction_seconds": 0.9535694998921826
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "trial_number": 3,
+      "params": {
+        "n_neighbors": 15,
+        "weights": "uniform"
+      },
+      "validation_ap": 0.3152454984271413,
+      "fit_seconds": 0.02198004093952477,
+      "prediction_seconds": 0.9331764579983428
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "trial_number": 4,
+      "params": {
+        "n_neighbors": 15,
+        "weights": "distance"
+      },
+      "validation_ap": 0.32433716810717395,
+      "fit_seconds": 0.022095291991718113,
+      "prediction_seconds": 0.9178955829702318
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "trial_number": 5,
+      "params": {
+        "n_neighbors": 31,
+        "weights": "uniform"
+      },
+      "validation_ap": 0.3300569024307587,
+      "fit_seconds": 0.02232941600959748,
+      "prediction_seconds": 0.9280094159767032
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "trial_number": 6,
+      "params": {
+        "n_neighbors": 31,
+        "weights": "distance"
+      },
+      "validation_ap": 0.33612225090051506,
+      "fit_seconds": 0.021975083043798804,
+      "prediction_seconds": 0.9020759159466252
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "trial_number": 1,
+      "params": {
+        "n_neighbors": 5,
+        "weights": "uniform"
+      },
+      "validation_ap": 0.3084479271699784,
+      "fit_seconds": 0.050939584034495056,
+      "prediction_seconds": 1.8697998749557883
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "trial_number": 2,
+      "params": {
+        "n_neighbors": 5,
+        "weights": "distance"
+      },
+      "validation_ap": 0.32407798454726156,
+      "fit_seconds": 0.052126333001069725,
+      "prediction_seconds": 1.861018041963689
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "trial_number": 3,
+      "params": {
+        "n_neighbors": 15,
+        "weights": "uniform"
+      },
+      "validation_ap": 0.3454798244373538,
+      "fit_seconds": 0.051510083954781294,
+      "prediction_seconds": 1.8671604170231149
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "trial_number": 4,
+      "params": {
+        "n_neighbors": 15,
+        "weights": "distance"
+      },
+      "validation_ap": 0.35995559722133247,
+      "fit_seconds": 0.051813250058330595,
+      "prediction_seconds": 1.901465459028259
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "trial_number": 5,
+      "params": {
+        "n_neighbors": 31,
+        "weights": "uniform"
+      },
+      "validation_ap": 0.36213897750656354,
+      "fit_seconds": 0.05328150000423193,
+      "prediction_seconds": 1.8855033329455182
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "trial_number": 6,
+      "params": {
+        "n_neighbors": 31,
+        "weights": "distance"
+      },
+      "validation_ap": 0.37302599724400193,
+      "fit_seconds": 0.05169308395124972,
+      "prediction_seconds": 1.8678347079548985
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "trial_number": 1,
+      "params": {
+        "C": 0.1
+      },
+      "validation_ap": 0.2630836675634205,
+      "fit_seconds": 5.580112291965634,
+      "prediction_seconds": 0.9190236669965088
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "trial_number": 2,
+      "params": {
+        "C": 1.0
+      },
+      "validation_ap": 0.2534016836370844,
+      "fit_seconds": 5.955860499991104,
+      "prediction_seconds": 0.9344781250692904
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "trial_number": 3,
+      "params": {
+        "C": 10.0
+      },
+      "validation_ap": 0.27422739109003724,
+      "fit_seconds": 9.128363166935742,
+      "prediction_seconds": 0.9663902499014512
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "trial_number": 1,
+      "params": {
+        "C": 0.1
+      },
+      "validation_ap": 0.36142829915205005,
+      "fit_seconds": 9.144358791993,
+      "prediction_seconds": 1.630627957987599
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "trial_number": 2,
+      "params": {
+        "C": 1.0
+      },
+      "validation_ap": 0.36680854590253015,
+      "fit_seconds": 9.47678879101295,
+      "prediction_seconds": 1.664483500062488
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "trial_number": 3,
+      "params": {
+        "C": 10.0
+      },
+      "validation_ap": 0.3407673073260399,
+      "fit_seconds": 14.548863040981814,
+      "prediction_seconds": 1.7330699999583885
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "trial_number": 1,
+      "params": {
+        "max_depth": 12,
+        "min_samples_leaf": 10
+      },
+      "validation_ap": 0.3737466787671993,
+      "fit_seconds": 0.6709795410279185,
+      "prediction_seconds": 0.032351041096262634
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "trial_number": 2,
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 5
+      },
+      "validation_ap": 0.3705250082123551,
+      "fit_seconds": 0.5388296659803018,
+      "prediction_seconds": 0.03148929192684591
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "trial_number": 3,
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 20
+      },
+      "validation_ap": 0.37050001476507044,
+      "fit_seconds": 0.5173899170476943,
+      "prediction_seconds": 0.030904666986316442
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "trial_number": 4,
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "validation_ap": 0.37489560086576373,
+      "fit_seconds": 0.8291598329087719,
+      "prediction_seconds": 0.03086920897476375
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "trial_number": 5,
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 20
+      },
+      "validation_ap": 0.3761292298850317,
+      "fit_seconds": 0.651173916994594,
+      "prediction_seconds": 0.03125195798929781
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "trial_number": 1,
+      "params": {
+        "max_depth": 12,
+        "min_samples_leaf": 10
+      },
+      "validation_ap": 0.4079039804603136,
+      "fit_seconds": 1.4127880830783397,
+      "prediction_seconds": 0.03348520793952048
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "trial_number": 2,
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 5
+      },
+      "validation_ap": 0.40258108136176035,
+      "fit_seconds": 1.0221797920530662,
+      "prediction_seconds": 0.034069750108756125
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "trial_number": 3,
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 20
+      },
+      "validation_ap": 0.40084683290381534,
+      "fit_seconds": 0.9757993750972673,
+      "prediction_seconds": 0.034004040993750095
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "trial_number": 4,
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "validation_ap": 0.41570023492242325,
+      "fit_seconds": 1.9734370420919731,
+      "prediction_seconds": 0.04676858405582607
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "trial_number": 5,
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 20
+      },
+      "validation_ap": 0.4124537892114568,
+      "fit_seconds": 1.367585333995521,
+      "prediction_seconds": 0.03363987500779331
+    }
+  ],
+  "choices": [
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "A",
+      "params": {
+        "C": 0.1
+      },
+      "threshold": 0.18919360972655197,
+      "score_type": "uncalibrated_probability",
+      "validation_ap": 0.35980111693136413
+    },
+    {
+      "model_id": "logistic_regression",
+      "feature_set": "B",
+      "params": {
+        "C": 0.1
+      },
+      "threshold": 0.19070125247158648,
+      "score_type": "uncalibrated_probability",
+      "validation_ap": 0.4254744906839136
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "A",
+      "params": {
+        "n_neighbors": 31,
+        "weights": "distance"
+      },
+      "threshold": 0.15562398966718144,
+      "score_type": "uncalibrated_probability",
+      "validation_ap": 0.33612225090051506
+    },
+    {
+      "model_id": "knn",
+      "feature_set": "B",
+      "params": {
+        "n_neighbors": 31,
+        "weights": "distance"
+      },
+      "threshold": 0.1885764404856474,
+      "score_type": "uncalibrated_probability",
+      "validation_ap": 0.37302599724400193
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "A",
+      "params": {
+        "C": 10.0
+      },
+      "threshold": -2.0408023924869054,
+      "score_type": "decision_function",
+      "validation_ap": 0.27422739109003724
+    },
+    {
+      "model_id": "svm",
+      "feature_set": "B",
+      "params": {
+        "C": 1.0
+      },
+      "threshold": -1.047124959420189,
+      "score_type": "decision_function",
+      "validation_ap": 0.36680854590253015
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "A",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 20
+      },
+      "threshold": 0.44494881594795094,
+      "score_type": "uncalibrated_probability",
+      "validation_ap": 0.3761292298850317
+    },
+    {
+      "model_id": "random_forest",
+      "feature_set": "B",
+      "params": {
+        "max_depth": 16,
+        "min_samples_leaf": 5
+      },
+      "threshold": 0.40783523270484795,
+      "score_type": "uncalibrated_probability",
+      "validation_ap": 0.41570023492242325
+    }
+  ],
+  "baselines": {
+    "always_on_time": {
+      "threshold": 1.0
+    },
+    "historical_risk_ranking": {
+      "threshold": 0.19697845392794777
+    }
+  },
+  "test_loaded_during_selection": false,
+  "class_weighting": "RF balanced; other model defaults",
+  "historical_simulation_note": "Weather receipt times and timely outcome-feed access are assumed, not verified by these sources. Historical schedule revisions are not reconstructed."
+}

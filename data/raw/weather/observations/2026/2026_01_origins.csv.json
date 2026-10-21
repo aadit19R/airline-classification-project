@@ -1,0 +1,56 @@
+{
+  "path": "data/raw/weather/observations/2026/2026_01_origins.csv",
+  "role": "raw_q1_2026_weather",
+  "method": "direct_public_download_unmodified_response",
+  "request": {
+    "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+    "params": {
+      "station": [
+        "ATL",
+        "ORD",
+        "DFW"
+      ],
+      "data": [
+        "tmpf",
+        "dwpf",
+        "drct",
+        "sknt",
+        "gust",
+        "vsby",
+        "p01i",
+        "skyc1",
+        "skyc2",
+        "skyc3",
+        "skyc4",
+        "skyl1",
+        "skyl2",
+        "skyl3",
+        "skyl4",
+        "wxcodes",
+        "metar"
+      ],
+      "sts": "2025-12-30T00:00Z",
+      "ets": "2026-02-03T00:00Z",
+      "tz": "Etc/UTC",
+      "format": "onlycomma",
+      "latlon": "no",
+      "elev": "no",
+      "missing": "M",
+      "trace": "T",
+      "direct": "no",
+      "report_type": [
+        3,
+        4
+      ]
+    }
+  },
+  "source_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
+  "resolved_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=ATL&station=ORD&station=DFW&data=tmpf&data=dwpf&data=drct&data=sknt&data=gust&data=vsby&data=p01i&data=skyc1&data=skyc2&data=skyc3&data=skyc4&data=skyl1&data=skyl2&data=skyl3&data=skyl4&data=wxcodes&data=metar&sts=2025-12-30T00%3A00Z&ets=2026-02-03T00%3A00Z&tz=Etc%2FUTC&format=onlycomma&latlon=no&elev=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+  "started_at_utc": "2026-10-18T19:37:03.922214+00:00",
+  "retrieved_at_utc": "2026-10-18T19:37:07.819380+00:00",
+  "response_headers": {
+    "Content-Type": "text/plain; charset=UTF-8"
+  },
+  "sha256": "a33e902b592976737f31e1bae4ced081861242ac964e6cbf37ce587dc5631f58",
+  "bytes": 572484
+}

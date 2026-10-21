@@ -1,0 +1,12 @@
+{
+  "request": {
+    "url": "https://mesonet.agron.iastate.edu/geojson/network.php",
+    "params": {
+      "network": "NH_ASOS"
+    }
+  },
+  "resolved_url": "https://mesonet.agron.iastate.edu/geojson/network.php?network=NH_ASOS",
+  "retrieved_at_utc": "2026-10-16T10:22:38.662317+00:00",
+  "sha256": "08a0a5ebb2b5785adab641ff17b82941a3d0f3c8965e8309bfb936a0a3b03aa9",
+  "bytes": 8335
+}

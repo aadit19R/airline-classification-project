@@ -1,0 +1,12 @@
+{
+  "request": {
+    "url": "https://mesonet.agron.iastate.edu/geojson/network.php",
+    "params": {
+      "network": "VI_ASOS"
+    }
+  },
+  "resolved_url": "https://mesonet.agron.iastate.edu/geojson/network.php?network=VI_ASOS",
+  "retrieved_at_utc": "2026-10-16T10:22:46.581046+00:00",
+  "sha256": "b09b9bbd6c03b2be20a15531490d0897174b0b489ac405ef66a656c75c339834",
+  "bytes": 1414
+}

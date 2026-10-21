@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "protected_baseline_files": 21,
+  "notebooks": {
+    "04_model_improvements.ipynb": {
+      "code_cells": 13,
+      "figures": 5,
+      "errors": 0,
+      "stderr": 0
+    },
+    "05_fresh_test_evaluation.ipynb": {
+      "code_cells": 10,
+      "figures": 5,
+      "errors": 0,
+      "stderr": 0
+    }
+  },
+  "baseline_integrity": {
+    "checked_files": 21,
+    "documented_notebook_appendices": {
+      "notebooks/02_feature_engineering.ipynb": {
+        "original_cells_preserved": 38,
+        "original_metadata_preserved": true
+      }
+    }
+  },
+  "selection_frozen_before_test": true,
+  "all_candidate_ids_and_labels_match": true,
+  "saved_bundles_reproduce_exported_scores": true,
+  "reloaded_model_spot_checks": 320,
+  "all_metrics_curves_confusions_and_quotas_recomputed": true,
+  "table_rows": {
+    "flight_predictions.csv": 180000,
+    "model_metrics.csv": 26,
+    "pr_curve.csv": 166732,
+    "priority_curve.csv": 54,
+    "subgroup_metrics.csv": 342,
+    "feature_comparison.csv": 8
+  }
+}

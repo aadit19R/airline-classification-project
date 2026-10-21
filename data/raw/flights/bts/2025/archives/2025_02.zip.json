@@ -1,0 +1,20 @@
+{
+  "path": "data/raw/flights/bts/2025/archives/2025_02.zip",
+  "role": "raw_official_2025_flights",
+  "method": "direct_public_download",
+  "source_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_2.zip",
+  "resolved_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_2.zip",
+  "started_at_utc": "2026-10-18T14:01:29.181450+00:00",
+  "retrieved_at_utc": "2026-10-18T14:02:20.231398+00:00",
+  "response_headers": {
+    "Content-Type": "application/x-zip-compressed",
+    "Content-Length": "25302583",
+    "Last-Modified": "Wed, 28 May 2025 14:22:03 GMT",
+    "ETag": "\"80f7c2e1dbcfdb1:0\""
+  },
+  "sha256": "12dc8dbdb3c8b3c20d4c00a8b188196ae202f781a8760871ae502a9c733d0ecd",
+  "bytes": 25302583,
+  "archive_csv_member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_2.csv",
+  "uncompressed_csv_bytes": 228245475,
+  "contains_tail_number": true
+}
