@@ -1,11 +1,11 @@
 {
   "01_cleaning_and_eda.ipynb": {
-    "started_at_utc": "2026-10-26T23:18:11.344542+00:00",
-    "finished_at_utc": "2026-10-26T23:18:41.000917+00:00",
-    "seconds": 29.65639020805247,
+    "started_at_utc": "2026-10-27T10:15:40.735164+00:00",
+    "finished_at_utc": "2026-10-27T10:16:05.098691+00:00",
+    "seconds": 24.363702332833782,
     "fresh_kernel": true,
     "code_cells": 39,
-    "visible_code_lines": 243,
+    "visible_code_lines": 244,
     "figures": 4,
     "errors": 0,
     "stderr": [
@@ -13,20 +13,20 @@
     ]
   },
   "02_feature_engineering.ipynb": {
-    "started_at_utc": "2026-10-26T23:20:35.389514+00:00",
-    "finished_at_utc": "2026-10-26T23:20:41.368253+00:00",
-    "seconds": 5.978750417008996,
+    "started_at_utc": "2026-10-27T10:16:05.100434+00:00",
+    "finished_at_utc": "2026-10-27T10:16:10.333308+00:00",
+    "seconds": 5.232919082976878,
     "fresh_kernel": true,
     "code_cells": 54,
-    "visible_code_lines": 317,
+    "visible_code_lines": 318,
     "figures": 0,
     "errors": 0,
     "stderr": []
   },
   "03_model_training.ipynb": {
-    "started_at_utc": "2026-10-26T22:58:41.731192+00:00",
-    "finished_at_utc": "2026-10-26T23:04:45.936301+00:00",
-    "seconds": 364.2052232909482,
+    "started_at_utc": "2026-10-27T10:16:10.334538+00:00",
+    "finished_at_utc": "2026-10-27T10:21:48.524038+00:00",
+    "seconds": 338.1917987500783,
     "fresh_kernel": true,
     "code_cells": 16,
     "visible_code_lines": 97,
@@ -35,9 +35,9 @@
     "stderr": []
   },
   "04_evaluation_and_findings.ipynb": {
-    "started_at_utc": "2026-10-26T23:04:45.937228+00:00",
-    "finished_at_utc": "2026-10-26T23:05:37.561904+00:00",
-    "seconds": 51.62473816704005,
+    "started_at_utc": "2026-10-27T10:21:48.525662+00:00",
+    "finished_at_utc": "2026-10-27T10:22:37.624523+00:00",
+    "seconds": 49.09920770791359,
     "fresh_kernel": true,
     "code_cells": 12,
     "visible_code_lines": 66,

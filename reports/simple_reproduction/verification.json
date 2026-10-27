@@ -1,64 +1,24 @@
 {
   "status": "passed",
-  "verified_at_utc": "2026-10-26T23:21:31.591899+00:00",
-  "purpose": "reproduction of the completed July evaluation; no new test or selection",
-  "visible_code_lines": 723,
-  "code_cells": 121,
-  "essential_figures": 7,
-  "maximum_cell_lines": 10,
-  "median_cell_lines": 6.0,
-  "visible_classifier_fit_calls": 1,
-  "project_helpers_required": false,
-  "notebooks_self_contained": true,
-  "validation_threshold_derivations_checked": 8,
-  "fresh_kernels": 4,
-  "benign_font_cache_startup_notices": 2,
-  "errors": 0,
-  "warnings": 0,
+  "verified_at_utc": "2026-10-27T10:24:17.332681+00:00",
+  "purpose": "Verify current notebook data, trained pipelines and July results against a compact frozen reference.",
+  "train_rows": 40000,
+  "test_rows": 10000,
+  "active_source_rows": 1374996,
   "feature_columns_checked": 78,
-  "feature_rows_checked": 50000,
   "feature_values_checked": 3900000,
-  "feature_missingness_matches": true,
-  "principal_A_B_models": 8,
-  "baseline_comparisons": 4,
-  "exact_rank_checks": 120000,
-  "review_quota_checks": 36,
-  "subgroup_analysis_in_notebooks": false,
-  "maximum_absolute_score_difference": 2.220446049250313e-16,
+  "pipelines_checked": 8,
+  "baseline_rules_checked": 4,
   "learned_preprocessing_arrays_checked": 45,
-  "chronological_cohorts_match": true,
-  "training_only_preprocessing": true,
-  "dashboard_summaries_reconcile": true,
-  "protected_files_unchanged": 351,
-  "historical_sources_required": false,
-  "evaluation_export_files_unchanged": 16,
-  "current_split": {
-    "train": {
-      "rows": 40000,
-      "period": [
-        "2025-01-01",
-        "2025-12-31"
-      ]
-    },
-    "test": {
-      "rows": 10000,
-      "period": [
-        "2026-07-01",
-        "2026-07-31"
-      ]
-    }
-  },
-  "feature_hashes_match_pre_refactor_reference": true,
-  "source_refactor_evidence": "reports/notebook_refactor.json",
-  "provenance_note": "Selection and historical source hashes are preserved. reports/study_labels.json records the earlier label migration; reports/notebook_refactor.json records the move of source code into notebooks and pre-refactor feature fingerprints. All selected feature values, cohorts, learned preprocessing, predictions and ranks are checked directly.",
-  "july_population": 87298,
-  "software": {
-    "python": "3.13.6",
-    "pandas": "3.0.3",
-    "numpy": "2.5.1",
-    "scikit-learn": "1.9.0",
-    "pyarrow": "20.0.0",
-    "joblib": "1.5.3",
-    "nbclient": "0.10.2"
-  }
+  "risk_ranks_checked": 120000,
+  "review_quotas_checked": 36,
+  "maximum_absolute_score_difference": 2.220446049250313e-16,
+  "code_cells": 121,
+  "figures": 7,
+  "older_experiment_reports_required": false,
+  "large_evaluation_exports_required": false,
+  "reference_files": [
+    "reports/final_models/reference.json",
+    "reports/final_models/reference_scores.npz"
+  ]
 }

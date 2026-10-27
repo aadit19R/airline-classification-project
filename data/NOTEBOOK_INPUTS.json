@@ -1,0 +1,833 @@
+{
+  "updated_at_utc": "2026-10-27T10:19:27.724650+00:00",
+  "purpose": "Exact existing input files for running notebooks 01-04 in order with DOWNLOAD_MISSING=False. No archive paths are read.",
+  "flight_months": [
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-05",
+    "2026-06",
+    "2026-07"
+  ],
+  "files": [
+    {
+      "path": "data/raw/flights/bts/2024_context/csv/2024_11.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2024_context/csv/2024_12.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_01.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_02.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_03.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_04.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_05.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_06.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_07.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_08.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_09.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_10.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_11.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2025/csv/2025_12.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2026/csv/2026_05.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2026/csv/2026_06.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/flights/bts/2026/csv/2026_07.csv",
+      "kind": "flight_csv",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_01_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_01_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_01_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_01_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_01_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_01_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_02_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_02_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_02_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_02_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_02_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_02_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_03_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_03_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_03_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_03_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_03_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_03_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_04_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_04_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_04_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_04_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_04_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_04_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_05_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_05_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_05_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_05_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_05_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_05_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_06_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_06_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_06_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_06_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_06_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_06_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_07_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_07_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_07_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_07_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_07_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_07_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_08_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_08_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_08_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_08_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_08_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_08_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_09_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_09_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_09_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_09_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_09_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_09_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_10_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_10_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_10_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_10_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_10_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_10_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_11_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_11_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_11_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_11_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_11_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_11_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_12_batch00.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_12_batch00.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_12_batch04.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_12_batch04.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_12_batch11.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2025/2025_12_batch11.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2026/2026_05_origins.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2026/2026_05_origins.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2026/2026_06_origins.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2026/2026_06_origins.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2026/2026_07_origins.csv",
+      "kind": "weather_csv",
+      "required_by_notebooks": [
+        1,
+        2
+      ]
+    },
+    {
+      "path": "data/raw/weather/observations/2026/2026_07_origins.csv.json",
+      "kind": "weather_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/stations/GA_ASOS.geojson",
+      "kind": "station_geojson",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/stations/GA_ASOS.geojson.json",
+      "kind": "station_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/stations/IL_ASOS.geojson",
+      "kind": "station_geojson",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/stations/IL_ASOS.geojson.json",
+      "kind": "station_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/stations/TX_ASOS.geojson",
+      "kind": "station_geojson",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "data/raw/weather/stations/TX_ASOS.geojson.json",
+      "kind": "station_request_metadata",
+      "required_by_notebooks": [
+        1
+      ]
+    },
+    {
+      "path": "config/project.json",
+      "kind": "experiment_record",
+      "required_by_notebooks": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "path": "reports/final_models/cohorts.json",
+      "kind": "experiment_record",
+      "required_by_notebooks": [
+        2,
+        3
+      ]
+    },
+    {
+      "path": "reports/final_models/selection.json",
+      "kind": "experiment_record",
+      "required_by_notebooks": [
+        2,
+        3
+      ]
+    },
+    {
+      "path": "reports/model_selection.json",
+      "kind": "experiment_record",
+      "required_by_notebooks": [
+        4
+      ]
+    }
+  ],
+  "generated_handoffs": [
+    {
+      "produced_by": 1,
+      "used_by": 2,
+      "path": "data/processed/flights_clean.parquet"
+    },
+    {
+      "produced_by": 2,
+      "used_by": [
+        3,
+        4
+      ],
+      "path": "reports/simple_reproduction/features.parquet"
+    },
+    {
+      "produced_by": 3,
+      "used_by": 4,
+      "path": "reports/simple_reproduction/models.joblib"
+    }
+  ],
+  "optional_for_normal_notebooks": [
+    "data/archive/2026_jan_apr/",
+    "Original flight ZIPs and download metadata when their CSVs already exist",
+    "Other 52 station networks",
+    "data/raw/reference/airports/airports.csv",
+    "Older processed features and legacy model bundles",
+    "The final project report and compact regression-reference files"
+  ],
+  "optional_verifier": "Uses current notebook outputs, reports/final_models/reference.json and reference_scores.npz, plus models/final_flight_delay_models.joblib. Older experiment reports, large exports and archived raw files are not dependencies."
+}

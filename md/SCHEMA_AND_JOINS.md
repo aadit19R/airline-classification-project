@@ -1,6 +1,6 @@
 # Schema and joins used in this project
 
-The core pipeline code is visible in notebooks 01–04 and checked against the frozen July exports and pre-refactor feature fingerprints. The final section describes the published evaluation exports, including analysis omitted from the shorter notebook walkthrough. This describes the implemented pipeline, not a proposed warehouse. It contains no EDA or model performance findings.
+The core pipeline code is visible in notebooks 01–04 and checked against the frozen July exports and pre-refactor feature fingerprints. The final section describes the current saved model outputs. This describes the implemented pipeline, not a proposed warehouse. It contains no EDA or model performance findings.
 
 ## 1. Physical storage and logical schema
 
@@ -9,17 +9,17 @@ The implementation is a file-based analytical pipeline using pandas DataFrames, 
 | Object | Grain: what one row means | Key used in this pipeline | Physical status |
 | --- | --- | --- | --- |
 | Raw BTS flight CSV | One reported scheduled flight leg on a date | Source month/file plus original CSV row position identifies the source record | Original monthly CSVs and ZIPs |
-| Clean flights | One scoped scheduled flight, including context and ineligible schedules | `flight_id`, checked unique | `data/processed/flights_clean.parquet`: 1,689,081 rows, 33 columns |
+| Clean flights | One scoped scheduled flight, including context and ineligible schedules | `flight_id`, checked unique | `data/processed/flights_clean.parquet`: 1,374,996 rows, 33 columns |
 | Prepared weather | One usable origin-station observation at a timestamp | Composite key: `origin`, `weather_observed_utc`, checked unique after overlap/conflict treatment | Built in memory from raw weather CSVs |
 | IEM station reference | One station feature within a network response | Explicit network selection plus station `sid` for origin mappings | Raw GeoJSON responses |
 | Airport reference | One airport/facility | `iata_code` for the required airport subset, checked unique before relevant lookups | Raw `airports.csv`: 86,053 rows, 19 columns |
 | Published EDA feature reference | One eligible query flight | `flight_id`, checked unique | `data/processed/features.parquet`: 1,158,165 rows, 55 columns |
 | Later model inputs | One selected query flight | `flight_id` and frozen cohort IDs | `reports/simple_reproduction/features.parquet`: 50,000 rows, saved by notebook 02 |
-| Prediction export | One flight scored by one candidate in one run/cohort | `run_id`, `candidate_id`, `split`, `cohort_id`, `flight_id` | Final CSV export |
+| Evaluation metrics | One model/input combination or baseline | `model_id`, `feature_set` | `reports/simple_reproduction/metrics.json` |
 
 The cleaned source table uses `preparation_period` for source/EDA periods. The older EDA reference table retains `preparation_sample` and `initial_refit_sample` for historical provenance. The current 50,000-row notebook handoff uses only `split=train` (40,000 all-2025 flights) and `split=test` (10,000 July flights).
 
-Notebook 01 saves the complete cleaned schedule context from November 2024 through July 2026. Notebook 02 reads that handoff directly; it does not need a separate later-period loader. Feature counts differ from stored column counts because labels, identifiers, timestamps and audit flags are not predictors. The full stored schemas and final input lists are in [DATASET_GUIDE.md](DATASET_GUIDE.md).
+Notebook 01 saves 17 active months: November–December 2024, all of 2025, and May–July 2026. January–April 2026 sources and their 314,085 cleaned schedules are archived. Notebook 02 reads that handoff directly; it does not need a separate later-period loader. Feature counts differ from stored column counts because labels, identifiers, timestamps and audit flags are not predictors. The full stored schemas and final input lists are in [DATASET_GUIDE.md](DATASET_GUIDE.md).
 
 ## 2. Flight identity and reference lookups
 
@@ -125,20 +125,10 @@ For a 14:00 departure, this window is 13:00 through just before 14:00. It is bas
 
 These checks enforce the project rules in Python. They are not SQL foreign-key constraints, and no single assertion alone proves all forms of temporal availability.
 
-## 10. Evaluation-output relationships have a different grain
+## 10. Current saved evaluation outputs
 
-The final July export contains 10,000 distinct flights scored by 16 candidates, so `flight_predictions.csv` has 160,000 rows. Repeated `flight_id` values here are intentional. A candidate can represent a feature-set/model combination or a baseline.
+`reports/simple_reproduction/metrics.json` has 12 rows: four classifiers with A/B inputs and four baselines. Its key is `model_id` plus `feature_set`.
 
-| Export | Rows | Grain / verified unique key |
-| --- | ---: | --- |
-| `flight_predictions.csv` | 160,000 | Common candidate/cohort key + `flight_id` |
-| `model_metrics.csv` | 16 | Common candidate/cohort key |
-| `subgroup_metrics.csv` | 288 | Common key + `group_dimension`, `group_value` |
-| `priority_curve.csv` | 48 | Common key + `capacity_fraction` |
-| `pr_curve.csv` | 113,047 | Common key + `point_index` |
+`scores.npz` contains one 10,000-value score array per rule. Notebook 04 sorts July flights by `flight_id` before scoring, so that same order defines the array positions. A score array is not another flight source table.
 
-The common key is `run_id`, `candidate_id`, `split`, `cohort_id`. These compound keys were checked for duplicates while preparing this explanation; none were found. `feature_comparison.csv` separately describes one A-to-B comparison per model/cohort, with explicit base/added feature-set fields.
-
-Joining detailed predictions to metrics on the full common key is many-to-one. Joining only on `model_id` can mix feature sets. If aggregate metrics are repeated onto prediction rows, summing those repeated aggregate fields would inflate totals. The HTML dashboard therefore keeps its metric, subgroup, priority, curve and flight data at their intended grains and selects records by identifiers rather than creating one giant joined table.
-
-For a report, the accurate description is: **a pandas-based extraction and enrichment pipeline with temporal joins, key lookups and grouped window aggregation, producing a denormalized flight-level modeling table and separate evaluation tables.** A dimensional warehouse would be an additional implementation, not the schema currently built.
+The compact files in `reports/final_models/reference.json` and `reference_scores.npz` preserve original-results checks without the older bulky CSV exports. The feature table remains one row per selected flight; preprocessing and prediction do not multiply those rows.

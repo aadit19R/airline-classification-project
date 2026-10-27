@@ -230,5 +230,5 @@ The organization follows the concise introduction, EDA, modeling and conclusion 
 
 [6] OurAirports. [Raw airport reference downloads](https://ourairports.com/data/). Accessed 19 October 2026.
 
-Project evidence: the four notebooks in notebooks/simple/; reports/preparation_manifest.json; reports/final_models/selection.json; reports/evaluation_exports/final_july/. The interactive HTML dashboard presents O1-O4. Report figures are regenerated from saved data, without refitting models.
+Project evidence: notebooks/simple/; reports/final_models/selection.json and cohorts.json; reports/simple_reproduction/metrics.json. Figures and findings come from the completed study; rerun the notebooks to reproduce model results.
 

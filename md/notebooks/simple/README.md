@@ -21,6 +21,10 @@ The optional runner uses a fresh kernel for each notebook:
 python3 scripts/run_simple_notebooks.py
 ```
 
+## Required source data
+
+Use November–December 2024, all of 2025, and May–July 2026 flight files. January–April 2026 is archived. Notebook 01 reads only the three origin-station metadata files; the airport-reference CSV is optional. [Exact file requirements and generated handoffs](../../NOTEBOOK_DATA_REQUIREMENTS.md).
+
 ## Training and test data
 
 **Train:** 40,000 flights across all of 2025. **Test:** 10,000 July 2026 flights.
@@ -34,7 +38,7 @@ Model settings and thresholds were chosen during earlier chronological developme
 
 ## Saved files
 
-1. Notebook 01 saves `data/processed/flights_clean.parquet`: all 1,689,081 scoped source schedules through July.
+1. Notebook 01 saves `data/processed/flights_clean.parquet`: 1,374,996 scoped schedules from the 17 active source months.
 2. Notebook 02 saves `reports/simple_reproduction/features.parquet`: the 50,000 selected training/test rows.
 3. Notebook 03 saves `reports/simple_reproduction/models.joblib`: eight fitted A/B pipelines and their thresholds.
 4. Notebook 04 saves `metrics.json` and `scores.npz` in the same results folder.
@@ -42,10 +46,10 @@ Model settings and thresholds were chosen during earlier chronological developme
 The older `data/processed/features.parquet` supports the published report; it is not an input to notebook training.
 The [existing report](../../../reports/final_report/output/pdf/predeparture_flight_delay_report.pdf) retains the additional subgroup, review-budget and bootstrap analysis. Those sections are omitted from this shorter notebook walkthrough.
 
-Optional independent checks cover feature values, learned preprocessing, scores, metrics and ranks:
+Optional independent checks use a compact frozen reference to cover feature values, learned preprocessing, scores, metrics and ranks:
 
 ```sh
 python3 scripts/verify_simple_reproduction.py
 ```
 
-[Execution](../../../reports/simple_reproduction/execution.json) · [Verification](../../../reports/simple_reproduction/verification.json) · [Refactor evidence](../../../reports/notebook_refactor.json)
+[Execution](../../../reports/simple_reproduction/execution.json) · [Verification](../../../reports/simple_reproduction/verification.json)

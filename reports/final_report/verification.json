@@ -1,8 +1,8 @@
 {
-  "verified_at_utc": "2026-10-26T20:53:30.870704+00:00",
+  "verified_at_utc": "2026-10-27T10:19:27.722990+00:00",
   "pdf": "reports/final_report/output/pdf/predeparture_flight_delay_report.pdf",
-  "pdf_sha256": "f130d733b43081824f07e12abb916d38d9aacd2cf0d7ee6882ee2b181e5d3985",
-  "pdf_bytes": 591907,
+  "pdf_sha256": "4774b66806ba367bd9b536fdba05ce66b977e4bc7515b3b89ee8d314c0aa22d9",
+  "pdf_bytes": 591858,
   "page_count": 9,
   "figure_count": 6,
   "external_reference_links": [
@@ -26,15 +26,15 @@
       9
     ],
     "all_pages_passed": true,
-    "notes": "Rendered all nine pages and inspected contact sheets after updating the evaluation-export path. Text bounds passed; numerical evidence and all six figures are byte-identical to the previous report."
+    "notes": "Rendered all nine pages and inspected contact sheets plus the last page. Pages 1-8 and all six figures are unchanged. The final paragraph now points to retained current notebook inputs/results."
   },
   "text_and_bounds_checks_passed": true,
   "required_finding_checks_passed": true,
-  "frozen_july_export_hashes_verified": 6,
-  "rounded_model_f1_matches_frozen_exports": true,
   "model_refitting_performed": false,
   "eda_period": "January-September 2025",
   "final_fitting_period": "January-December 2025",
   "final_confirmation": "July 2026",
-  "editable_copy": "md/reports/final_report/predeparture_flight_delay_report.md"
+  "editable_copy": "md/reports/final_report/predeparture_flight_delay_report.md",
+  "current_results_reference": "reports/final_models/reference.json",
+  "rounded_model_f1_matches_reference": true
 }

@@ -25,13 +25,11 @@ The runner uses four fresh kernels in order. **This reproduces the completed Jul
 
 ## Results and deliverables
 
-- [Interactive HTML dashboard](../dashboard/dist/departure_delay_dashboard.html) · [usage guide](dashboard/README.md)
 - [Final project report](../reports/final_report/output/pdf/predeparture_flight_delay_report.pdf) · [editable source and reproduction guide](reports/final_report/README.md)
 - [Measured final findings](reports/final_models/RESULTS.md) · [reproduction verification](reports/simple_reproduction/README.md)
-- [Frozen evaluation exports](reports/evaluation_exports/README.md)
 
 ## Reference
 
-[Objectives](OBJECTIVES.md) · [Dataset guide](DATASET_GUIDE.md) · [Schema and joins](SCHEMA_AND_JOINS.md) · [Scripts](scripts/README.md) · [Source inventory](../data/SOURCE_MANIFEST.json)
+[Objectives](OBJECTIVES.md) · [Required notebook data](NOTEBOOK_DATA_REQUIREMENTS.md) · [Dataset guide](DATASET_GUIDE.md) · [Schema and joins](SCHEMA_AND_JOINS.md) · [Scripts](scripts/README.md) · [Source inventory](../data/SOURCE_MANIFEST.json)
 
-Run the notebooks in order. Outputs are written to `reports/simple_reproduction/`; raw inputs, published models and evaluation exports stay in their existing locations.
+Run the notebooks in order. Outputs are written to `reports/simple_reproduction/`; the current settings and cohorts stay in `reports/final_models/`. Older experiment reports and bulky CSV exports have been removed.

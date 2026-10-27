@@ -1,25 +1,9 @@
-# Project report
+# Final project report
 
-For the main teaching sequence, use the [four simple notebooks](../../notebooks/simple/README.md). They explain the same preparation decisions and reproduce the completed July evaluation, with separate artifacts and direct compatibility checks. The PDF, editable report source and numerical findings remain the published originals.
+The [nine-page PDF](../../../reports/final_report/output/pdf/predeparture_flight_delay_report.pdf) and [editable Markdown copy](predeparture_flight_delay_report.md) retain the completed study's findings. The six figures are stored in `reports/final_report/figures/`.
 
-Open the [nine-page PDF report](output/pdf/predeparture_flight_delay_report.pdf).
-The [editable Markdown source](predeparture_flight_delay_report.md) contains the same prose, tables and figures.
+The report covers sources, cleaning, EDA, features, chronological modelling, July results and limitations. Its numerical findings are unchanged by the repository cleanup.
 
-The first seven pages focus on sources, cleaning, exploratory data analysis, weather extraction, feature creation, transformations and sampling. The last two cover the four classifiers, the objective findings, limitations and references. Six figures explain the findings alongside the preparation decisions they support.
+Use the [four notebooks](../../notebooks/simple/README.md) to reproduce the current data preparation, eight final fits and evaluation. The old report-generation script and bulky experiment exports were removed. Keep the Markdown and figures for future report edits.
 
-The report distinguishes January-September 2025 EDA from final all-2025 model refits and the frozen July 2026 evaluation. Earlier Q1/Q2 results are historical benchmarks. It uses the executed project evidence; no models were refitted or selected while writing it.
-
-Supporting files:
-
-- [Evidence and frozen-source hashes](report_evidence.json).
-- [Report verification](verification.json).
-- [Individual report figures](figures/).
-- [Report builder](../../scripts/build_final_report.py).
-
-To regenerate the PDF, Markdown, figures and evidence from the existing project handoffs:
-
-```bash
-python3 scripts/build_final_report.py
-```
-
-Run from the project root. In addition to the project's analysis packages, PDF generation uses ReportLab and the macOS Arial fonts. Visual verification used PyMuPDF to render all nine pages. Regeneration reads the saved preparation handoffs and July exports; it does not run the notebooks or alter the fitted models. Changes to prose should be made in the builder because regeneration replaces the Markdown copy.
+`report_evidence.json` contains the report's numerical summary; `verification.json` records the PDF checks. Current model regression references are in `reports/final_models/`.

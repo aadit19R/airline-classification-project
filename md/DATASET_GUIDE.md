@@ -1,6 +1,6 @@
 # Dataset reference: departure-delay classification
 
-Source counts were audited against local schemas, acquisition records and final experiment records on 20 October 2026. Current split metadata is verified in `reports/simple_reproduction/verification.json` and its migration evidence in `reports/study_labels.json`. This guide describes the data itself, its coverage and its role. It contains no EDA patterns or model performance findings. Counts describe the locally acquired snapshots, not the continually updated source websites.
+Source counts were audited against local schemas, acquisition records and final experiment records on 20 October 2026. Current split metadata is verified in `reports/simple_reproduction/verification.json`. This guide describes the data itself, its coverage and its role. It contains no EDA patterns or model performance findings. Counts describe the locally acquired snapshots, not the continually updated source websites.
 
 ## 1. What the project uses
 
@@ -27,6 +27,8 @@ The project's prediction scope is departures from Atlanta (ATL), Dallas Fort Wor
 | April-June 2026 | 1,817,231 | 260,336 | 254,333 | Evaluated improvement benchmark; later history context |
 | July 2026 | 631,970 | 89,701 | 87,298 | Fresh final confirmation after the procedure was frozen |
 | Total acquired | 12,287,947 | 1,689,081 | Roles differ; do not combine as one training set | 21 months of raw flight records |
+
+January–April 2026 files are now in `data/archive/2026_jan_apr/` and are not read by current notebooks. The table above describes the total acquired history, including that archive. Active flight inputs cover 17 months and 10,018,886 national rows, yielding 1,374,996 scoped schedules. See [exact notebook data requirements](NOTEBOOK_DATA_REQUIREMENTS.md).
 
 National files are retained unchanged. Filtering to three origins happens in the project pipeline. A national file's row count is therefore different from the project population or model sample size. These raw snapshots cover November 2024 through July 2026; no August-December 2026 flight data is part of this project.
 
@@ -104,7 +106,7 @@ The same weather report can serve several flights. Observation time is supplied,
 
 ### IEM station/network metadata
 
-The 55 GeoJSON responses are stored in `data/raw/weather/stations/`. A GeoJSON file contains station features, each with an identifier, properties and point geometry. Relevant fields include `sid`, `network`, station name, state/country, elevation, `tzname`, and longitude/latitude in the geometry. Networks for the three origins are GA_ASOS (ATL), IL_ASOS (ORD) and TX_ASOS (DFW). These source responses supplied fresh airport/station/timezone mappings; a previous project's generated timezone table was not reused.
+The 55 GeoJSON responses are stored in `data/raw/weather/stations/`. A GeoJSON file contains station features, each with an identifier, properties and point geometry. Relevant fields include `sid`, `network`, station name, state/country, elevation, `tzname`, and longitude/latitude in the geometry. Networks for the three origins are GA_ASOS (ATL), IL_ASOS (ORD) and TX_ASOS (DFW). Only those three response/metadata pairs are required by the current notebooks; the other 52 responses are optional references. These source responses supplied fresh airport/station/timezone mappings; a previous project's generated timezone table was not reused.
 
 Reference metadata is a downloaded snapshot. It does not prove every property had the same value on every historical flight date. Metadata files are not additional flight or weather-measurement examples.
 
@@ -120,21 +122,21 @@ All airport-reference columns, in file order:
 
 | Item | Rows | Columns | Coverage and role |
 | --- | ---: | ---: | --- |
-| `data/processed/flights_clean.parquet` | 1,689,081 | 33 | Complete scoped schedules, November 2024-July 2026; saved by notebook 01 |
+| `data/processed/flights_clean.parquet` | 1,374,996 | 33 | 17 active months: November–December 2024, all 2025, May–July 2026; saved by notebook 01 |
 | `data/processed/features.parquet` | 1,158,165 | 55 | Eligible 2025 and Q1-2026 query flights; original predictors, label and traceability fields |
 | `reports/simple_reproduction/features.parquet` | 50,000 | 109 | Final model inputs rebuilt by notebook 02; train=40,000 all-2025 flights, test=10,000 July flights |
 
-The clean table includes 153,143 history-context schedules, 957,315 2025 schedules, 228,586 Q1-2026 schedules, 260,336 Q2 schedules and 89,701 July schedules. The features table contains 938,417 eligible 2025 flights plus 219,748 eligible Q1-2026 flights. It excludes history-only rows as prediction queries. These are two stages of the same project, not independent source datasets.
+The active clean table includes 153,143 history-context schedules, 957,315 2025 schedules, 174,837 May–June schedules and 89,701 July schedules. The archive preserves 314,085 January–April 2026 cleaned schedules. Together these preserve the original 1,689,081 acquired scoped schedules. The features table contains 938,417 eligible 2025 flights plus 219,748 eligible Q1-2026 flights. It excludes history-only rows as prediction queries. These are two stages of the same project, not independent source datasets.
 
-The cleaned schedule handoff covers every acquired month through July. `preparation_period` describes source periods, not final training/test membership. The older 55-column feature table is retained for published EDA/report reproduction; its preparation sample flags are historical. Notebook training reads only the new 50,000-row input table, with frozen cohort IDs from JSON records.
+The cleaned schedule handoff covers the 17 active months; January–April 2026 is archived and excluded from notebook reads. `preparation_period` describes source periods, not final training/test membership. The older 55-column feature table is retained as a historical data reference; its preparation sample flags are historical. Notebook training reads only the new 50,000-row input table, with frozen cohort IDs from JSON records.
 
-The final notebook handoff, `reports/simple_reproduction/features.parquet`, has one authoritative `split`: `train` for all 40,000 selected 2025 flights and `test` for all 10,000 selected July flights. It has no competing `role` field. Exact fitting IDs remain in `reports/final_models/cohorts.json`. The earlier label migration is recorded in `reports/study_labels.json`; the self-contained notebook refactor and pre-refactor feature fingerprints are recorded in `reports/notebook_refactor.json`. Selected predictor values, labels and row membership are unchanged.
+The final notebook handoff, `reports/simple_reproduction/features.parquet`, has one authoritative `split`: `train` for all 40,000 selected 2025 flights and `test` for all 10,000 selected July flights. It has no competing `role` field. Exact fitting IDs remain in `reports/final_models/cohorts.json`. The compact original-results fingerprints are in `reports/final_models/reference.json`. Selected predictor values, labels and row membership are unchanged.
 
 The 55 stored feature-table columns are not 55 predictors: the original B set has 37 predictors, while the rest are labels, identifiers, sample flags and audit timestamps. The original A set has 10 predictors. After later additions, the final A set has 26 input columns. Selected B has 78 for Logistic Regression/KNN, 66 for SVM and 72 for Random Forest. These counts are before one-hot expansion; an encoded numeric matrix can have more columns. See Appendix C for exact final input lists.
 
 The original January-September EDA population has 698,670 eligible flights. Initial fitting used a shared 20,000-flight sample. Final fitting uses a shared 40,000-flight sample spanning all twelve 2025 months, sampled proportionally by month and outcome. The July final evaluation uses a shared 10,000-flight sample from its 87,298 eligible departures. Sample sizes do not replace the full stored populations. All four models use identical fitting/evaluation IDs at the relevant comparison stage, and natural class proportions are retained. No 50/50 class balancing dataset was created.
 
-Parquet is a typed, column-oriented binary table format: smaller/faster for these Python datasets than repeatedly saving wide CSVs. It is not a different source of data. The shared preparation JSON manifest is the log describing how handoffs were made, not another flight dataset.
+Parquet is a typed, column-oriented binary table format: smaller/faster for these Python datasets than repeatedly saving wide CSVs. It is not a different source of data. The cleaning log is saved in `reports/simple_reproduction/cleaning_checks.json`; the feature calculations are visible in notebook 02.
 
 ## 7. Availability, provenance and boundaries
 
@@ -153,13 +155,13 @@ All paths below are relative to the project root `departure-delay-classification
 | --- | --- |
 | 2024 context CSVs | [data/raw/flights/bts/2024_context/csv/](../data/raw/flights/bts/2024_context/csv/) |
 | Full 2025 flight CSVs | [data/raw/flights/bts/2025/csv/](../data/raw/flights/bts/2025/csv/) |
-| January-July 2026 flight CSVs | [data/raw/flights/bts/2026/csv/](../data/raw/flights/bts/2026/csv/) |
+| Active May-July 2026 flight CSVs | [data/raw/flights/bts/2026/csv/](../data/raw/flights/bts/2026/csv/) |
 | Original BTS field descriptions | [July 2026 source readme](../data/raw/flights/bts/2026/source_documentation/2026_07_readme.html) |
 | Weather CSV responses | [data/raw/weather/observations/](../data/raw/weather/observations/) |
 | Weather-station metadata | [data/raw/weather/stations/](../data/raw/weather/stations/) |
 | Airport reference | [data/raw/reference/airports/airports.csv](../data/raw/reference/airports/airports.csv) |
 | Original preparation handoffs | [data/processed/](../data/processed/) |
-| Original preparation rules/log | [reports/preparation_manifest.json](../reports/preparation_manifest.json) |
+| Current feature rules | [Feature Engineering notebook](../notebooks/simple/02_feature_engineering.ipynb) |
 | Original acquisition source registry | [data/SOURCE_MANIFEST.json](../data/SOURCE_MANIFEST.json) |
 | Q2 acquisition details | [data/raw/_provenance/2026_q2_validation_report.json](../data/raw/_provenance/2026_q2_validation_report.json) |
 | July acquisition details | [data/raw/_provenance/2026_july_validation_report.json](../data/raw/_provenance/2026_july_validation_report.json) |
@@ -200,7 +202,7 @@ The groups below list every named CSV field exactly once. The unnamed 110th head
 
 Actual stored column names and types. The 55-column table is a retained published reference.
 
-### Cleaned source context: 1,689,081 rows, 33 columns
+### Active cleaned source context: 1,374,996 rows, 33 columns
 
 `data/processed/flights_clean.parquet`
 

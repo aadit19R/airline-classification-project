@@ -1,0 +1,188 @@
+{
+  "status": "passed",
+  "purpose": "Retain January-April 2026 sources from earlier evaluations; exclude from the active final notebook workflow.",
+  "file_moves": [
+    {
+      "original_path": "data/raw/flights/bts/2026/archives/2026_01.zip",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/archives/2026_01.zip",
+      "bytes": 27312195,
+      "sha256": "9ff58f560519dbc8fbd1b8b9fd2a172ca46d0a9e80f1df4fd48891efca41e89c"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/archives/2026_01.zip.json",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/archives/2026_01.zip.json",
+      "bytes": 1133,
+      "sha256": "747a6ae76ea6160c06d3ad9b9b009009f71d76cbd975156b05fef15f3258a503"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/archives/2026_02.zip",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/archives/2026_02.zip",
+      "bytes": 25811524,
+      "sha256": "a18b6de822a63bb881b55983ef039bf02a7cac046e9624e5c1b19b470a5e05cb"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/archives/2026_02.zip.json",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/archives/2026_02.zip.json",
+      "bytes": 1135,
+      "sha256": "0a2e70a42f7ff0f3557e1b91a215347159ab18577e80d023dc5f23fd3df283fc"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/archives/2026_03.zip",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/archives/2026_03.zip",
+      "bytes": 31150791,
+      "sha256": "c0864d5dabd522517976e29bb81f0c094d114e3e0e40cd51bc5a238ae4292b9d"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/archives/2026_03.zip.json",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/archives/2026_03.zip.json",
+      "bytes": 1135,
+      "sha256": "676fa4e9c0522948b8aace0c38dc33b0b372e22a2a03e8cb650fdb4781637a53"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/archives/2026_04.zip",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/archives/2026_04.zip",
+      "bytes": 30504623,
+      "sha256": "70e685ffa6042e6c851c4f1e821d774dfe7318d3eb212ac5bfc6a53ea23f3cfb"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/archives/2026_04.zip.json",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/archives/2026_04.zip.json",
+      "bytes": 1135,
+      "sha256": "0a42c161cc6cffd0625494d8b2f1e3d9799dfa2bb4eb32e93e03ee77f19b2304"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/csv/2026_01.csv",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/csv/2026_01.csv",
+      "bytes": 244674667,
+      "sha256": "1eee85bd4987075472df721c6f97e11c68d8db5b8af3a81179afb8f95a06111e"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/csv/2026_02.csv",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/csv/2026_02.csv",
+      "bytes": 232387736,
+      "sha256": "c499d998f6feaf27c6a23a8e1111ba84610e9eddb9ac110af965967f60f52647"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/csv/2026_03.csv",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/csv/2026_03.csv",
+      "bytes": 276602665,
+      "sha256": "3909fa18d3a8f7eee680b5065eae3776007692ee9175cfccc2c53ae37adac4cc"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/csv/2026_04.csv",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/csv/2026_04.csv",
+      "bytes": 270478182,
+      "sha256": "71b1ac148bb7a344161b5eeb846aa662fae8d986b37025f8d8d92383b8c13ee7"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/source_documentation/2026_01_readme.html",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/source_documentation/2026_01_readme.html",
+      "bytes": 12152,
+      "sha256": "0ba795b87d903d1b556ea93c19924cab0d240deb478e53a2f551b37ea6686867"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/source_documentation/2026_02_readme.html",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/source_documentation/2026_02_readme.html",
+      "bytes": 12152,
+      "sha256": "0ba795b87d903d1b556ea93c19924cab0d240deb478e53a2f551b37ea6686867"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/source_documentation/2026_03_readme.html",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/source_documentation/2026_03_readme.html",
+      "bytes": 12152,
+      "sha256": "0ba795b87d903d1b556ea93c19924cab0d240deb478e53a2f551b37ea6686867"
+    },
+    {
+      "original_path": "data/raw/flights/bts/2026/source_documentation/2026_04_readme.html",
+      "archived_path": "data/archive/2026_jan_apr/raw/flights/bts/2026/source_documentation/2026_04_readme.html",
+      "bytes": 12152,
+      "sha256": "0ba795b87d903d1b556ea93c19924cab0d240deb478e53a2f551b37ea6686867"
+    },
+    {
+      "original_path": "data/raw/weather/observations/2026/2026_01_origins.csv",
+      "archived_path": "data/archive/2026_jan_apr/raw/weather/observations/2026/2026_01_origins.csv",
+      "bytes": 572484,
+      "sha256": "a33e902b592976737f31e1bae4ced081861242ac964e6cbf37ce587dc5631f58"
+    },
+    {
+      "original_path": "data/raw/weather/observations/2026/2026_01_origins.csv.json",
+      "archived_path": "data/archive/2026_jan_apr/raw/weather/observations/2026/2026_01_origins.csv.json",
+      "bytes": 1750,
+      "sha256": "c28ed0b6689317b8169657372544f9350b5a078ab4e0f7d5d1426692a948c17d"
+    },
+    {
+      "original_path": "data/raw/weather/observations/2026/2026_02_origins.csv",
+      "archived_path": "data/archive/2026_jan_apr/raw/weather/observations/2026/2026_02_origins.csv",
+      "bytes": 476254,
+      "sha256": "50ed0c5fa84e01a48359bdc1bfe9de33e0ec93027f3e5bd9eb9a177db7a90d7e"
+    },
+    {
+      "original_path": "data/raw/weather/observations/2026/2026_02_origins.csv.json",
+      "archived_path": "data/archive/2026_jan_apr/raw/weather/observations/2026/2026_02_origins.csv.json",
+      "bytes": 1750,
+      "sha256": "f8db65f951132efe421fa53bac7721954e073b43b5ea27abe03802f833413b1d"
+    },
+    {
+      "original_path": "data/raw/weather/observations/2026/2026_03_origins.csv",
+      "archived_path": "data/archive/2026_jan_apr/raw/weather/observations/2026/2026_03_origins.csv",
+      "bytes": 572023,
+      "sha256": "c39c577592af71342c0f76cba70977a84b1c796e1bcb37cbe2a5737e7f945cb3"
+    },
+    {
+      "original_path": "data/raw/weather/observations/2026/2026_03_origins.csv.json",
+      "archived_path": "data/archive/2026_jan_apr/raw/weather/observations/2026/2026_03_origins.csv.json",
+      "bytes": 1750,
+      "sha256": "b6c9856ac9a09186b6ad60e015f5dd93e55ea5212bb789b9ab7da5c0ce969220"
+    },
+    {
+      "original_path": "data/raw/weather/observations/2026/2026_04_origins.csv",
+      "archived_path": "data/archive/2026_jan_apr/raw/weather/observations/2026/2026_04_origins.csv",
+      "bytes": 556889,
+      "sha256": "46b0c5d46e448977db523cb56a8d27d10997605bd43055f62fda8b1d5b254fb2"
+    },
+    {
+      "original_path": "data/raw/weather/observations/2026/2026_04_origins.csv.json",
+      "archived_path": "data/archive/2026_jan_apr/raw/weather/observations/2026/2026_04_origins.csv.json",
+      "bytes": 1750,
+      "sha256": "ccf90268037b3e797f9a201628a9c39d258dd49d2d22463cb2c45417405a8d3e"
+    }
+  ],
+  "raw_file_count": 24,
+  "raw_bytes": 1141160179,
+  "archived_clean_rows": 314085,
+  "previous_active_clean_rows": 1689081,
+  "remaining_active_clean_rows": 1374996,
+  "required_active_flight_months": [
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-05",
+    "2026-06",
+    "2026-07"
+  ],
+  "final_model_sample_unchanged": {
+    "train": 40000,
+    "test": 10000
+  },
+  "previous_clean_sha256": "b8eb0f39ee23a8b9a94c159414d84188abe71bbdd501434632ee82491378f1d4",
+  "updated_at_utc": "2026-10-27T09:04:01.180607+00:00",
+  "active_clean_sha256": "c7311a8653701b3847f71736c7a6a22308bc69ae40938b00e267a69b35ec604f",
+  "archived_clean_sha256": "73479409d33d704d6c9a97a79fb1f737983bc35433110526cb70e49e59c28f43",
+  "all_109_final_feature_columns_exactly_unchanged": true,
+  "all_retained_clean_values_exactly_preserved": true,
+  "all_archived_source_bytes_verified": true,
+  "verified_at_utc": "2026-10-27T09:04:58.666370+00:00",
+  "verification": "reports/simple_reproduction/verification.json",
+  "reported_metrics_and_predictions_unchanged": true
+}

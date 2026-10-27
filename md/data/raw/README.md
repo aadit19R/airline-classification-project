@@ -1,4 +1,12 @@
-# Raw data: start here
+# Active raw data and archived sources
+
+Current notebooks read 17 flight months: November–December 2024, all 2025, and May–July 2026. January–April 2026 flight/weather payloads, request metadata and flight source readmes are archived in `data/archive/2026_jan_apr/`. They are not required by the notebook run.
+
+See [exact notebook input requirements](../../NOTEBOOK_DATA_REQUIREMENTS.md), [the input manifest](../../../data/NOTEBOOK_INPUTS.json), and [archive mapping/checksums](../../../data/archive/2026_jan_apr/archive_manifest.json).
+
+The acquisition records below describe the historical acquisition layout. Their original paths are preserved for provenance; use the archive mapping to locate moved files.
+
+## Historical raw data: start here
 
 All required raw files are now stored inside this project's own `data/raw` directory. They have not been cleaned, filtered by flight, imputed, merged or converted into model features. Original downloads and source response bytes are retained.
 

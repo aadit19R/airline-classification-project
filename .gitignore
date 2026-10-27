@@ -16,3 +16,9 @@ data/raw/**/*.csv
 data/raw/**/*.zip
 data/raw/**/*.part
 data/raw/weather/stations/*.geojson
+
+# Archived raw payloads remain local; archive manifests stay versioned.
+data/archive/**/*.csv
+data/archive/**/*.zip
+data/archive/**/*.parquet
+data/archive/**/*.part

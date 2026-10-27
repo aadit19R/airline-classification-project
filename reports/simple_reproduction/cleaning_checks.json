@@ -1,6 +1,6 @@
 {
-  "rows": 1689081,
-  "source_months": 21,
+  "rows": 1374996,
+  "source_months": 17,
   "unique_flight_ids": true,
   "log": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "issue": "Cancelled schedules",
-      "affected_rows": 37401
+      "affected_rows": 26778
     },
     {
       "issue": "Unknown operated outcomes",

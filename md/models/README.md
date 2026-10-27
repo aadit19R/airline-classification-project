@@ -1,9 +1,9 @@
-# Saved flight-delay pipelines
+# Saved models
 
-flight_delay_models.joblib contains all eight final full-2025 A/B pipelines, their frozen validation thresholds, score types, feature-set labels, selection metadata and the two baseline rules/objects. Read the exact input columns from selection.protocol.feature_sets. The export manifest records its checksum and package versions.
+The current notebook bundle is `reports/simple_reproduction/models.joblib`, written by notebook 03 and loaded by notebook 04. It contains eight fitted scikit-learn A/B pipelines, input columns and chosen thresholds.
 
-Use the saved preprocessing inside each pipeline; do not independently refit it for prediction. To reproduce this study's warnings, obtain the positive-class score and compare it with the saved threshold. Pipeline.predict uses the estimator's default cutoff, which can differ from the validation-selected cutoff.
+`models/final_flight_delay_models.joblib` is the original final-study reference used by the optional verifier. The other two bundles in this directory are legacy saved models; they are preserved but are not inputs to the current notebooks.
 
-For SVM, use pipeline.decision_function(X). For the other classifier candidates, use pipeline.predict_proba(X)[:, 1], with class 1 as the delayed class. Then calculate predicted = (score >= saved_threshold).astype(int).
+For SVM use `decision_function`; for the other classifiers use positive-class `predict_proba`. Compare the resulting score with the bundle's saved threshold. Calling `Pipeline.predict()` uses a default threshold and may produce different warnings.
 
-Scores are not verified calibrated probabilities. This is a historical simulation, not a verified live data-feed implementation. The raw tail number/rotation features remain excluded.
+Use each pipeline's fitted preprocessing. Scores are not verified calibrated probabilities.

@@ -1,9 +1,9 @@
 {
-  "schema_version": "2.1",
-  "updated_at_utc": "2026-10-26T22:05:31.135048+00:00",
+  "schema_version": "2.2",
+  "updated_at_utc": "2026-10-27T10:19:27.724282+00:00",
   "path_base": "data_directory",
   "reuse_policy": "Only prior data/raw source bytes and original raw-response metadata may be copied. No prior processed/interim/feature/cleaned/model/timezone table is an input. All active input paths are inside this new project.",
-  "acquisition_status": "required_raw_inputs_available_through_2026_07",
+  "acquisition_status": "17_active_flight_months_available;_2026_January-April_archived",
   "sources": [
     {
       "id": "flights_2025",
@@ -63,7 +63,12 @@
       "status": "available_local",
       "expected_files": 55,
       "source_url": "https://mesonet.agron.iastate.edu/geojson/network.php",
-      "purpose": "Generate new airport/station/timezone mappings from source fields including tzname; no previous lookup imported"
+      "purpose": "55 original network responses retained; only the three origin networks and their metadata are required by notebooks.",
+      "required_networks_for_notebooks": [
+        "GA_ASOS",
+        "IL_ASOS",
+        "TX_ASOS"
+      ]
     },
     {
       "id": "airport_metadata",
@@ -72,48 +77,62 @@
       "status": "available_local",
       "source_url": "https://ourairports.com/data/",
       "raw_rows": 86053,
-      "purpose": "Unmodified airport identifiers, names, coordinates and original metadata"
+      "purpose": "Unmodified airport identifiers, names, coordinates and original metadata",
+      "required_by_notebooks": false
     },
     {
-      "id": "flights_2026_q1",
+      "id": "flights_2026_active",
       "path": "raw/flights/bts/2026/csv",
-      "glob": "2026_0[1-3].csv",
+      "glob": "2026_0[5-7].csv",
       "kind": "unmodified_official_csv",
-      "status": "available_local",
+      "status": "active",
       "expected_files": 3,
-      "raw_rows": 1671142,
-      "contains_tail_number": true,
-      "source_url": "https://transtats.bts.gov/PREZIP/",
-      "purpose": "Earlier evaluated Q1-2026 benchmark and historical context; the current final test period is July 2026."
+      "raw_rows": 1851282,
+      "purpose": "May/June earlier outcomes and July final test/schedule context."
     },
     {
-      "id": "flights_2026_q1_archives",
+      "id": "flights_2026_active_archives",
       "path": "raw/flights/bts/2026/archives",
-      "glob": "2026_0[1-3].zip",
+      "glob": "2026_0[5-7].zip",
       "kind": "original_official_archive",
       "status": "available_local",
       "expected_files": 3,
-      "purpose": "Original ZIPs and retrieval metadata"
+      "required_when": "Needed for extraction only when an active CSV is missing."
     },
     {
-      "id": "weather_observations_2026_q1",
+      "id": "weather_observations_2026_active",
       "path": "raw/weather/observations/2026",
-      "glob": "2026_0[1-3]_origins.csv",
+      "glob": "2026_0[5-7]_origins.csv",
       "kind": "unaltered_raw_api_responses",
-      "status": "available_local",
+      "status": "active",
       "expected_files": 3,
-      "source_url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py",
-      "stations": [
-        "ATL",
-        "ORD",
-        "DFW"
-      ],
-      "report_types": [
-        3,
-        4
-      ],
-      "timezone": "Etc/UTC",
-      "purpose": "Monthly three-station responses with two-day request padding on both sides; source overlaps and M/T codes retained"
+      "purpose": "Retain May-July raw responses, request padding and source-provenance ordering used by the unchanged feature build."
+    },
+    {
+      "id": "flights_2026_jan_apr_archived",
+      "path": "archive/2026_jan_apr/raw/flights/bts/2026/csv",
+      "glob": "2026_0[1-4].csv",
+      "kind": "unmodified_official_csv",
+      "status": "archived_not_read_by_notebooks",
+      "expected_files": 4,
+      "raw_rows": 2269061,
+      "purpose": "Earlier evaluated experiment sources; zero contribution to final feature windows."
+    },
+    {
+      "id": "flights_2026_jan_apr_archived_archives",
+      "path": "archive/2026_jan_apr/raw/flights/bts/2026/archives",
+      "glob": "2026_0[1-4].zip",
+      "kind": "original_official_archive",
+      "status": "archived_not_read_by_notebooks",
+      "expected_files": 4
+    },
+    {
+      "id": "weather_observations_2026_jan_apr_archived",
+      "path": "archive/2026_jan_apr/raw/weather/observations/2026",
+      "glob": "2026_0[1-4]_origins.csv",
+      "kind": "unaltered_raw_api_responses",
+      "status": "archived_not_read_by_notebooks",
+      "expected_files": 4
     }
   ],
   "required_missing_files": [],
@@ -139,12 +158,13 @@
   "current_scope_note": "The current A/B experiment trains on 40,000 all-2025 flights and tests on 10,000 July-2026 flights. Model selection uses chronological 2025 folds. Q1/Q2 are earlier benchmarks. Aircraft rotation is excluded.",
   "extension_acquisition": "raw/_provenance/2026_q1_acquisition_log.json",
   "extension_validation": "raw/_provenance/2026_q1_validation_report.json",
-  "extension_report": "../reports/DATA_ACQUISITION_2026_Q1.md",
-  "processed_data_status": "Notebook 01 saves complete November-2024 through July-2026 cleaned schedules. Notebook 02 rebuilds the same 50,000 selected rows and features; notebooks 03/04 contain preprocessing, fitting and evaluation. No project helper modules are imported. The older full feature Parquet is retained only as a published EDA/reference table.",
+  "processed_data_status": "Notebook 01 now saves 1,374,996 scoped schedules from 17 active months: November-December 2024, all 2025, May-July 2026. January-April 2026 raw files and 314,085 cleaned rows are archived. Notebook 02 preserves the same 50,000 selected rows and all original feature values. The old full feature table remains a historical data reference; the current model reference is compact. Older experiment reports and bulky exports have been removed.",
   "extension_quality_reviews": {
     "weather_conflicts_pending_preparation_review": [],
     "approved_exclusion_policy": "User approved removing both report versions at the two Q1-2026 conflicts, in addition to the six 2025 keys. Raw files remain unchanged; all flight queries are retained.",
     "decision_registry": "../config/project.json",
-    "executed_treatments": "../reports/preparation_manifest.json"
-  }
+    "executed_treatments": "../notebooks/simple/02_feature_engineering.ipynb"
+  },
+  "notebook_inputs": "NOTEBOOK_INPUTS.json",
+  "archive_manifest": "archive/2026_jan_apr/archive_manifest.json"
 }
