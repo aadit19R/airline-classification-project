@@ -1,4 +1,4 @@
-"""Build the six Tableau evaluation tables from frozen predictions."""
+"""Build the six evaluation tables from frozen predictions."""
 import hashlib
 import numpy as np
 import pandas as pd

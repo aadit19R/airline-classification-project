@@ -1,8 +1,8 @@
 {
-  "verified_at_utc": "2026-10-19T08:39:41.937990+00:00",
-  "pdf": "output/pdf/predeparture_flight_delay_report.pdf",
-  "pdf_sha256": "ecffb54733c9adbe74be8206896c2cc7c1f354c2349a1fa0097cd5ed40cd09e3",
-  "pdf_bytes": 591953,
+  "verified_at_utc": "2026-10-26T20:53:30.870704+00:00",
+  "pdf": "reports/final_report/output/pdf/predeparture_flight_delay_report.pdf",
+  "pdf_sha256": "f130d733b43081824f07e12abb916d38d9aacd2cf0d7ee6882ee2b181e5d3985",
+  "pdf_bytes": 591907,
   "page_count": 9,
   "figure_count": 6,
   "external_reference_links": [
@@ -26,7 +26,7 @@
       9
     ],
     "all_pages_passed": true,
-    "notes": "All pages rendered to PNG and reviewed for readable text and graphs, page breaks and clipping. Changed pages reviewed again after final wording edits."
+    "notes": "Rendered all nine pages and inspected contact sheets after updating the evaluation-export path. Text bounds passed; numerical evidence and all six figures are byte-identical to the previous report."
   },
   "text_and_bounds_checks_passed": true,
   "required_finding_checks_passed": true,
@@ -36,5 +36,5 @@
   "eda_period": "January-September 2025",
   "final_fitting_period": "January-December 2025",
   "final_confirmation": "July 2026",
-  "editable_copy": "predeparture_flight_delay_report.md"
+  "editable_copy": "md/reports/final_report/predeparture_flight_delay_report.md"
 }

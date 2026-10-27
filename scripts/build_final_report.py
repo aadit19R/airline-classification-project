@@ -34,21 +34,21 @@ plt.rcParams.update({'font.family':'DejaVu Sans','font.size':9,'axes.titlesize':
  'axes.edgecolor':'#a9b3bf','axes.labelcolor':'#354457','xtick.color':'#354457','ytick.color':'#354457',
  'text.color':'#19293a','figure.facecolor':'white','axes.facecolor':'white','savefig.facecolor':'white'})
 prep=json.loads((ROOT/'reports/preparation_manifest.json').read_text())
-manifest=json.loads((ROOT/'tableau/exports/final_july/export_manifest.json').read_text())
+manifest=json.loads((ROOT/'reports/evaluation_exports/final_july/export_manifest.json').read_text())
 selection=json.loads((ROOT/'reports/final_models/selection.json').read_text())
 for f,meta in manifest['files'].items():
- assert hashlib.sha256((ROOT/'tableau/exports/final_july'/f).read_bytes()).hexdigest()==meta['sha256']
+ assert hashlib.sha256((ROOT/'reports/evaluation_exports/final_july'/f).read_bytes()).hexdigest()==meta['sha256']
 clean_columns=['flight_id','flight_date','origin','airline','destination','departure_time_band','departure_delay_minutes',
- 'distance_miles','scheduled_duration_minutes','delayed_departure','departure_hour','month','cancelled','query_eligible']
-schedules=pd.read_parquet(ROOT/'data/processed/flights_clean.parquet',columns=clean_columns,filters=[('split','==','train')])
-train=schedules.loc[schedules.query_eligible].copy()
+ 'distance_miles','scheduled_duration_minutes','delayed_departure','departure_hour','month','cancelled','preparation_query_eligible']
+schedules=pd.read_parquet(ROOT/'data/processed/flights_clean.parquet',columns=clean_columns,filters=[('preparation_period','==','eda_2025')])
+train=schedules.loc[schedules.preparation_query_eligible].copy()
 feature_columns=['flight_id','gust_knots','ceiling_ft','rain_reported','wind_knots','visibility_miles','temperature_f',
  'precip_inches','precip_trace','weather_age_minutes','weather_report_missing','condition_codes_missing','no_ceiling_reported']
-weather=pd.read_parquet(ROOT/'data/processed/features.parquet',columns=feature_columns,filters=[('split','==','train')])
+weather=pd.read_parquet(ROOT/'data/processed/features.parquet',columns=feature_columns,filters=[('preparation_period','==','eda_2025')])
 train=train.merge(weather,on='flight_id',how='left',validate='one_to_one')
 assert len(train)==698670 and train.flight_id.is_unique
-metrics=pd.read_csv(ROOT/'tableau/exports/final_july/model_metrics.csv')
-priority=pd.read_csv(ROOT/'tableau/exports/final_july/priority_curve.csv')
+metrics=pd.read_csv(ROOT/'reports/evaluation_exports/final_july/model_metrics.csv')
+priority=pd.read_csv(ROOT/'reports/evaluation_exports/final_july/priority_curve.csv')
 model_ids=['logistic_regression','knn','svm','random_forest']
 names=['Logistic Regression','KNN','RBF SVM','Random Forest']
 b=metrics.loc[metrics.feature_set.eq('B')].set_index('model_id').loc[model_ids]
@@ -287,7 +287,7 @@ refs=[
  ('5','NOAA','ASOS User Guide visibility and cloud conventions','https://www.weather.gov/media/asos/aum-toc.pdf'),
  ('6','OurAirports','Raw airport reference downloads','https://ourairports.com/data/')]
 for n,author,title,url in refs:q.append(('ref',f'[{n}] {author}. <link href="{escape(url)}" color="#245e87">{title}</link>. Accessed 19 October 2026.'))
-q.append(('ref','Project evidence: notebooks 01 and 02 (cleaning and features), 02a (deeper EDA), 06 and 07 (final modeling and July confirmation); reports/preparation_manifest.json; reports/final_models/selection.json; tableau/exports/final_july/. The interactive HTML dashboard presents O1-O4. Report figures are regenerated from saved data, without refitting models.'))
+q.append(('ref','Project evidence: the four notebooks in notebooks/simple/; reports/preparation_manifest.json; reports/final_models/selection.json; reports/evaluation_exports/final_july/. The interactive HTML dashboard presents O1-O4. Report figures are regenerated from saved data, without refitting models.'))
 
 # Build a plain, typeset PDF. A page break separates each purposeful report section.
 fontdir=Path('/System/Library/Fonts/Supplemental')
@@ -341,12 +341,12 @@ for i,pageobj in enumerate(PAGE):
   if block[0] in ['p','ref']:lines.append(md(block[1])+'\n')
   elif block[0]=='h':lines.append('### '+block[1]+'\n')
   elif block[0]=='bullet':lines.append('- '+md(block[1])+'\n')
-  elif block[0]=='image':lines.append(f'![{block[2]}](figures/{block[1]})\n\n{block[2]}\n')
+  elif block[0]=='image':lines.append(f'![{block[2]}](../../../reports/final_report/figures/{block[1]})\n\n{block[2]}\n')
   elif block[0]=='table':
    lines.append('| '+' | '.join(block[1])+' |');lines.append('| '+' | '.join(['---']*len(block[1]))+' |')
    for row in block[2]:lines.append('| '+' | '.join(map(str,row))+' |')
    lines.append('')
-(OUT/'predeparture_flight_delay_report.md').write_text('\n'.join(lines)+'\n')
+(ROOT/'md/reports/final_report/predeparture_flight_delay_report.md').write_text('\n'.join(lines)+'\n')
 stats['source_run']=manifest['run_id'];stats['source_hashes']=manifest['files'];stats['model_selection_sha256']=hashlib.sha256((ROOT/'reports/final_models/selection.json').read_bytes()).hexdigest();stats['model_refitting_performed']=False
 (OUT/'report_evidence.json').write_text(json.dumps(stats,indent=2)+'\n')
 print(PDF)

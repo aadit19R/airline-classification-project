@@ -32,7 +32,7 @@ c['sources_manifest']='data/SOURCE_MANIFEST.json'
 c['raw_only_input_policy']=True
 c['feature_sets']['C']['source_status']='2025_tail_numbers_acquired_in_full_raw_files'
 # Acquisition metadata must not reactivate the excluded rotation experiment.
-c['feature_sets']['C']['availability_gate']='Not part of current objectives, training or Tableau findings. Reopening requires a separate scope decision and historical assignment-timing evidence.'
+c['feature_sets']['C']['availability_gate']='Not part of current objectives, training or dashboard. Reopening requires a separate scope decision and historical assignment-timing evidence.'
 config_path.write_text(json.dumps(c,indent=2)+'\n')
 
 readme=f'''# Raw data: start here
@@ -77,13 +77,13 @@ No file from the old project's processed/interim/model outputs or generated time
 
 BTS does not include a historical timestamp of when each aircraft assignment became known. Aircraft rotation is excluded from the agreed A/B project because final `Tail_Number` cannot establish assignment availability at the cutoff. Actual historical delivery/receipt timestamps for weather and flight outcome feeds are also not supplied. These are documented information limits, not silently invented columns.
 
-No classifiers, cleaned dataset, train/test feature matrix or Tableau findings workbook has been created during raw sourcing. The next stage starts fresh cleaning from these source files.
+No classifiers, cleaned dataset, train/test feature matrix or dashboard workbook has been created during raw sourcing. The next stage starts fresh cleaning from these source files.
 '''
 (RAW/'README.md').write_text(readme)
 
 # Bring current project instructions into line with the user's raw-only rule.
 p=ROOT/'README.md';t=p.read_text()
-t=t.replace('**Current stage:** project setup and objective definition. No new classifiers have been trained and no Tableau workbook with findings has been produced yet.','**Current stage:** raw data acquired and independently audited. Begin at [the raw-data guide](data/raw/README.md). No new classifiers or findings workbook have been produced yet.')
+t=t.replace('**Current stage:** project setup and objective definition. No new classifiers have been trained and no dashboard with findings has been produced yet.','**Current stage:** raw data acquired and independently audited. Begin at [the raw-data guide](data/raw/README.md). No new classifiers or findings workbook have been produced yet.')
 t=t.replace('- C requires supplementary 2025 tail-number data and is a separately labelled retrospective assignment scenario unless timing evidence exists.','- Full 2025 raw files now include tail numbers. C still requires a fresh linkage/coverage audit and is a separately labelled retrospective assignment scenario unless timing evidence exists.')
 t=t.replace('Raw source data remains in the existing cache and is referenced through the source inventory. New code and outputs belong in this folder. Core dependencies are listed in requirements.txt; this project does not require the earlier fitted models.','All active raw source inputs now live inside this folder. Only original raw files were copied from the earlier project; 2025 flight archives were acquired directly from BTS. No prior cleaned/processed tables or generated timezone lookup is reused. Core dependencies are listed in requirements.txt.')
 p.write_text(t)

@@ -2,7 +2,7 @@
   "schema_version": "1.1",
   "project_id": "departure_delay_classification",
   "title": "Pre-departure Flight Delay Risk Classification",
-  "status": "models_evaluated_tableau_workbook_pending",
+  "status": "models_evaluated_html_dashboard_available",
   "objectives": {
     "main": "To develop and evaluate, through a historical simulation with a two-hour pre-departure cutoff, a classification framework using Logistic Regression, KNN, SVM and Random Forest, and assess whether its predictions can reliably identify and prioritize flights at risk of departing at least 15 minutes late.",
     "supporting": [
@@ -61,19 +61,20 @@
   },
   "split": {
     "train_start": "2025-01-01",
-    "train_end": "2025-09-30",
-    "validation_start": "2025-10-01",
-    "validation_end": "2025-12-31",
-    "test_start": "2026-01-01",
-    "test_end": "2026-03-31",
-    "refit_start": "2025-01-01",
-    "refit_end": "2025-12-31",
-    "disclosure": "2025 has been explored in earlier work. Q1 2026 is reserved for final evaluation after selection and a full-2025 refit."
+    "train_end": "2025-12-31",
+    "test_start": "2026-07-01",
+    "test_end": "2026-07-31",
+    "train_rows": 40000,
+    "test_rows": 10000,
+    "membership": "Exact selected flight IDs; the 2025 population is larger than the final training sample.",
+    "training_ids": "reports/final_models/cohorts.json:final_refit_ids",
+    "test_ids": "reports/simple_reproduction/features.parquet where split == test",
+    "validation": "Chronological development/calibration/scoring folds inside 2025; no separate final validation partition.",
+    "disclosure": "July was the final confirmation period and is now exposed; do not retune using its outcomes."
   },
   "sampling": {
     "seed": 42,
-    "train_rows": 20000,
-    "validation_rows": 5000,
+    "train_rows": 40000,
     "test_rows": 10000,
     "strata": [
       "month",
@@ -81,8 +82,7 @@
     ],
     "same_query_ids_for_all_comparisons": true,
     "preserve_evaluation_prevalence": true,
-    "refit_rows": 20000,
-    "refit_policy": "Independent fixed-seed proportional month x outcome sample from all eligible 2025 flights, shared across A/B and all classifiers; use only after validation choices are frozen."
+    "membership_record": "reports/final_models/cohorts.json"
   },
   "models": [
     "logistic_regression",
@@ -103,15 +103,15 @@
       "name": "with_aircraft_rotation",
       "required": false,
       "planned": false,
-      "availability_gate": "Not part of current objectives, training or Tableau findings. Reopening requires a separate scope decision and historical assignment-timing evidence.",
+      "availability_gate": "Not part of current objectives, training or dashboard findings. Reopening requires a separate scope decision and historical assignment-timing evidence.",
       "source_status": "2025_tail_numbers_acquired_in_full_raw_files",
       "status": "excluded_from_agreed_scope"
     }
   },
   "evaluation": {
-    "selection_split": "validation",
-    "selection_metric": "average_precision",
-    "threshold_selection_split": "validation",
+    "selection_split": "chronological_validation_within_2025",
+    "selection_metric": "mean_delayed_class_f1",
+    "threshold_selection_split": "October_2025_calibration",
     "threshold_metric": "delayed_class_f1",
     "freeze_before_test": true,
     "capacity_fractions": [
@@ -143,27 +143,14 @@
     "study_design": "historical_simulation_with_input_availability_assumptions",
     "live_availability_verified": false,
     "availability_disclosure": "Weather receipt times and timely outcome-feed access are assumed, not verified by these sources. Historical schedule revisions are not reconstructed.",
-    "final_refit": "Refit finalized preprocessing and classifiers from scratch on refit_sample; retain validation-selected settings and threshold. Never select or recalibrate on test outcomes."
+    "final_refit": "Fit on the exact 40,000 all-2025 IDs in cohorts.json; preserve settings and October thresholds. Final split=test contains the 10,000 July 2026 flights.",
+    "selection_tiebreak": "mean_average_precision"
   },
   "history": {
     "window_days": 28,
     "lag_days": 7,
     "outcome": "delayed_departure",
     "availability_note": "Retrospective outcome-feed assumption; monthly BTS releases do not establish live delivery."
-  },
-  "tableau": {
-    "required": true,
-    "workbook_target": "tableau/workbooks/departure_delay_findings.twbx",
-    "export_directory": "tableau/exports",
-    "dashboards": [
-      "01_model_performance",
-      "02_feature_value",
-      "03_prediction_reliability",
-      "04_risk_prioritization"
-    ],
-    "status": "real_exports_ready_workbook_pending",
-    "csv_encoding": "utf-8",
-    "publish_requested": false
   },
   "model_options": {
     "random_forest": {
@@ -210,176 +197,10 @@
       "precip_trace"
     ],
     "indicator_policy": "Median impute every numeric predictor; skip redundant automatic indicators for columns represented by explicit missingness flags. Preserve automatic indicators for remaining numeric predictors, including wind and gust.",
-    "month_encoding": "Fixed 12-month sine/cosine; raw month retained for audit, sampling and Tableau."
+    "month_encoding": "Fixed 12-month sine/cosine; raw month retained for audit, sampling and dashboard display."
   },
   "sources_manifest": "data/SOURCE_MANIFEST.json",
   "raw_only_input_policy": true,
-  "notebook_preparation": {
-    "status": "all_three_notebooks_fresh_kernel_passed_revised_timeline",
-    "notebooks": [
-      "notebooks/01_cleaning_and_eda.ipynb",
-      "notebooks/02_feature_engineering.ipynb",
-      "notebooks/02a_deeper_training_exploration.ipynb"
-    ],
-    "frequent_inline_plots": true,
-    "intermediate_csv_exports": false,
-    "planned_reusable_data_files": [
-      "data/processed/flights_clean.parquet",
-      "data/processed/features.parquet"
-    ],
-    "shared_manifest": "reports/preparation_manifest.json",
-    "routine_choices_delegated": true,
-    "clarify_material_ambiguities_before_treatment_code": true,
-    "explicit_ipython_imports": false,
-    "reference_methodology": {
-      "reference_notebook": "../reference EDA .ipynb",
-      "reference_sha256": "47f21395092d06474ef7c9c719bf5709ee617c7488dd2aa51e615f526da1cf1c",
-      "reference_used_as_dataset": false,
-      "review": "reports/REFERENCE_EDA_REVIEW.md",
-      "methods": [
-        "head_info_describe",
-        "X_y_orientation",
-        "variable_roles_and_cardinality",
-        "percentage_frequencies",
-        "skewness",
-        "IQR_3SD_99th_percentile_diagnostics",
-        "grouped_target_summaries",
-        "before_after_transformation_comparisons"
-      ],
-      "automatic_statistical_capping": false,
-      "model_feature_lists_changed": false
-    },
-    "static_feature_dictionary": "feature_dictionary in config/project.json",
-    "simplification": {
-      "status": "complete",
-      "metrics": [
-        {
-          "notebook": "01_cleaning_and_eda.ipynb",
-          "code_characters_before": 28415,
-          "code_characters_after": 27436,
-          "figure_blocks": 13,
-          "real_data_executed": false
-        },
-        {
-          "notebook": "02_feature_engineering.ipynb",
-          "code_characters_before": 38284,
-          "code_characters_after": 33159,
-          "figure_blocks": 13,
-          "real_data_executed": true
-        }
-      ],
-      "synthetic_regression": {
-        "checks": [
-          {
-            "notebook": "01_cleaning_and_eda.ipynb",
-            "synthetic_rows": 2016,
-            "identical_printed_output": true,
-            "identical_plot_renders": 13,
-            "identical_parquet_table": true
-          },
-          {
-            "notebook": "02_feature_engineering.ipynb",
-            "synthetic_rows": 1572,
-            "identical_printed_output": true,
-            "identical_plot_renders": 13,
-            "identical_parquet_table": true
-          }
-        ],
-        "manifest_equal_except_timestamps": true
-      },
-      "real_data_execution": "Notebook 02 completed on real data in the user Python 3.13 environment; original synthetic equivalence results retained as history.",
-      "static_descriptions": "feature_dictionary in config/project.json",
-      "external_analysis_helper_files_added": false
-    },
-    "parquet_engine_fix": {
-      "engine": "pyarrow",
-      "installed_version": "20.0.0",
-      "python_version": "3.13",
-      "save_cell_restored": true,
-      "earlier_outputs_preserved": true,
-      "tested_with_existing_pandas_session": true,
-      "restart_required_for_this_fix": false,
-      "actual_handoff_executed_by_agent": true
-    },
-    "handoff_recovery": {
-      "source": "Existing notebook-01 preparation code, without regenerating EDA figures",
-      "clean_rows": 1110458,
-      "eligible_2025_queries": 938417,
-      "notebook_01_saved_outputs_preserved": true,
-      "notebook_02_startup_verified_on_real_handoff": true,
-      "weather_history_features_executed": true
-    },
-    "full_data_execution": {
-      "notebook": "notebooks/02_feature_engineering.ipynb",
-      "completed_at_utc": "2026-10-18T16:46:30.003084+00:00",
-      "fresh_kernel": true,
-      "code_cells": 20,
-      "inline_figures": 13,
-      "error_outputs": 0,
-      "stderr_outputs": 0,
-      "rows": 938417,
-      "report": "reports/NOTEBOOK_02_EXECUTION_REPORT.md",
-      "python": "3.13.6",
-      "packages": {
-        "pandas": "3.0.3",
-        "numpy": "2.5.1",
-        "pyarrow": "20.0.0",
-        "scikit-learn": "1.9.0",
-        "matplotlib": "3.11.1",
-        "seaborn": "0.13.2",
-        "nbclient": "0.10.2",
-        "nbformat": "5.10.4"
-      },
-      "applies_to": "Earlier 2025-only build; superseded by timeline_update for current row counts and splits."
-    },
-    "timeline_update": {
-      "completed_at_utc": "2026-10-18T19:54:40.314482+00:00",
-      "fresh_kernels": true,
-      "notebooks": [
-        {
-          "notebook": "01_cleaning_and_eda.ipynb",
-          "code_cells": 22,
-          "inline_figures": 13,
-          "errors": 0,
-          "stderr": 0
-        },
-        {
-          "notebook": "02_feature_engineering.ipynb",
-          "code_cells": 20,
-          "inline_figures": 13,
-          "errors": 0,
-          "stderr": 0
-        },
-        {
-          "notebook": "02a_deeper_training_exploration.ipynb",
-          "code_cells": 11,
-          "inline_figures": 7,
-          "errors": 0,
-          "stderr": 0
-        }
-      ],
-      "clean_rows": 1339044,
-      "feature_rows": 1158165,
-      "query_rows_by_split": {
-        "test": 219748,
-        "train": 698670,
-        "validation": 239747
-      },
-      "feature_counts": {
-        "A": 10,
-        "B": 37
-      },
-      "preprocessor_preview_columns": 293,
-      "classifiers_trained": false,
-      "corrections": [
-        "fixed_12_month_cyclic_encoding",
-        "selective_missingness_indicators",
-        "all_METAR_body_cloud_layers"
-      ],
-      "final_refit_sample_rows": 20000,
-      "report": "reports/PREPARATION_TIMELINE_UPDATE.md"
-    }
-  },
   "feature_dictionary": [
     {
       "feature": "airline",
@@ -839,60 +660,279 @@
     "unreviewed_conflicts": "stop and clarify",
     "fallback": "earlier observation under the existing 20-minute buffer and 180-minute maximum age; otherwise missing weather"
   },
-  "evaluation_extension": {
-    "status": "approved_timeline_implemented_and_handoffs_rebuilt",
-    "initial_training": {
+  "evaluation_exports": {
+    "directory": "reports/evaluation_exports",
+    "final_manifest": "reports/evaluation_exports/final_july/export_manifest.json"
+  },
+  "initial_experiment_record": {
+    "status": "historical_only_not_the_current_split",
+    "split": {
+      "train_start": "2025-01-01",
+      "train_end": "2025-09-30",
+      "validation_start": "2025-10-01",
+      "validation_end": "2025-12-31",
+      "test_start": "2026-01-01",
+      "test_end": "2026-03-31",
+      "refit_start": "2025-01-01",
+      "refit_end": "2025-12-31",
+      "disclosure": "Historical initial experiment: Q1 2026 was its evaluation period. The current final test is July 2026; use the top-level split definition."
+    },
+    "sampling": {
+      "seed": 42,
+      "train_rows": 20000,
+      "validation_rows": 5000,
+      "test_rows": 10000,
+      "strata": [
+        "month",
+        "delayed_departure"
+      ],
+      "same_query_ids_for_all_comparisons": true,
+      "preserve_evaluation_prevalence": true,
+      "refit_rows": 20000,
+      "refit_policy": "Independent fixed-seed proportional month x outcome sample from all eligible 2025 flights, shared across A/B and all classifiers; use only after validation choices are frozen."
+    },
+    "evaluation_extension": {
+      "status": "approved_timeline_implemented_and_handoffs_rebuilt",
+      "initial_training": {
+        "start": "2025-01-01",
+        "end": "2025-09-30"
+      },
+      "validation": {
+        "start": "2025-10-01",
+        "end": "2025-12-31"
+      },
+      "final_refit": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "rule": "Independent fixed-seed proportional month x outcome sample from all eligible 2025 flights, shared across A/B and all classifiers; use only after validation choices are frozen.",
+        "sample_rows": 20000
+      },
+      "final_test": {
+        "start": "2026-01-01",
+        "end": "2026-03-31"
+      },
+      "test_outcome_policy": "No 2026 outcome EDA or feature/model/threshold selection; labels and final scoring use frozen rules.",
+      "raw_validation": "data/raw/_provenance/2026_q1_validation_report.json",
+      "weather_conflicts_pending_review": [],
+      "existing_split_and_sample_flags": "Historical initial-experiment record. Its former column names have been replaced by explicit preparation metadata; current train/test membership is defined by the top-level split and frozen flight IDs."
+    },
+    "modelling": {
+      "status": "completed",
+      "run_id": "departure_20261018T201555701606Z",
+      "notebook": "notebooks/03_classification.ipynb",
+      "selection_record": "reports/model_selection.json",
+      "results_report": "reports/MODELLING_RESULTS.md",
+      "execution_report": "reports/MODEL_EXECUTION_REPORT.md",
+      "model_bundle": "models/flight_delay_models.joblib",
+      "selected_model_id": "logistic_regression",
+      "selected_feature_set": "B",
+      "selection_metric": "validation average precision",
+      "threshold_metric": "validation delayed-class F1",
+      "test_metrics": {
+        "average_precision": 0.4055013595063023,
+        "precision": 0.3271709633649932,
+        "recall": 0.7606466876971609,
+        "f1": 0.4575426944971537,
+        "accuracy": 0.5426,
+        "roc_auc": 0.6684348806975904
+      },
+      "notebook_code_cells": 19,
+      "inline_figures": 12,
+      "parameter_trials": 34,
+      "final_pipelines": 8,
+      "fresh_kernel": true,
+      "errors": 0,
+      "stderr": 0,
+      "source_handoffs_unchanged": true,
+      "selection_frozen_before_test": true
+    },
+    "notebook_preparation": {
+      "status": "all_three_notebooks_fresh_kernel_passed_revised_timeline",
+      "notebooks": [
+        "notebooks/01_cleaning_and_eda.ipynb",
+        "notebooks/02_feature_engineering.ipynb",
+        "notebooks/02a_deeper_training_exploration.ipynb"
+      ],
+      "frequent_inline_plots": true,
+      "intermediate_csv_exports": false,
+      "planned_reusable_data_files": [
+        "data/processed/flights_clean.parquet",
+        "data/processed/features.parquet"
+      ],
+      "shared_manifest": "reports/preparation_manifest.json",
+      "routine_choices_delegated": true,
+      "clarify_material_ambiguities_before_treatment_code": true,
+      "explicit_ipython_imports": false,
+      "reference_methodology": {
+        "reference_notebook": "../reference EDA .ipynb",
+        "reference_sha256": "47f21395092d06474ef7c9c719bf5709ee617c7488dd2aa51e615f526da1cf1c",
+        "reference_used_as_dataset": false,
+        "review": "reports/REFERENCE_EDA_REVIEW.md",
+        "methods": [
+          "head_info_describe",
+          "X_y_orientation",
+          "variable_roles_and_cardinality",
+          "percentage_frequencies",
+          "skewness",
+          "IQR_3SD_99th_percentile_diagnostics",
+          "grouped_target_summaries",
+          "before_after_transformation_comparisons"
+        ],
+        "automatic_statistical_capping": false,
+        "model_feature_lists_changed": false
+      },
+      "static_feature_dictionary": "feature_dictionary in config/project.json",
+      "simplification": {
+        "status": "complete",
+        "metrics": [
+          {
+            "notebook": "01_cleaning_and_eda.ipynb",
+            "code_characters_before": 28415,
+            "code_characters_after": 27436,
+            "figure_blocks": 13,
+            "real_data_executed": false
+          },
+          {
+            "notebook": "02_feature_engineering.ipynb",
+            "code_characters_before": 38284,
+            "code_characters_after": 33159,
+            "figure_blocks": 13,
+            "real_data_executed": true
+          }
+        ],
+        "synthetic_regression": {
+          "checks": [
+            {
+              "notebook": "01_cleaning_and_eda.ipynb",
+              "synthetic_rows": 2016,
+              "identical_printed_output": true,
+              "identical_plot_renders": 13,
+              "identical_parquet_table": true
+            },
+            {
+              "notebook": "02_feature_engineering.ipynb",
+              "synthetic_rows": 1572,
+              "identical_printed_output": true,
+              "identical_plot_renders": 13,
+              "identical_parquet_table": true
+            }
+          ],
+          "manifest_equal_except_timestamps": true
+        },
+        "real_data_execution": "Notebook 02 completed on real data in the user Python 3.13 environment; original synthetic equivalence results retained as history.",
+        "static_descriptions": "feature_dictionary in config/project.json",
+        "external_analysis_helper_files_added": false
+      },
+      "parquet_engine_fix": {
+        "engine": "pyarrow",
+        "installed_version": "20.0.0",
+        "python_version": "3.13",
+        "save_cell_restored": true,
+        "earlier_outputs_preserved": true,
+        "tested_with_existing_pandas_session": true,
+        "restart_required_for_this_fix": false,
+        "actual_handoff_executed_by_agent": true
+      },
+      "handoff_recovery": {
+        "source": "Existing notebook-01 preparation code, without regenerating EDA figures",
+        "clean_rows": 1110458,
+        "eligible_2025_queries": 938417,
+        "notebook_01_saved_outputs_preserved": true,
+        "notebook_02_startup_verified_on_real_handoff": true,
+        "weather_history_features_executed": true
+      },
+      "full_data_execution": {
+        "notebook": "notebooks/02_feature_engineering.ipynb",
+        "completed_at_utc": "2026-10-18T16:46:30.003084+00:00",
+        "fresh_kernel": true,
+        "code_cells": 20,
+        "inline_figures": 13,
+        "error_outputs": 0,
+        "stderr_outputs": 0,
+        "rows": 938417,
+        "report": "reports/NOTEBOOK_02_EXECUTION_REPORT.md",
+        "python": "3.13.6",
+        "packages": {
+          "pandas": "3.0.3",
+          "numpy": "2.5.1",
+          "pyarrow": "20.0.0",
+          "scikit-learn": "1.9.0",
+          "matplotlib": "3.11.1",
+          "seaborn": "0.13.2",
+          "nbclient": "0.10.2",
+          "nbformat": "5.10.4"
+        },
+        "applies_to": "Earlier 2025-only build; superseded by timeline_update for current row counts and splits."
+      },
+      "timeline_update": {
+        "completed_at_utc": "2026-10-18T19:54:40.314482+00:00",
+        "fresh_kernels": true,
+        "notebooks": [
+          {
+            "notebook": "01_cleaning_and_eda.ipynb",
+            "code_cells": 22,
+            "inline_figures": 13,
+            "errors": 0,
+            "stderr": 0
+          },
+          {
+            "notebook": "02_feature_engineering.ipynb",
+            "code_cells": 20,
+            "inline_figures": 13,
+            "errors": 0,
+            "stderr": 0
+          },
+          {
+            "notebook": "02a_deeper_training_exploration.ipynb",
+            "code_cells": 11,
+            "inline_figures": 7,
+            "errors": 0,
+            "stderr": 0
+          }
+        ],
+        "clean_rows": 1339044,
+        "feature_rows": 1158165,
+        "query_rows_by_split": {
+          "test": 219748,
+          "train": 698670,
+          "validation": 239747
+        },
+        "feature_counts": {
+          "A": 10,
+          "B": 37
+        },
+        "preprocessor_preview_columns": 293,
+        "classifiers_trained": false,
+        "corrections": [
+          "fixed_12_month_cyclic_encoding",
+          "selective_missingness_indicators",
+          "all_METAR_body_cloud_layers"
+        ],
+        "final_refit_sample_rows": 20000,
+        "report": "reports/PREPARATION_TIMELINE_UPDATE.md"
+      }
+    }
+  },
+  "source_periods": {
+    "eda_2025": {
       "start": "2025-01-01",
       "end": "2025-09-30"
     },
-    "validation": {
+    "later_development_2025": {
       "start": "2025-10-01",
       "end": "2025-12-31"
     },
-    "final_refit": {
-      "start": "2025-01-01",
-      "end": "2025-12-31",
-      "rule": "Independent fixed-seed proportional month x outcome sample from all eligible 2025 flights, shared across A/B and all classifiers; use only after validation choices are frozen.",
-      "sample_rows": 20000
-    },
-    "final_test": {
+    "earlier_evaluation_q1_2026": {
       "start": "2026-01-01",
       "end": "2026-03-31"
     },
-    "test_outcome_policy": "No 2026 outcome EDA or feature/model/threshold selection; labels and final scoring use frozen rules.",
-    "raw_validation": "data/raw/_provenance/2026_q1_validation_report.json",
-    "weather_conflicts_pending_review": [],
-    "existing_split_and_sample_flags": "Current split, model_sample and refit_sample flags implement the approved 2025 development/Q1-2026 final-test chronology."
-  },
-  "modelling": {
-    "status": "completed",
-    "run_id": "departure_20261018T201555701606Z",
-    "notebook": "notebooks/03_classification.ipynb",
-    "selection_record": "reports/model_selection.json",
-    "results_report": "reports/MODELLING_RESULTS.md",
-    "execution_report": "reports/MODEL_EXECUTION_REPORT.md",
-    "model_bundle": "models/flight_delay_models.joblib",
-    "export_manifest": "tableau/exports/export_manifest.json",
-    "selected_model_id": "logistic_regression",
-    "selected_feature_set": "B",
-    "selection_metric": "validation average precision",
-    "threshold_metric": "validation delayed-class F1",
-    "test_metrics": {
-      "average_precision": 0.4055013595063023,
-      "precision": 0.3271709633649932,
-      "recall": 0.7606466876971609,
-      "f1": 0.4575426944971537,
-      "accuracy": 0.5426,
-      "roc_auc": 0.6684348806975904
+    "earlier_evaluation_q2_2026": {
+      "start": "2026-04-01",
+      "end": "2026-06-30"
     },
-    "notebook_code_cells": 19,
-    "inline_figures": 12,
-    "parameter_trials": 34,
-    "final_pipelines": 8,
-    "fresh_kernel": true,
-    "errors": 0,
-    "stderr": 0,
-    "source_handoffs_unchanged": true,
-    "selection_frozen_before_test": true
+    "final_test_2026_07": {
+      "start": "2026-07-01",
+      "end": "2026-07-31"
+    }
   }
 }

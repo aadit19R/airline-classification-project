@@ -4,7 +4,7 @@ The objectives require model evidence because they assess prediction. This does 
 
 ## EDA establishes the context
 
-Use EDA to audit missing values, joins and exclusions, understand the target balance, inspect departure patterns and choose features worth testing. Airport/time/weather charts belong in the notebook and can appear as context in Tableau. Keep outcome-driven feature choices within development periods; avoid using final evaluation findings to keep redesigning the model.
+Use EDA to audit missing values, joins and exclusions, understand the target balance, inspect departure patterns and choose features worth testing. Airport/time/weather charts belong in the notebook and can appear as context in dashboard. Keep outcome-driven feature choices within development periods; avoid using final evaluation findings to keep redesigning the model.
 
 The agreed sequence includes univariate analysis, bivariate analysis, missing value treatment, outlier treatment, variable creation and variable transformation. See [the four-notebook guide](notebooks/simple/README.md) for examples and outputs. Source checks and essential parsing come first; valid extremes remain, and learned treatments are fitted on training data through the modelling pipelines.
 
@@ -19,7 +19,7 @@ The agreed sequence includes univariate analysis, bivariate analysis, missing va
 
 EDA describes records already observed. ML uses earlier examples to learn a rule, then is checked against flight outcomes excluded from fitting/tuning. Both appear in the project, with different claims supported by each.
 
-## Tableau should tell the full story
+## dashboard should tell the full story
 
 The workbook should have understandable context as well as model evidence:
 

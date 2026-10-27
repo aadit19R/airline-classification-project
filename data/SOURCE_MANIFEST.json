@@ -1,9 +1,9 @@
 {
   "schema_version": "2.1",
-  "updated_at_utc": "2026-10-18T19:54:40.314482+00:00",
+  "updated_at_utc": "2026-10-26T22:05:31.135048+00:00",
   "path_base": "data_directory",
   "reuse_policy": "Only prior data/raw source bytes and original raw-response metadata may be copied. No prior processed/interim/feature/cleaned/model/timezone table is an input. All active input paths are inside this new project.",
-  "acquisition_status": "required_raw_inputs_available_including_2026_q1",
+  "acquisition_status": "required_raw_inputs_available_through_2026_07",
   "sources": [
     {
       "id": "flights_2025",
@@ -84,7 +84,7 @@
       "raw_rows": 1671142,
       "contains_tail_number": true,
       "source_url": "https://transtats.bts.gov/PREZIP/",
-      "purpose": "Held-out January\u2013March 2026 source records; no outcome EDA/tuning before final evaluation"
+      "purpose": "Earlier evaluated Q1-2026 benchmark and historical context; the current final test period is July 2026."
     },
     {
       "id": "flights_2026_q1_archives",
@@ -136,11 +136,11 @@
   "extraction_provenance": "raw/_provenance/bts_extraction_log.json",
   "scope_audit": "scope_audit.json",
   "variable_requirements": "../DATA_REQUIREMENTS.md",
-  "current_scope_note": "The agreed ML experiment uses A/B only. Aircraft rotation is excluded; earlier acquisition/audit notes about a possible C scenario do not define the current objectives.",
+  "current_scope_note": "The current A/B experiment trains on 40,000 all-2025 flights and tests on 10,000 July-2026 flights. Model selection uses chronological 2025 folds. Q1/Q2 are earlier benchmarks. Aircraft rotation is excluded.",
   "extension_acquisition": "raw/_provenance/2026_q1_acquisition_log.json",
   "extension_validation": "raw/_provenance/2026_q1_validation_report.json",
   "extension_report": "../reports/DATA_ACQUISITION_2026_Q1.md",
-  "processed_data_status": "Both handoffs rebuilt and executed for January\u2013September 2025 training, October\u2013December validation, full-2025 refit membership and Q1-2026 final testing.",
+  "processed_data_status": "Notebook 01 saves complete November-2024 through July-2026 cleaned schedules. Notebook 02 rebuilds the same 50,000 selected rows and features; notebooks 03/04 contain preprocessing, fitting and evaluation. No project helper modules are imported. The older full feature Parquet is retained only as a published EDA/reference table.",
   "extension_quality_reviews": {
     "weather_conflicts_pending_preparation_review": [],
     "approved_exclusion_policy": "User approved removing both report versions at the two Q1-2026 conflicts, in addition to the six 2025 keys. Raw files remain unchanged; all flight queries are retained.",

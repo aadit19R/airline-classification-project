@@ -1,6 +1,6 @@
 # Schema and joins used in this project
 
-Verified against notebooks 01, 02 and 02a; `scripts/improvement_features.py`; `scripts/final_features.py`; and the frozen July export schemas on 21 October 2026. This describes the implemented pipeline, not a proposed warehouse. It contains no EDA or model performance findings.
+The core pipeline code is visible in notebooks 01–04 and checked against the frozen July exports and pre-refactor feature fingerprints. The final section describes the published evaluation exports, including analysis omitted from the shorter notebook walkthrough. This describes the implemented pipeline, not a proposed warehouse. It contains no EDA or model performance findings.
 
 ## 1. Physical storage and logical schema
 
@@ -9,15 +9,17 @@ The implementation is a file-based analytical pipeline using pandas DataFrames, 
 | Object | Grain: what one row means | Key used in this pipeline | Physical status |
 | --- | --- | --- | --- |
 | Raw BTS flight CSV | One reported scheduled flight leg on a date | Source month/file plus original CSV row position identifies the source record | Original monthly CSVs and ZIPs |
-| Clean flights | One scoped scheduled flight, including context and ineligible schedules | `flight_id`, checked unique | `data/processed/flights_clean.parquet`: 1,339,044 rows, 33 columns |
+| Clean flights | One scoped scheduled flight, including context and ineligible schedules | `flight_id`, checked unique | `data/processed/flights_clean.parquet`: 1,689,081 rows, 33 columns |
 | Prepared weather | One usable origin-station observation at a timestamp | Composite key: `origin`, `weather_observed_utc`, checked unique after overlap/conflict treatment | Built in memory from raw weather CSVs |
 | IEM station reference | One station feature within a network response | Explicit network selection plus station `sid` for origin mappings | Raw GeoJSON responses |
 | Airport reference | One airport/facility | `iata_code` for the required airport subset, checked unique before relevant lookups | Raw `airports.csv`: 86,053 rows, 19 columns |
-| Original flight features | One eligible query flight | `flight_id`, checked unique | `data/processed/features.parquet`: 1,158,165 rows, 55 columns |
-| Later model inputs | One selected query flight | `flight_id` and frozen cohort IDs | Built in memory; later feature sets are not extra permanent Parquet handoffs |
+| Published EDA feature reference | One eligible query flight | `flight_id`, checked unique | `data/processed/features.parquet`: 1,158,165 rows, 55 columns |
+| Later model inputs | One selected query flight | `flight_id` and frozen cohort IDs | `reports/simple_reproduction/features.parquet`: 50,000 rows, saved by notebook 02 |
 | Prediction export | One flight scored by one candidate in one run/cohort | `run_id`, `candidate_id`, `split`, `cohort_id`, `flight_id` | Final CSV export |
 
-The Parquet handoffs cover the original preparation stage through March 2026. Later scripts combine their records with raw April-July 2026 inputs as needed. Feature counts differ from stored column counts because labels, identifiers, timestamps and audit flags are not predictors. The full stored schemas and final input lists are in [DATASET_GUIDE.md](DATASET_GUIDE.md).
+The cleaned source table uses `preparation_period` for source/EDA periods. The older EDA reference table retains `preparation_sample` and `initial_refit_sample` for historical provenance. The current 50,000-row notebook handoff uses only `split=train` (40,000 all-2025 flights) and `split=test` (10,000 July flights).
+
+Notebook 01 saves the complete cleaned schedule context from November 2024 through July 2026. Notebook 02 reads that handoff directly; it does not need a separate later-period loader. Feature counts differ from stored column counts because labels, identifiers, timestamps and audit flags are not predictors. The full stored schemas and final input lists are in [DATASET_GUIDE.md](DATASET_GUIDE.md).
 
 ## 2. Flight identity and reference lookups
 
@@ -29,7 +31,7 @@ A separate duplicate check uses the composite schedule identity:
 
 Flight number alone is insufficient. A repeated schedule identity triggers review rather than automatic deletion.
 
-For the three origins, notebook 01 selects station metadata from GA_ASOS/ATL, IL_ASOS/ORD and TX_ASOS/DFW. Each station match must be unique and have `tzname`. A dictionary lookup maps origin code to timezone. Airport reference records are filtered by `iata_code`; the three required records must also be unique. Broader route-feature experiments map required origin/destination codes to coordinates after checking the lookup index is unique. These are code-based lookups, often implemented with `.map()`, not necessarily calls to `.merge()`.
+For the three origins, notebook 01 selects station metadata from GA_ASOS/ATL, IL_ASOS/ORD and TX_ASOS/DFW. Each station match must be unique and supply `tzname`. A loop applies that station's timezone to the origin's flights. The OurAirports snapshot is retained as a source reference; it is not used to create current model features.
 
 **Do not equate identifiers from different providers.** BTS `OriginAirportID` and OurAirports `id` belong to different identifier systems. The implemented airport lookup uses the airport code. An airport's origin and destination roles are also distinct: origin-local timezone is used for departure-time conversion.
 
@@ -37,7 +39,7 @@ For the three origins, notebook 01 selects station metadata from GA_ASOS/ATL, IL
 
 `pd.concat(parts, ignore_index=True)` stacks monthly flight rows vertically after selecting the required columns/scope. Weather response batches are also concatenated before duplicate/conflict handling. Concatenation is not a relational join: January rows are followed by February rows rather than paired with them.
 
-There are also horizontal concatenations and index-based `.join()` operations in exploratory feature/plot cells. Those attach columns derived from the same base rows. Their correctness depends on preserving the original row index and flight order; they are not matches based on airline or airport. The feature appendices check index and `flight_id` alignment.
+Notebook 02 also concatenates the two cloud-ceiling sources horizontally before taking their minimum. Both share the same weather-row index. This attaches values for existing observations; it does not match flights to weather. The actual relational joins follow below.
 
 ## 4. Main flight-weather join: backward as-of
 
@@ -81,27 +83,15 @@ matched = frame[['origin', 'weather_observed_utc']].merge(
 )
 ```
 
-Several flights can share the same key on the left. The right side must have no more than one row per composite report key. `validate='many_to_one'` rejects an ambiguous right table. A row-count assertion checks that the enrichment has not multiplied flights. This is implemented in `add_compact` in [scripts/final_features.py](scripts/final_features.py). Similar exact report-key joins are used for raw-weather auditing in notebook 02a.
+Several flights can share the same key on the left. The right side must have no more than one row per composite report key. `validate='many_to_one'` rejects an ambiguous right table. A row-count assertion checks that the enrichment has not multiplied flights. The exact merge is visible in [notebook 02](../notebooks/simple/02_feature_engineering.ipynb), in the pressure section.
 
-## 6. Flight-to-flight lookups and the EDA inner join
+## 6. Select flights by their IDs
 
-Later feature building recovers `flight_number` and `scheduled_departure_minutes` from clean flights by indexing that table on `flight_id` and using `.map()`. These are one-to-one key lookups for selected query IDs, without expanding rows.
-
-Notebook 02a attaches departure hour and observed delay for exploration with:
-
-```python
-train.merge(
-    scheduled[['flight_id', 'departure_hour', 'departure_delay_minutes']],
-    on='flight_id',
-    validate='one_to_one',
-)
-```
-
-Because no `how` is supplied, this is an inner merge: it keeps matching IDs. Both tables come from the corresponding original training handoffs. `validate='one_to_one'` checks uniqueness on both sides. The observed delay attached here is for exploration; it does not become a predictor of that same flight.
+Notebook 02 indexes the clean table on `flight_id` and selects the saved training IDs plus sampled July IDs using `.loc`. This retains schedule fields in the requested row order. It is an index lookup, not an additional merge. Notebook 01's EDA already has departure hour and observed delay, so it needs no extra flight-to-flight join.
 
 ## 7. Historical delay features: grouped time-range aggregation
 
-History is conceptually a flight-to-earlier-flights relationship, but the code does not materialize a large self-join. It uses grouped, sorted event timestamps, `np.searchsorted` and cumulative delay counts. Each query flight receives one set of summaries.
+History is conceptually a flight-to-earlier-flights relationship, but the code does not materialize a large self-join. It uses sorted outcomes, grouped running totals (`cumcount` and `cumsum`), and two backward `merge_asof` joins. One join finds the totals strictly before the window start; the other finds totals strictly before the end. Subtracting gives the flights and delays inside the window. Each query flight receives one set of summaries.
 
 | History level | Matching group |
 | --- | --- |
@@ -127,10 +117,10 @@ For a 14:00 departure, this window is 13:00 through just before 14:00. It is bas
 ## 9. Join-integrity checks
 
 - `flight_id` must remain unique at the flight-feature stage.
-- Prepared weather must be unique on `origin`, `weather_observed_utc`. Identical overlap payloads are collapsed; all versions of approved conflicting timestamps are excluded. Unreviewed conflicts stop processing.
+- Prepared weather must be unique on `origin`, `weather_observed_utc`. Identical overlap payloads are collapsed; all versions of conflicting timestamps are excluded. The optional verifier compares rebuilt features with the saved reference fingerprints.
 - Main feature row counts and flight order/IDs are checked against their query cohorts. The as-of join restores original query order after sorting for time matching.
-- Exact weather enrichment validates `many_to_one`; EDA flight enrichment validates `one_to_one`.
-- Matched weather ages and contributing historical-event timestamps must obey the declared time limits.
+- Exact weather enrichment validates `many_to_one`; selecting flight IDs starts from a table checked for unique IDs.
+- Matched weather ages must obey the declared time limits. The optional verifier also checks contributing historical-event timestamps against the history window.
 - Model fitting/evaluation feature sets share frozen query IDs and labels. Later July construction checks 10,000 unique query flights after enrichment.
 
 These checks enforce the project rules in Python. They are not SQL foreign-key constraints, and no single assertion alone proves all forms of temporal availability.

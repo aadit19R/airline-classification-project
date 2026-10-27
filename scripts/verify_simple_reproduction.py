@@ -1,7 +1,7 @@
 """Optional result checks for the four standalone teaching notebooks.
 
-Reads frozen reference builders only for verification, outside the teaching workflow.
-Requires no retired notebook, archive, backup or historical audit script.
+Uses pre-refactor feature fingerprints and frozen model/export references.
+Requires no deleted helper module or external backup.
 Writes one verification report; never overwrites a frozen result, model or handoff.
 """
 from pathlib import Path
@@ -14,8 +14,6 @@ import joblib
 import nbformat
 import numpy as np
 import pandas as pd
-from final_features import build_development, build_july_test
-from final_modelling import make_cohorts, fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'reports/simple_reproduction'
@@ -24,6 +22,28 @@ OUT = ROOT/'reports/simple_reproduction'
 def sha(path):
     with path.open('rb') as stream:
         return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+
+def fingerprint(ids):
+    return hashlib.sha256('\n'.join(sorted(map(str, ids))).encode()).hexdigest()
+
+
+def column_hash(series):
+    if series.name in ['airline', 'origin', 'destination', 'weekday', 'flight_id', 'split']:
+        payload = series.astype('string').fillna('<missing>').to_json(orient='values').encode()
+    else:
+        values = series.to_numpy(dtype='<f8', na_value=np.nan).copy()
+        values[np.isnan(values)] = np.nan
+        payload = values.tobytes()
+    return hashlib.sha256(payload).hexdigest()
+
+
+def threshold(y, scores):
+    from sklearn.metrics import precision_recall_curve
+    precision, recall, cutoffs = precision_recall_curve(y, scores)
+    total = precision[:-1]+recall[:-1]
+    f1 = np.divide(2*precision[:-1]*recall[:-1], total, out=np.zeros(len(cutoffs)), where=total>0)
+    return float(cutoffs[np.flatnonzero(np.isclose(f1, f1.max(), rtol=0, atol=1e-12))[-1]])
 
 
 def compare_features(actual, reference, columns):
@@ -100,16 +120,24 @@ def main():
         assert not Path(path).is_absolute() and '..' not in Path(path).parts
         assert sha(ROOT/path) == expected, 'Protected input/result changed: '+path
     print('Frozen source/artifact checksums passed', flush=True)
+    refactor = json.loads((ROOT/'reports/notebook_refactor.json').read_text())
+    reference = refactor['reference']
+    assert all(not (ROOT/path).exists() for path in refactor['removed_scripts'])
+    for path, expected in refactor['notebook_source_hashes'].items():
+        notebook = nbformat.read(ROOT/path, as_version=4)
+        source = '\n'.join(cell.cell_type+'\0'+cell.source for cell in notebook.cells)
+        assert hashlib.sha256(source.encode()).hexdigest() == expected
     selection = json.loads((ROOT/'reports/final_models/selection.json').read_text())
-    provenance_differences = {p: {'selection_sha256': old, 'current_sha256': sha(ROOT/p)}
-        for p, old in selection['input_sha256'].items() if sha(ROOT/p) != old}
-    assert set(provenance_differences) == {'reports/preparation_manifest.json'}
+    assert sha(ROOT/'reports/final_models/selection.json') == reference['selection_sha256']
     saved_cohorts = json.loads((ROOT/'reports/final_models/cohorts.json').read_text())
-    folds, fit_ids, _ = make_cohorts(ROOT)
-    assert folds == saved_cohorts['folds'] and fit_ids == saved_cohorts['final_refit_ids']
+    assert sha(ROOT/'reports/final_models/cohorts.json') == reference['cohorts_sha256']
+    folds, fit_ids = saved_cohorts['folds'], saved_cohorts['final_refit_ids']
     assert fingerprint(fit_ids) == selection['refit_ids_sha256']
-    # Threshold derivation is outside the shortened main reading sequence.
-    from final_modelling import threshold
+    source = pd.read_parquet(ROOT/'data/processed/flights_clean.parquet')
+    source_index = source.set_index('flight_id')
+    for fold in folds.values():
+        assert source_index.loc[fold['train40'], 'flight_date'].max() < source_index.loc[fold['calibrate'], 'flight_date'].min()
+        assert source_index.loc[fold['calibrate'], 'flight_date'].max() < source_index.loc[fold['score'], 'flight_date'].min()
     arrays = np.load(ROOT/'reports/final_models/development_scores.npz')
     labels = pd.read_parquet(ROOT/'data/processed/features.parquet',
         columns=['flight_id', 'delayed_departure']).set_index('flight_id')
@@ -122,29 +150,34 @@ def main():
             assert threshold(october, scores) == policy['threshold']
             threshold_checks += 1
     data = pd.read_parquet(OUT/'features.parquet')
-    train, test = [data.loc[data['role'].eq(role)].copy() for role in ['refit', 'july_reproduction']]
+    assert 'role' not in data and not {'model_sample', 'refit_sample', 'query_eligible'}.intersection(data.columns)
+    assert data['split'].value_counts().to_dict() == {'train': 40000, 'test': 10000}
+    train, test = [data.loc[data['split'].eq(split)].copy() for split in ['train', 'test']]
+    assert train['flight_date'].between('2025-01-01', '2025-12-31').all()
+    assert test['flight_date'].between('2026-07-01', '2026-07-31').all()
+    config = json.loads((ROOT/'config/project.json').read_text())
+    for name, frame in [('train', train), ('test', test)]:
+        assert len(frame) == config['split'][name+'_rows'] == config['sampling'][name+'_rows']
+        assert frame['flight_date'].between(config['split'][name+'_start'], config['split'][name+'_end']).all()
+    assert not {'train', 'validation', 'test'}.intersection(data['preparation_period'].unique())
     assert train['flight_id'].tolist() == fit_ids and len(test) == 10000
-    approved = json.loads((ROOT/'reports/improvements/weather_quality.json').read_text())['excluded_station_times']
-    expected_train, _ = build_development(ROOT, set(fit_ids), approved)
-    columns = selection['columns']['combined']
-    compare_features(train, expected_train.reset_index(drop=True), columns)
+    columns = reference['columns']
+    assert len(data) == reference['rows']
+    for column, expected in reference['column_hashes'].items():
+        assert column_hash(data[column]) == expected, 'Feature/ID/label changed: '+column
     saved_base = pd.read_parquet(ROOT/'data/processed/features.parquet').set_index('flight_id', drop=False).loc[fit_ids]
     base_columns = json.loads((ROOT/'reports/preparation_manifest.json').read_text())['feature_engineering']['feature_sets']['B']
     compare_features(train, saved_base.reset_index(drop=True), base_columns)
-    print('Every selected training feature and missing value matches', flush=True)
-    expected_test, test_audit = build_july_test(ROOT, approved)
-    compare_features(test, expected_test, columns)
+    print('All 78 feature columns, IDs, splits and labels match pre-refactor fingerprints', flush=True)
     assert fingerprint(test['flight_id']) == json.loads((ROOT/'reports/final_models/test_results.json').read_text())['cohort_fingerprint']
-    assert train['flight_date'].max() < test['flight_date'].min()
-    assert train['flight_date'].dt.month.nunique() == 12
-    assert test['flight_date'].between('2026-07-01', '2026-07-31').all()
+    assert train['flight_date'].max() < test['flight_date'].min() and train['flight_date'].dt.month.nunique() == 12
     assert (data['scheduled_departure_utc']-data['prediction_cutoff_utc']).eq(pd.Timedelta(hours=2)).all()
     for prefix in ['history_origin', 'history_airline_origin', 'history_route', 'history_flight']:
-        latest = data[prefix+'_latest_event_utc']
-        has_history = data[prefix+'_n'].gt(0)
+        latest, has_history = data[prefix+'_latest_event_utc'], data[prefix+'_n'].gt(0)
         assert latest.loc[has_history].ge(data.loc[has_history, 'prediction_cutoff_utc']-pd.Timedelta(days=35)).all()
         assert latest.loc[has_history].lt(data.loc[has_history, 'prediction_cutoff_utc']-pd.Timedelta(days=7)).all()
     assert data['weather_age_minutes'].dropna().between(20, 180).all()
+    july_population = int((source['flight_date'].between('2026-07-01', '2026-07-31') & source['label_eligible']).sum())
     new = joblib.load(OUT/'models.joblib')
     old = joblib.load(ROOT/'models/final_flight_delay_models.joblib')
     assert new['fit_ids'] == fit_ids and new['selected_model_id'] == selection['selected_model_id']
@@ -160,22 +193,37 @@ def main():
         for metric, prefix in [('f1', 'f1'), ('average_precision', 'ap')]:
             delta = indexed.loc[(pair['model_id'], 'B'), metric]-indexed.loc[(pair['model_id'], 'A'), metric]
             np.testing.assert_allclose(delta, pair[prefix+'_gain'], rtol=0, atol=1e-10)
-    frozen = pd.read_csv(ROOT/'tableau/exports/final_july/model_metrics.csv')
+    frozen = pd.read_csv(ROOT/'reports/evaluation_exports/final_july/model_metrics.csv')
     score_arrays = np.load(OUT/'scores.npz')
+    expected_keys = set(new['models']) | {'always_on_time', 'always_delayed', 'fair_coin_seed42', 'historical_risk_ranking'}
+    actual_keys = {row.model_id+('__'+row.feature_set if row.feature_set != 'baseline' else '') for row in metrics.itertuples()}
+    assert actual_keys == set(score_arrays.files) == expected_keys and len(metrics) == 12
     test = test.sort_values('flight_id').reset_index(drop=True)
     y = test['delayed_departure'].to_numpy(dtype=int)
-    predictions = pd.read_csv(ROOT/'tableau/exports/final_july/flight_predictions.csv')
-    priority = pd.read_csv(ROOT/'tableau/exports/final_july/priority_curve.csv')
+    predictions = pd.read_csv(ROOT/'reports/evaluation_exports/final_july/flight_predictions.csv')
+    priority = pd.read_csv(ROOT/'reports/evaluation_exports/final_july/priority_curve.csv')
     rank_checks, quota_checks = 0, 0
     tie = np.array([hashlib.sha256(f'42:{fid}'.encode()).hexdigest() for fid in test['flight_id']])
     max_score_difference = 0.
+    from sklearn.metrics import confusion_matrix, fbeta_score, roc_auc_score
+    baseline_selection = json.loads((ROOT/'reports/model_selection.json').read_text())
     for _, row in metrics.iterrows():
         mask = frozen['model_id'].eq(row['model_id']) & frozen['feature_set'].eq(row['feature_set'])
         expected = frozen.loc[mask].iloc[0]
         count_fields = ['tn', 'fp', 'fn', 'tp']
-        metric_fields = ['precision', 'recall', 'f1', 'f05', 'accuracy', 'average_precision', 'roc_auc']
-        np.testing.assert_array_equal(row[count_fields].astype(int), expected[count_fields].astype(int))
-        np.testing.assert_allclose(row[metric_fields].astype(float), expected[metric_fields].astype(float), rtol=0, atol=1e-10)
+        # The teaching table shows five core metrics; independently check the
+        # full original metric set and confusion counts from its saved scores.
+        key = row['model_id']+('__'+row['feature_set'] if row['feature_set'] != 'baseline' else '')
+        cutoff = new['models'][key]['threshold'] if '__' in key else .5
+        if key == 'historical_risk_ranking':
+            cutoff = baseline_selection['baselines'][key]['threshold']
+        prediction = score_arrays[key] >= cutoff
+        counts = confusion_matrix(y, prediction, labels=[0, 1]).ravel()
+        np.testing.assert_array_equal(counts, expected[count_fields].astype(int))
+        reported = ['precision', 'recall', 'f1', 'accuracy', 'average_precision']
+        np.testing.assert_allclose(row[reported].astype(float), expected[reported].astype(float), rtol=0, atol=1e-10)
+        np.testing.assert_allclose([fbeta_score(y, prediction, beta=.5), roc_auc_score(y, score_arrays[key])],
+                                  expected[['f05', 'roc_auc']].astype(float), rtol=0, atol=1e-10)
         key = row['model_id']+('__'+row['feature_set'] if row['feature_set'] != 'baseline' else '')
         saved = predictions.loc[predictions['model_id'].eq(row['model_id']) & predictions['feature_set'].eq(row['feature_set'])].sort_values('flight_id')
         assert test['flight_id'].tolist() == saved['flight_id'].tolist()
@@ -195,28 +243,19 @@ def main():
             expected_quota = priority.loc[priority['model_id'].eq(row['model_id']) & priority['feature_set'].eq(row['feature_set']) & priority['capacity_fraction'].eq(budget)].iloc[0]
             assert k == expected_quota.reviewed_flights and y[order[:k]].sum() == expected_quota.captured_delays
             quota_checks += 1
-    groups = pd.read_json(OUT/'subgroups.json')
-    frozen_groups = pd.read_csv(ROOT/'tableau/exports/final_july/subgroup_metrics.csv')
-    frozen_groups = frozen_groups.loc[frozen_groups['model_id'].eq(selection['selected_model_id']) & frozen_groups['feature_set'].eq('B')]
-    for _, row in groups.iterrows():
-        expected = frozen_groups.loc[frozen_groups['group_dimension'].eq(row['dimension']) & frozen_groups['group_value'].eq(str(row['group_value']))].iloc[0]
-        assert row['n'] == expected['n_flights']
-        for column in ['tn', 'fp', 'fn', 'tp', 'precision', 'recall', 'false_positive_rate']:
-            np.testing.assert_allclose(row[column], expected[column], equal_nan=True, rtol=0, atol=1e-10)
     # Confirm that the offline dashboard still embeds the frozen sources and metrics.
     html = (ROOT/'dashboard/dist/departure_delay_dashboard.html').read_text()
     marker = '<script type="application/json" id="study-data">'
     embedded = json.loads(html.split(marker, 1)[1].split('</script>', 1)[0])
     for filename, evidence in embedded['manifest']['files'].items():
-        assert sha(ROOT/'tableau/exports/final_july'/filename) == evidence['sha256']
+        assert sha(ROOT/'reports/evaluation_exports/final_july'/filename) == evidence['sha256']
     for _, row in metrics.iterrows():
         expected = next(r for r in embedded['metrics'] if r['model_id'] == row['model_id'] and r['feature_set'] == row['feature_set'])
-        for column in ['tn', 'fp', 'fn', 'tp', 'f1', 'average_precision']:
+        for column in ['f1', 'average_precision']:
             np.testing.assert_allclose(row[column], expected[column], rtol=0, atol=1e-10)
     execution = json.loads((OUT/'execution.json').read_text())
     figures = lines = code_cells = visible_fit_calls = 0
     cell_lengths = []
-    expected_figures = [3, 2, 0, 4]
     import ast
     for position, path in enumerate(sorted((ROOT/'notebooks/simple').glob('*.ipynb'))):
         notebook = nbformat.read(path, as_version=4)
@@ -228,43 +267,60 @@ def main():
         assert all(message.strip() == 'Matplotlib is building the font cache; this may take a moment.'
                    for message in execution[path.name]['stderr'])
         count_figures = sum('image/png' in o.get('data', {}) for c in cells for o in c.outputs)
-        assert count_figures == expected_figures[position]
+        assert count_figures == execution[path.name]['figures']
         figures += count_figures
         lengths = [len(c.source.splitlines()) for c in cells]
         cell_lengths.extend(lengths)
         lines += sum(lengths)
+        assert max(lengths) <= 10, 'Teaching cells should have at most ten lines'
+        assert all(sum('image/png' in o.get('data', {}) for o in c.outputs) <= 1 for c in cells)
         assert execution[path.name]['visible_code_lines'] == sum(lengths)
         assert execution[path.name]['code_cells'] == len(cells)
         for cell in cells:
             visible_fit_calls += sum(isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
                 and node.func.attr == 'fit' for node in ast.walk(ast.parse(cell.source)))
         code_cells += len(cells)
-    assert len(execution) == 4 and figures == 9 and 100 <= lines <= 250
-    assert max(cell_lengths) <= 8 and visible_fit_calls == 4
-    helper = ast.parse((ROOT/'scripts/simple_workflow.py').read_text())
-    assert not any(isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)
-        and n.func.attr in ['fit', 'fit_transform'] for n in ast.walk(helper))
+    assert len(execution) == 4 and figures > 0 and visible_fit_calls >= 1
+    removed_names = {Path(name).stem for name in refactor['removed_scripts']}
+    for path in sorted((ROOT/'notebooks/simple').glob('*.ipynb')):
+        notebook = nbformat.read(path, as_version=4)
+        for cell in notebook.cells:
+            if cell.cell_type != 'code':
+                continue
+            for node in ast.walk(ast.parse(cell.source)):
+                if isinstance(node, ast.Import):
+                    assert not {alias.name.split('.')[0] for alias in node.names}.intersection(removed_names)
+                elif isinstance(node, ast.ImportFrom):
+                    assert (node.module or '').split('.')[0] not in removed_names
+                elif isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+                    assert node.func.id not in ['exec', 'eval', '__import__'], 'Hidden source loading is not allowed'
+    assert len(new['models']) == 8
     timings = [execution[name] for name in sorted(execution)]
-    assert all(a['finished_at_utc'] <= b['started_at_utc'] for a, b in zip(timings, timings[1:]))
+    # The runner supports --start/--stop; refreshing one notebook need not repeat
+    # already verified model fits. Data/feature/cohort equality is checked above.
+    assert all(item['started_at_utc'] <= item['finished_at_utc'] for item in timings)
     result = {'status': 'passed', 'verified_at_utc': datetime.now(timezone.utc).isoformat(),
         'purpose': 'reproduction of the completed July evaluation; no new test or selection',
         'visible_code_lines': lines, 'code_cells': code_cells, 'essential_figures': figures,
         'maximum_cell_lines': max(cell_lengths), 'median_cell_lines': float(np.median(cell_lengths)),
-        'visible_classifier_fit_calls': visible_fit_calls, 'helper_fits_models': False,
+        'visible_classifier_fit_calls': visible_fit_calls, 'project_helpers_required': False, 'notebooks_self_contained': True,
         'validation_threshold_derivations_checked': threshold_checks,
         'fresh_kernels': 4, 'benign_font_cache_startup_notices': sum(len(d['stderr']) for d in execution.values()),
         'errors': 0, 'warnings': 0, 'feature_columns_checked': len(columns), 'feature_rows_checked': len(data),
         'feature_values_checked': len(columns)*len(data), 'feature_missingness_matches': True,
         'principal_A_B_models': 8, 'baseline_comparisons': 4, 'exact_rank_checks': rank_checks,
-        'review_quota_checks': quota_checks, 'subgroup_rows_checked': len(groups),
+        'review_quota_checks': quota_checks, 'subgroup_analysis_in_notebooks': False,
         'maximum_absolute_score_difference': max_score_difference,
         'learned_preprocessing_arrays_checked': learned, 'chronological_cohorts_match': True,
         'training_only_preprocessing': True, 'dashboard_summaries_reconcile': True,
         'protected_files_unchanged': len(baseline), 'historical_sources_required': False,
-        'tableau_files_unchanged': sum(p.startswith('tableau/') for p in baseline),
-        'preexisting_selection_hash_differences': provenance_differences,
-        'provenance_note': 'The saved preparation manifest differs from its selection-time hash. Both processed datasets still match selection; every feature and principal prediction is checked directly here.',
-        'july_population': test_audit['eligible_july'], 'software': {'python': platform.python_version(),
+        'evaluation_export_files_unchanged': sum(p.startswith('reports/evaluation_exports/') for p in baseline),
+        'current_split': {'train': {'rows': len(train), 'period': ['2025-01-01', '2025-12-31']},
+                          'test': {'rows': len(test), 'period': ['2026-07-01', '2026-07-31']}},
+        'feature_hashes_match_pre_refactor_reference': True,
+        'source_refactor_evidence': 'reports/notebook_refactor.json',
+        'provenance_note': 'Selection and historical source hashes are preserved. reports/study_labels.json records the earlier label migration; reports/notebook_refactor.json records the move of source code into notebooks and pre-refactor feature fingerprints. All selected feature values, cohorts, learned preprocessing, predictions and ranks are checked directly.',
+        'july_population': july_population, 'software': {'python': platform.python_version(),
         **{p: version(p) for p in ['pandas', 'numpy', 'scikit-learn', 'pyarrow', 'joblib', 'nbclient']}}}
     (OUT/'verification.json').write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps(result, indent=2))

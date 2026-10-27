@@ -1,30 +1,31 @@
 {
-  "rows": 1339044,
-  "columns_checked": [
-    "flight_date",
-    "airline",
-    "flight_number",
-    "origin",
-    "destination",
-    "scheduled_departure_hhmm",
-    "departure_delay_minutes",
-    "departure_delay_15_source",
-    "cancelled",
-    "diverted",
-    "scheduled_duration_minutes",
-    "distance_miles",
-    "source_file",
-    "source_row_number",
-    "label_eligible",
-    "delayed_departure",
-    "scheduled_departure_minutes",
-    "scheduled_departure_utc",
-    "prediction_cutoff_utc",
-    "departure_outcome_event_utc",
-    "split",
-    "query_eligible",
-    "distance_miles_invalid",
-    "scheduled_duration_minutes_invalid"
-  ],
-  "exact_values_and_missingness": true
+  "rows": 1689081,
+  "source_months": 21,
+  "unique_flight_ids": true,
+  "log": [
+    {
+      "issue": "Unreadable numbers",
+      "affected_rows": 0
+    },
+    {
+      "issue": "Duplicate schedules",
+      "affected_rows": 0
+    },
+    {
+      "issue": "Cancelled schedules",
+      "affected_rows": 37401
+    },
+    {
+      "issue": "Unknown operated outcomes",
+      "affected_rows": 0
+    },
+    {
+      "issue": "Nonpositive distance",
+      "affected_rows": 0
+    },
+    {
+      "issue": "Nonpositive duration",
+      "affected_rows": 0
+    }
+  ]
 }

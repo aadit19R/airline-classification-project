@@ -1,17 +1,18 @@
 {
   "status": "passed",
-  "verified_at_utc": "2026-10-21T20:43:41.998920+00:00",
+  "verified_at_utc": "2026-10-26T23:21:31.591899+00:00",
   "purpose": "reproduction of the completed July evaluation; no new test or selection",
-  "visible_code_lines": 190,
-  "code_cells": 45,
-  "essential_figures": 9,
-  "maximum_cell_lines": 7,
-  "median_cell_lines": 4.0,
-  "visible_classifier_fit_calls": 4,
-  "helper_fits_models": false,
+  "visible_code_lines": 723,
+  "code_cells": 121,
+  "essential_figures": 7,
+  "maximum_cell_lines": 10,
+  "median_cell_lines": 6.0,
+  "visible_classifier_fit_calls": 1,
+  "project_helpers_required": false,
+  "notebooks_self_contained": true,
   "validation_threshold_derivations_checked": 8,
   "fresh_kernels": 4,
-  "benign_font_cache_startup_notices": 3,
+  "benign_font_cache_startup_notices": 2,
   "errors": 0,
   "warnings": 0,
   "feature_columns_checked": 78,
@@ -22,22 +23,34 @@
   "baseline_comparisons": 4,
   "exact_rank_checks": 120000,
   "review_quota_checks": 36,
-  "subgroup_rows_checked": 18,
+  "subgroup_analysis_in_notebooks": false,
   "maximum_absolute_score_difference": 2.220446049250313e-16,
   "learned_preprocessing_arrays_checked": 45,
   "chronological_cohorts_match": true,
   "training_only_preprocessing": true,
   "dashboard_summaries_reconcile": true,
-  "protected_files_unchanged": 389,
+  "protected_files_unchanged": 351,
   "historical_sources_required": false,
-  "tableau_files_unchanged": 49,
-  "preexisting_selection_hash_differences": {
-    "reports/preparation_manifest.json": {
-      "selection_sha256": "2d0a3365abbcc0c2c6cd5a5927a775b18b3d77de8d10a6d3aef6640ffaa1c7e5",
-      "current_sha256": "3a0a62439e5ca88a287d20ad226061f8e6c9b28f04b6de6edc8478d74bff69b2"
+  "evaluation_export_files_unchanged": 16,
+  "current_split": {
+    "train": {
+      "rows": 40000,
+      "period": [
+        "2025-01-01",
+        "2025-12-31"
+      ]
+    },
+    "test": {
+      "rows": 10000,
+      "period": [
+        "2026-07-01",
+        "2026-07-31"
+      ]
     }
   },
-  "provenance_note": "The saved preparation manifest differs from its selection-time hash. Both processed datasets still match selection; every feature and principal prediction is checked directly here.",
+  "feature_hashes_match_pre_refactor_reference": true,
+  "source_refactor_evidence": "reports/notebook_refactor.json",
+  "provenance_note": "Selection and historical source hashes are preserved. reports/study_labels.json records the earlier label migration; reports/notebook_refactor.json records the move of source code into notebooks and pre-refactor feature fingerprints. All selected feature values, cohorts, learned preprocessing, predictions and ranks are checked directly.",
   "july_population": 87298,
   "software": {
     "python": "3.13.6",

@@ -4,7 +4,7 @@ The [four simple notebooks](../notebooks/simple/README.md) are the main explanat
 
 Open **[departure_delay_dashboard.html](dist/departure_delay_dashboard.html)** in Safari, Chrome or Edge. Double-click the file in Finder. It is a single portable file: its charts, styling, code and study data are embedded. No account, internet, installation or local server is required.
 
-The user requested this HTML deliverable in place of Tableau/Power BI. The four pages map to the agreed ML objectives:
+The four pages of this HTML dashboard map to the agreed ML objectives:
 
 1. **O1 · Model performance:** model/feature selectors, six comparison metrics, baseline references, confusion matrix, precision–recall curves, runtime and exact comparison table.
 2. **O2 · Feature value:** schedule A → B and equally retuned 66 → B comparisons, paired 95% intervals, predictor counts and precisely defined source coverage.
@@ -17,7 +17,7 @@ Flight-list airport/search/outcome filters affect only the list. Selecting an O3
 
 ## Evidence and scope
 
-The sole inputs are the six frozen files in `tableau/exports/final_july/`. Their hashes are checked against that run's manifest. The file embeds all 16 metric candidates, all 113,047 precision–recall points, the feature/subgroup/quota tables, and all 10,000 B predictions for each of the four classifiers. Flight identities are shared once to avoid duplication. No new fitting, sampling, threshold adjustment or test-driven selection occurs.
+The sole inputs are the six frozen files in `reports/evaluation_exports/final_july/`. Their hashes are checked against that run's manifest. The file embeds all 16 metric candidates, all 113,047 precision–recall points, the feature/subgroup/quota tables, and all 10,000 B predictions for each of the four classifiers. Flight identities are shared once to avoid duplication. No new fitting, sampling, threshold adjustment or test-driven selection occurs.
 
 Default: Logistic Regression B, 10% review quota, July 2026, 10,000 natural-prevalence flights at ATL/DFW/ORD. This is one-month summer confirmation under historical input-availability assumptions. Unsupported subgroup rates stay null/blank; scores remain uncalibrated. Study notes contain objectives, metric definitions, assumptions and original source checksums.
 

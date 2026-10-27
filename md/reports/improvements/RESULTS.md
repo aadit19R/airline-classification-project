@@ -1,6 +1,6 @@
 # Measured model-improvement results
 
-Completed 19 October 2026. All findings below come from executed notebooks and saved predictions. Original notebook 03, both prepared datasets, the shared preparation manifest, original fitted models and original Tableau exports retain their recorded checksums.
+Completed 19 October 2026. All findings below come from executed notebooks and saved predictions. Original notebook 03, both prepared datasets, the shared preparation manifest, original fitted models and original dashboard exports retain their recorded checksums.
 
 ## What changed
 
@@ -92,10 +92,10 @@ Aircraft rotation remains excluded; the seven-day outcome lag is unchanged. Arch
 
 Pressure, relative traffic normalization, destination forecasts, a real-time disruption feed, further years and more encoding methods remain possible future experiments. They were not silently introduced, and none is required to report this completed comparison. The fresh test is now exposed and cannot be reused as untouched evidence for further tuning.
 
-## Files and Tableau
+## Result files
 
 - Development: reports/improvements/development_summary.json; frozen selection: reports/improvements/selection.json.
 - Completed Q2 confirmation and independent checks: reports/improvements/test_results.json and execution_audit.json. The current [four-notebook workflow](../../notebooks/simple/README.md) reproduces the final July experiment.
 - Fitted pipelines: models/improved_flight_delay_models.joblib.
-- Six versioned Tableau tables: tableau/exports/improved/. Original tables remain in tableau/exports/.
-- Use F1 as the main threshold policy and keep model_version/candidate_id/cohort keys explicit. A packaged Tableau workbook is still pending.
+- Six versioned evaluation tables: reports/evaluation_exports/improved/.
+- Use F1 as the main threshold policy and keep model_version/candidate_id/cohort keys explicit.

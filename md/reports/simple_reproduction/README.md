@@ -1,32 +1,26 @@
-# Verified four-notebook workflow
+# Notebook results
 
-The [four notebooks](../../notebooks/simple/README.md) run independently, with **190 visible code lines, 45 code cells and nine figures**. Every code cell has at most seven lines. Shared modules handle repeated work; classifier definitions and `.fit()` calls remain visible.
+The [four notebooks](../../notebooks/simple/README.md) reproduce the completed July 2026 evaluation using 40,000 training flights, 10,000 test flights and the original model settings. Code cells have at most ten lines. Classifier definitions and fitting remain visible in notebook 03.
 
-All four notebooks have been executed in fresh kernels, including the eight A/B model fits. This reproduces the completed July 2026 evaluation using the frozen settings, 40,000 fitting IDs, 10,000 July flights, feature order, thresholds and validation-selected Logistic Regression / B. July is already exposed.
+```sh
+python3 scripts/run_simple_notebooks.py
+python3 scripts/verify_simple_reproduction.py
+```
 
-[verification.json](verification.json) records the optional independent checks:
+Outputs in [reports/simple_reproduction/](../../../reports/simple_reproduction/):
 
-- All 78 selected features on all 50,000 rows match, including missing values and time cutoffs.
-- Training-only preprocessing, chronological cohorts, fitting IDs and labels match.
-- All eight principal models and four baselines reproduce saved confusion counts and metrics.
-- 120,000 ranks, 36 review quotas, supported subgroup rates and dashboard summaries reconcile.
-- Current protected inputs/results retain their hashes.
+- `features.parquet`: unscaled training and test inputs.
+- `models.joblib`: eight A/B pipelines.
+- `metrics.json`: accuracy, precision, recall, F1 and average precision for models and baselines.
+- `scores.npz`: individual model and baseline scores.
+- `cleaning_checks.json`: source-cleaning summary.
+- `execution.json`: notebook execution times, outputs and errors.
+- `verification.json`: independent comparison with the original features, preprocessing, predictions, metrics, ranks and quotas.
+- `protected_checksums.json`: reference hashes for source data and published artifacts.
 
-The old notebooks, duplicate versions, archive bookkeeping and obsolete audits have been removed. Neither notebook execution nor the optional checker needs them. Frozen machine-readable development and selection records remain available because the current workflow uses them.
+Subgroup, review-budget and bootstrap sections are omitted from the notebook walkthrough. Their published results remain in the [evaluation exports](../evaluation_exports/README.md) and report. The notebooks reuse the previously chosen thresholds; the optional verifier independently checks their derivation from the recorded calibration scores.
 
-## Run
+The checks compare 3,900,000 selected feature values, eight pipelines, four baselines, 120,000 ranks and 36 review quotas. The feature table uses one `split`: 40,000 all-2025 training flights and 10,000 July-2026 test flights.
 
-From the project root, run `python3 scripts/run_simple_notebooks.py`. To repeat the optional result checks, run `python3 scripts/verify_simple_reproduction.py`.
-
-Generated Parquet, joblib and score-array files stay local and are recreated by the notebook run. Git includes the executed notebooks, source code and JSON results/verification records.
-
-## Included outputs
-
-- [execution.json](execution.json): fresh-kernel timestamps, runtime, cell and figure counts.
-- [verification.json](verification.json): current result checks and environment versions.
-- [protected_checksums.json](protected_checksums.json): hashes of current raw inputs, data, model/export files and supporting code; no retired files.
-- [features.parquet](features.parquet): one additional handoff containing the 40,000 fitting and 10,000 July rows.
-- [models.joblib](models.joblib): eight refitted reproduction pipelines.
-- [metrics.json](metrics.json), [subgroups.json](subgroups.json), [priority.json](priority.json) and [scores.npz](scores.npz): reproduced results.
-
-The preparation manifest's pre-existing difference from the selection-time hash remains documented in verification. Both processed datasets still match the selection hashes; feature values and predictions are checked directly. Tableau, frozen model bundles, original result exports and the published report are preserved.
+[Label migration evidence](../../../reports/study_labels.json) records the earlier metadata changes.
+[Refactor evidence](../../../reports/notebook_refactor.json) records source changes, removed-script hashes and pre-refactor feature fingerprints. Published model bundles and result exports remain the references; the verifier imports none of the removed modules.

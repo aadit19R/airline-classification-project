@@ -15,7 +15,7 @@ This is an offline historical study. Weather delivery buffers and access to earl
 To select the most suitable classifier through chronological validation and verify its delayed-flight detection performance and computational practicality on the final evaluation period.
 
 - Required evidence: The predeclared validation metric for selection (AP in the original rounds; mean delayed-class F1 with AP tie-break in the final compact-feature round); delayed-class F1, precision, recall, average precision and runtime for confirmation.
-- Tableau page: `01_model_performance`. Model comparison bars, precision-recall curves, confusion matrix and selected-model cards.
+- Dashboard page: `01_model_performance`. Model comparison bars, precision-recall curves, confusion matrix and selected-model cards.
 - Why ML is necessary: Requires fitted model scores, frozen predictions and observed outcomes on later-period flights.
 
 ### O2: Measure the value of additional information
@@ -23,7 +23,7 @@ To select the most suitable classifier through chronological validation and veri
 To assess whether adding origin weather, historical departure-delay patterns and scheduled airport traffic improves departure-delay classification compared with schedule features alone, using the same later-period flights and stated input-availability assumptions.
 
 - Required evidence: Paired changes in average precision and F1 from A (schedule) to B (schedule plus weather/history/traffic), using identical flights.
-- Tableau page: `02_feature_value`. Feature-set comparison matrix, incremental-gain bars and feature-coverage cards.
+- Dashboard page: `02_feature_value`. Feature-set comparison matrix, incremental-gain bars and feature-coverage cards.
 - Why ML is necessary: Requires controlled model retraining and evaluation; raw correlations do not establish predictive improvement.
 
 ### O3: Identify prediction strengths and failure patterns
@@ -31,7 +31,7 @@ To assess whether adding origin weather, historical departure-delay patterns and
 To evaluate the reliability of the selected model across airports, airlines and departure time bands by identifying missed delays and false alerts in sufficiently supported subgroups.
 
 - Required evidence: Subgroup recall, false-negative rate, false-positive rate and precision, with denominator counts and support flags.
-- Tableau page: `03_prediction_reliability`. Error-rate heatmaps, missed-delay versus false-alert charts and supported-group detail tables.
+- Dashboard page: `03_prediction_reliability`. Error-rate heatmaps, missed-delay versus false-alert charts and supported-group detail tables.
 - Why ML is necessary: Compares model predictions with actual outcomes; high observed delay frequency alone does not identify model failure.
 
 ### O4: Assess the usefulness of risk prioritization
@@ -39,7 +39,7 @@ To evaluate the reliability of the selected model across airports, airlines and 
 To quantify how effectively the selected model concentrates actual delayed flights within predeclared review budgets of 5%, 10% and 20% of scored flights, compared with random prioritization and a simple historical-risk baseline.
 
 - Required evidence: Delayed-flight recall, precision, lift and false alerts within the highest-ranked review quota.
-- Tableau page: `04_risk_prioritization`. Cumulative-gains curve, capacity selector, delay-capture/lift cards and ranked flight review list.
+- Dashboard page: `04_risk_prioritization`. Cumulative-gains curve, capacity selector, delay-capture/lift cards and ranked flight review list.
 - Why ML is necessary: Requires model scores and a retrospective ranking evaluation; it cannot be answered by counting historical delays.
 
 ## Rules for answering the objectives
@@ -50,8 +50,8 @@ To quantify how effectively the selected model concentrates actual delayed fligh
 - O4 is a retrospective ranking/capacity exercise. It does not establish actual money saved, delays prevented, or a deployable real-time alert policy. Use model scores, not unsupported probability labels.
 - All four objectives are answerable using A/B without aircraft rotation. O2 can find improvement, no meaningful change or worse performance; none of these results is assumed in advance.
 - Results describe the historical simulation under its input-availability assumptions. They do not verify actual two-hour live warning performance, or prove the historical schedule snapshot matched what was known at each cutoff.
-- EDA supports cleaning, scope and feature choices and can appear as context in Tableau. The four objectives additionally require fitted models' validation/final-period outputs; descriptive charts remain part of the project. See [the explanation](EDA_AND_ML_EXPLAINED.md).
+- EDA supports cleaning, scope and feature choices and can appear as context in dashboard. The four objectives additionally require fitted models' validation/final-period outputs; descriptive charts remain part of the project. See [the explanation](EDA_AND_ML_EXPLAINED.md).
 
 ## Final compact-feature round
 
-The objectives remain unchanged. Notebooks 06/07 implement the approved final F1-first selection using 2025 and a frozen July-2026 confirmation. O2 uses matched-settings A/B controls on identical flights; it does not claim an independently optimized A model. The retuned 66-feature reference separately measures gains from the compact additions. July covers one summer month at three hubs. Use reports/final_models/RESULTS.md and tableau/exports/final_july/ for the current evidence.
+The final experiment uses F1-first selection on 2025 data and a frozen July-2026 confirmation. The four notebooks in `notebooks/simple/` reproduce its final fitting and evaluation. O2 uses matched-settings A/B controls on identical flights; the retuned 66-feature reference separately measures gains from compact additions. July covers one summer month at three hubs. See [final findings](reports/final_models/RESULTS.md) and the [July export guide](reports/evaluation_exports/README.md).

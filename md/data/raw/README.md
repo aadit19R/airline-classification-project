@@ -4,9 +4,9 @@ All required raw files are now stored inside this project's own `data/raw` direc
 
 ## January–March 2026 extension
 
-The new final-test sources are available: [flight CSVs](flights/bts/2026/csv), [original archives](flights/bts/2026/archives) and [origin weather](weather/observations/2026). They contain 1,671,142 national rows and 228,586 ATL/ORD/DFW schedules. Each origin has weather observations on all 90 Q1 days, with boundary padding. See [the dataset guide](../../DATASET_GUIDE.md).
+The earlier Q1 evaluation sources are available: [flight CSVs](flights/bts/2026/csv), [original archives](flights/bts/2026/archives) and [origin weather](weather/observations/2026). They contain 1,671,142 national rows and 228,586 ATL/ORD/DFW schedules. Each origin has weather observations on all 90 Q1 days, with boundary padding. See [the dataset guide](../../DATASET_GUIDE.md).
 
-The acquisition structural audit loaded no test outcome values. The user subsequently approved excluding both versions at the two ambiguous 2026 weather timestamps, consistent with the six earlier conflicts. The preparation notebooks and both handoffs are now rebuilt for 2025 development/final refit and Q1-2026 testing. Raw report versions remain stored; no test outcome EDA is performed.
+The acquisition structural audit loaded no test outcome values. The user subsequently approved excluding both versions at the two ambiguous 2026 weather timestamps, consistent with the six earlier conflicts. Q1 and Q2 2026 are earlier evaluation periods. The current final model trains on 40,000 all-2025 flights and tests on 10,000 July 2026 flights. Source tables use explicit `preparation_period` names; final train/test membership is stored in the notebook feature handoff.
 
 ## Ready-to-open source files
 
@@ -46,4 +46,4 @@ No file from the old project's processed/interim/model outputs or generated time
 
 BTS does not include a historical timestamp of when each aircraft assignment became known. Aircraft rotation remains excluded; final aircraft registrations do not establish assignment availability at the prediction cutoff. Actual historical delivery/receipt timestamps for weather and flight outcome feeds are also not supplied. These are documented information limits, not silently invented columns.
 
-No classifiers, cleaned dataset, train/test feature matrix or Tableau findings workbook has been created during raw sourcing. The next stage starts fresh cleaning from these source files.
+Use the [current notebook guide](../../notebooks/simple/README.md) for cleaning, feature engineering, fitting and final July evaluation.

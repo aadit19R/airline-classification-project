@@ -1,6 +1,6 @@
 # Dataset reference: departure-delay classification
 
-Verified against local schemas, acquisition audits and the final experiment records on 20 October 2026. This guide describes the data itself, its coverage and its role. It contains no EDA patterns or model performance findings. Counts describe the locally acquired snapshots, not the continually updated source websites.
+Source counts were audited against local schemas, acquisition records and final experiment records on 20 October 2026. Current split metadata is verified in `reports/simple_reproduction/verification.json` and its migration evidence in `reports/study_labels.json`. This guide describes the data itself, its coverage and its role. It contains no EDA patterns or model performance findings. Counts describe the locally acquired snapshots, not the continually updated source websites.
 
 ## 1. What the project uses
 
@@ -32,7 +32,7 @@ National files are retained unchanged. Filtering to three origins happens in the
 
 January 2025 needs earlier flight history. The history rule looks back over a 28-day window ending seven days before the prediction cutoff. Its earliest January windows reach late November 2024. These earlier months are context, not additional 2025 training examples.
 
-The original preparation split is January-September 2025 training/EDA, October-December 2025 validation, and January-March 2026 testing. Later model development uses chronological folds within 2025, followed by a shared all-2025 fitting sample. Q1 and Q2 outcomes had already been evaluated, so July became the final fresh confirmation. No 2026 flights are included in final model fitting. Earlier 2026 outcomes can still enter later 2026 history features under the declared seven-day lag.
+**Current split: 40,000 training flights across January-December 2025 and 10,000 test flights from July 2026.** Model selection uses chronological rounds inside 2025. Q1 and Q2 2026 are earlier evaluated benchmarks, not the current test set. No 2026 flights enter model fitting. Earlier 2026 outcomes can enter later history features under the seven-day lag. July is now exposed and must not be used for new model choices.
 
 ## 3. Flight file structure, variables and units
 
@@ -120,13 +120,15 @@ All airport-reference columns, in file order:
 
 | Item | Rows | Columns | Coverage and role |
 | --- | ---: | ---: | --- |
-| `data/processed/flights_clean.parquet` | 1,339,044 | 33 | Scoped schedules, November 2024-March 2026; preserves context/status and eligibility flags |
+| `data/processed/flights_clean.parquet` | 1,689,081 | 33 | Complete scoped schedules, November 2024-July 2026; saved by notebook 01 |
 | `data/processed/features.parquet` | 1,158,165 | 55 | Eligible 2025 and Q1-2026 query flights; original predictors, label and traceability fields |
-| Later feature matrices | Depends on the frozen cohort | Depends on feature package | Built in memory from saved handoffs plus raw sources; no extra permanent combined feature dataset was required |
+| `reports/simple_reproduction/features.parquet` | 50,000 | 109 | Final model inputs rebuilt by notebook 02; train=40,000 all-2025 flights, test=10,000 July flights |
 
-The clean table includes 153,143 history-context schedules, 957,315 2025 schedules and 228,586 Q1-2026 schedules. The features table contains 938,417 eligible 2025 flights plus 219,748 eligible Q1-2026 flights. It excludes history-only rows as prediction queries. These are two stages of the same project, not independent source datasets.
+The clean table includes 153,143 history-context schedules, 957,315 2025 schedules, 228,586 Q1-2026 schedules, 260,336 Q2 schedules and 89,701 July schedules. The features table contains 938,417 eligible 2025 flights plus 219,748 eligible Q1-2026 flights. It excludes history-only rows as prediction queries. These are two stages of the same project, not independent source datasets.
 
-The two Parquet handoffs preserve the original preparation experiment. They have not silently been extended to July. Later scripts read April-July raw data, build features in memory, and save model/evaluation artifacts. The original `split`, `model_sample` and `refit_sample` flags describe the original experiment. The final cohort record is `reports/final_models/cohorts.json`; final rules and feature columns are in `reports/final_models/protocol.json` and `selection.json`.
+The cleaned schedule handoff covers every acquired month through July. `preparation_period` describes source periods, not final training/test membership. The older 55-column feature table is retained for published EDA/report reproduction; its preparation sample flags are historical. Notebook training reads only the new 50,000-row input table, with frozen cohort IDs from JSON records.
+
+The final notebook handoff, `reports/simple_reproduction/features.parquet`, has one authoritative `split`: `train` for all 40,000 selected 2025 flights and `test` for all 10,000 selected July flights. It has no competing `role` field. Exact fitting IDs remain in `reports/final_models/cohorts.json`. The earlier label migration is recorded in `reports/study_labels.json`; the self-contained notebook refactor and pre-refactor feature fingerprints are recorded in `reports/notebook_refactor.json`. Selected predictor values, labels and row membership are unchanged.
 
 The 55 stored feature-table columns are not 55 predictors: the original B set has 37 predictors, while the rest are labels, identifiers, sample flags and audit timestamps. The original A set has 10 predictors. After later additions, the final A set has 26 input columns. Selected B has 78 for Logistic Regression/KNN, 66 for SVM and 72 for Random Forest. These counts are before one-hot expansion; an encoded numeric matrix can have more columns. See Appendix C for exact final input lists.
 
@@ -149,20 +151,20 @@ All paths below are relative to the project root `departure-delay-classification
 
 | Purpose | Location |
 | --- | --- |
-| 2024 context CSVs | [data/raw/flights/bts/2024_context/csv/](data/raw/flights/bts/2024_context/csv/) |
-| Full 2025 flight CSVs | [data/raw/flights/bts/2025/csv/](data/raw/flights/bts/2025/csv/) |
-| January-July 2026 flight CSVs | [data/raw/flights/bts/2026/csv/](data/raw/flights/bts/2026/csv/) |
-| Original BTS field descriptions | [July 2026 source readme](data/raw/flights/bts/2026/source_documentation/2026_07_readme.html) |
-| Weather CSV responses | [data/raw/weather/observations/](data/raw/weather/observations/) |
-| Weather-station metadata | [data/raw/weather/stations/](data/raw/weather/stations/) |
-| Airport reference | [data/raw/reference/airports/airports.csv](data/raw/reference/airports/airports.csv) |
-| Original preparation handoffs | [data/processed/](data/processed/) |
-| Original preparation rules/log | [reports/preparation_manifest.json](reports/preparation_manifest.json) |
-| Original acquisition source registry | [data/SOURCE_MANIFEST.json](data/SOURCE_MANIFEST.json) |
-| Q2 acquisition details | [data/raw/_provenance/2026_q2_validation_report.json](data/raw/_provenance/2026_q2_validation_report.json) |
-| July acquisition details | [data/raw/_provenance/2026_july_validation_report.json](data/raw/_provenance/2026_july_validation_report.json) |
-| Final cohort definitions | [reports/final_models/cohorts.json](reports/final_models/cohorts.json) |
-| Final feature definitions | [scripts/final_features.py](scripts/final_features.py) and [scripts/improvement_features.py](scripts/improvement_features.py) |
+| 2024 context CSVs | [data/raw/flights/bts/2024_context/csv/](../data/raw/flights/bts/2024_context/csv/) |
+| Full 2025 flight CSVs | [data/raw/flights/bts/2025/csv/](../data/raw/flights/bts/2025/csv/) |
+| January-July 2026 flight CSVs | [data/raw/flights/bts/2026/csv/](../data/raw/flights/bts/2026/csv/) |
+| Original BTS field descriptions | [July 2026 source readme](../data/raw/flights/bts/2026/source_documentation/2026_07_readme.html) |
+| Weather CSV responses | [data/raw/weather/observations/](../data/raw/weather/observations/) |
+| Weather-station metadata | [data/raw/weather/stations/](../data/raw/weather/stations/) |
+| Airport reference | [data/raw/reference/airports/airports.csv](../data/raw/reference/airports/airports.csv) |
+| Original preparation handoffs | [data/processed/](../data/processed/) |
+| Original preparation rules/log | [reports/preparation_manifest.json](../reports/preparation_manifest.json) |
+| Original acquisition source registry | [data/SOURCE_MANIFEST.json](../data/SOURCE_MANIFEST.json) |
+| Q2 acquisition details | [data/raw/_provenance/2026_q2_validation_report.json](../data/raw/_provenance/2026_q2_validation_report.json) |
+| July acquisition details | [data/raw/_provenance/2026_july_validation_report.json](../data/raw/_provenance/2026_july_validation_report.json) |
+| Final cohort definitions | [reports/final_models/cohorts.json](../reports/final_models/cohorts.json) |
+| Final feature definitions | [Feature Engineering notebook](../notebooks/simple/02_feature_engineering.ipynb) |
 
 Some older source guides/configuration notes describe the original Q1 experiment. This reference consolidates later Q2/July acquisitions without rewriting those frozen records.
 
@@ -196,13 +198,15 @@ The groups below list every named CSV field exactly once. The unnamed 110th head
 
 ## Appendix B. Stored Parquet schemas
 
-These are storage types, not a claim that every numeric-looking field is a continuous measurement. Binary flags, categorical codes and audit fields have separate roles.
+Actual stored column names and types. The 55-column table is a retained published reference.
 
-### flights_clean.parquet: 1,339,044 rows, 33 columns
+### Cleaned source context: 1,689,081 rows, 33 columns
+
+`data/processed/flights_clean.parquet`
 
 | Column | Stored type |
-| --- | --- |
-| `flight_date` | `timestamp[us]` |
+|---|---|
+| `flight_date` | `timestamp[ns]` |
 | `airline` | `large_string` |
 | `flight_number` | `large_string` |
 | `origin` | `large_string` |
@@ -214,17 +218,17 @@ These are storage types, not a claim that every numeric-looking field is a conti
 | `diverted` | `double` |
 | `scheduled_duration_minutes` | `double` |
 | `distance_miles` | `double` |
-| `source_row_number` | `int64` |
 | `source_file` | `large_string` |
+| `source_row_number` | `int64` |
 | `flight_id` | `large_string` |
 | `label_eligible` | `bool` |
 | `delayed_departure` | `int8` |
-| `split` | `large_string` |
 | `scheduled_departure_minutes` | `int16` |
 | `scheduled_departure_utc` | `timestamp[ns, tz=UTC]` |
 | `prediction_cutoff_utc` | `timestamp[ns, tz=UTC]` |
 | `departure_outcome_event_utc` | `timestamp[ns, tz=UTC]` |
-| `query_eligible` | `bool` |
+| `preparation_period` | `large_string` |
+| `preparation_query_eligible` | `bool` |
 | `distance_miles_invalid` | `int8` |
 | `scheduled_duration_minutes_invalid` | `int8` |
 | `month` | `int8` |
@@ -236,17 +240,19 @@ These are storage types, not a claim that every numeric-looking field is a conti
 | `month_sin` | `double` |
 | `month_cos` | `double` |
 
-### features.parquet: 1,158,165 rows, 55 columns
+### Published EDA reference: 1,158,165 rows, 55 columns
+
+`data/processed/features.parquet`
 
 | Column | Stored type |
-| --- | --- |
+|---|---|
 | `flight_id` | `large_string` |
 | `source_file` | `large_string` |
 | `source_row_number` | `int64` |
 | `flight_date` | `timestamp[us]` |
-| `split` | `large_string` |
-| `model_sample` | `bool` |
-| `refit_sample` | `bool` |
+| `preparation_period` | `large_string` |
+| `preparation_sample` | `bool` |
+| `initial_refit_sample` | `bool` |
 | `month` | `int8` |
 | `scheduled_departure_utc` | `timestamp[ns, tz=UTC]` |
 | `prediction_cutoff_utc` | `timestamp[ns, tz=UTC]` |
@@ -295,6 +301,122 @@ These are storage types, not a claim that every numeric-looking field is a conti
 | `history_route_n` | `int32` |
 | `history_route_no_history` | `int8` |
 | `airport_scheduled_departures_prior_60m` | `int32` |
+
+### Current model inputs: 50,000 rows, 109 columns
+
+`reports/simple_reproduction/features.parquet`
+
+| Column | Stored type |
+|---|---|
+| `flight_date` | `timestamp[ns]` |
+| `airline` | `large_string` |
+| `flight_number` | `large_string` |
+| `origin` | `large_string` |
+| `destination` | `large_string` |
+| `scheduled_departure_hhmm` | `double` |
+| `departure_delay_minutes` | `double` |
+| `departure_delay_15_source` | `double` |
+| `cancelled` | `double` |
+| `diverted` | `double` |
+| `scheduled_duration_minutes` | `double` |
+| `distance_miles` | `double` |
+| `source_file` | `large_string` |
+| `source_row_number` | `int64` |
+| `flight_id` | `large_string` |
+| `label_eligible` | `bool` |
+| `delayed_departure` | `int8` |
+| `scheduled_departure_minutes` | `int16` |
+| `scheduled_departure_utc` | `timestamp[ns, tz=UTC]` |
+| `prediction_cutoff_utc` | `timestamp[ns, tz=UTC]` |
+| `departure_outcome_event_utc` | `timestamp[ns, tz=UTC]` |
+| `preparation_period` | `large_string` |
+| `preparation_query_eligible` | `bool` |
+| `distance_miles_invalid` | `int8` |
+| `scheduled_duration_minutes_invalid` | `int8` |
+| `month` | `int8` |
+| `weekday` | `int8` |
+| `departure_hour` | `int8` |
+| `departure_time_band` | `large_string` |
+| `departure_sin` | `double` |
+| `departure_cos` | `double` |
+| `month_sin` | `double` |
+| `month_cos` | `double` |
+| `split` | `large_string` |
+| `departure_sin2` | `double` |
+| `departure_cos2` | `double` |
+| `month_sin2` | `double` |
+| `month_cos2` | `double` |
+| `atl_departure_sin` | `double` |
+| `atl_departure_cos` | `double` |
+| `atl_departure_sin2` | `double` |
+| `atl_departure_cos2` | `double` |
+| `ord_departure_sin` | `double` |
+| `ord_departure_cos` | `double` |
+| `ord_departure_sin2` | `double` |
+| `ord_departure_cos2` | `double` |
+| `dfw_departure_sin` | `double` |
+| `dfw_departure_cos` | `double` |
+| `dfw_departure_sin2` | `double` |
+| `dfw_departure_cos2` | `double` |
+| `weather_lookup_utc` | `timestamp[ns, tz=UTC]` |
+| `weather_observed_utc` | `timestamp[ns, tz=UTC]` |
+| `dewpoint_spread_f` | `double` |
+| `wind_east_knots` | `double` |
+| `wind_north_knots` | `double` |
+| `freezing_wet` | `double` |
+| `prior3h_report_n` | `double` |
+| `prior3h_precip_known_n` | `double` |
+| `prior3h_wet_fraction` | `double` |
+| `prior3h_visibility_min` | `double` |
+| `prior3h_gust_max` | `double` |
+| `prior3h_visibility_change` | `double` |
+| `temperature_f` | `double` |
+| `wind_knots` | `double` |
+| `gust_knots` | `double` |
+| `visibility_miles` | `double` |
+| `precip_inches` | `double` |
+| `precip_trace` | `double` |
+| `ceiling_ft` | `double` |
+| `no_ceiling_reported` | `double` |
+| `cloud_coverage_missing` | `double` |
+| `rain_reported` | `double` |
+| `frozen_precip_reported` | `double` |
+| `fog_or_mist_reported` | `double` |
+| `thunder_reported` | `double` |
+| `condition_codes_missing` | `double` |
+| `ceiling_height_missing` | `double` |
+| `weather_source_file` | `large_string` |
+| `weather_age_minutes` | `double` |
+| `weather_report_missing` | `int8` |
+| `history_origin_rate` | `double` |
+| `history_origin_n` | `int32` |
+| `history_origin_no_history` | `int8` |
+| `history_origin_latest_event_utc` | `timestamp[ns, tz=UTC]` |
+| `history_airline_origin_rate` | `double` |
+| `history_airline_origin_n` | `int32` |
+| `history_airline_origin_no_history` | `int8` |
+| `history_airline_origin_latest_event_utc` | `timestamp[ns, tz=UTC]` |
+| `history_route_rate` | `double` |
+| `history_route_n` | `int32` |
+| `history_route_no_history` | `int8` |
+| `history_route_latest_event_utc` | `timestamp[ns, tz=UTC]` |
+| `history_flight_rate` | `double` |
+| `history_flight_n` | `int32` |
+| `history_flight_no_history` | `int8` |
+| `history_flight_latest_event_utc` | `timestamp[ns, tz=UTC]` |
+| `airport_scheduled_departures_prior_60m` | `int32` |
+| `altimeter_inhg` | `double` |
+| `altimeter_change3h_inhg` | `double` |
+| `altimeter_range3h_inhg` | `double` |
+| `variable_wind_flag` | `double` |
+| `gust_excess_knots` | `double` |
+| `altimeter_missing_flag` | `int8` |
+| `temperature_centered_square` | `double` |
+| `wind_square` | `double` |
+| `dewpoint_spread_square` | `double` |
+| `precip_log1p` | `double` |
+| `ceiling_log1p` | `double` |
+| `visibility_inverse` | `double` |
 
 ## Appendix C. Final input columns
 

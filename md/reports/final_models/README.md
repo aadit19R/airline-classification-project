@@ -35,6 +35,6 @@ Compare all four models, the retuned 66-feature reference, matched-settings sche
 - models/final_flight_delay_models.joblib: final fitted pipeline bundle.
 - test_access.json: first July outcome access and locked test procedure.
 - test_results.json: fixed July results and paired comparisons.
-- tableau/exports/final_july/: six versioned result CSVs and an export manifest.
+- reports/evaluation_exports/final_july/: six versioned result CSVs and an export manifest.
 
-The preparation Parquets, original preparation manifest, prior models and earlier exports remain unchanged. No new intermediate feature CSVs are required. The Tableau workbook remains the next deliverable after these results are reconciled.
+The preparation Parquets have clearer period/sample column names; every nonmetadata value is unchanged, as recorded in `reports/study_labels.json`. The original preparation manifest, prior models and earlier exports are preserved. No new intermediate feature CSVs are required. The HTML dashboard uses the final July exports.

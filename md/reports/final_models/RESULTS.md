@@ -96,7 +96,7 @@ The study remains a historical simulation: weather delivery uses an assumed 20-m
 - [Model Training](../../notebooks/simple/03_model_training.ipynb): final settings and eight A/B refits. The completed development searches remain recorded in development.json and selection.json.
 - [Evaluation and Findings](../../notebooks/simple/04_evaluation_and_findings.ipynb): reproduction of the completed July comparisons, error analysis and ranking results.
 - reports/final_models/development_audit.json: score, threshold, cohort and baseline-integrity checks.
-- tableau/exports/final_july/: six reconciled Tableau sources and the exact-run manifest.
+- reports/evaluation_exports/final_july/: six reconciled dashboard sources and the exact-run manifest.
 - models/final_flight_delay_models.joblib: final fitted pipelines.
 
-The Tableau workbook is the next deliverable; these exports are its frozen data snapshot.
+These exports are the frozen evaluation snapshot used by the report and HTML dashboard.

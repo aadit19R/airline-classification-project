@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "extends": "tableau/export_contract.json",
-  "directory": "tableau/exports/improved",
+  "extends": "reports/evaluation_exports/export_contract.json",
+  "directory": "reports/evaluation_exports/improved",
   "evaluation_period": "2026-04-01 through 2026-06-30",
   "split_value": "test_q2_2026",
   "model_versions": [

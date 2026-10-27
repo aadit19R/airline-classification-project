@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / 'tableau/exports/final_july'
+SOURCE = ROOT / 'reports/evaluation_exports/final_july'
 OUT = ROOT / 'dashboard/dist'
 MODELS = ['logistic_regression', 'knn', 'svm', 'random_forest']
 

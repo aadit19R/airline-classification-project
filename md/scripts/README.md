@@ -1,20 +1,16 @@
-# Project scripts
+# Optional project tools
 
-The [four notebooks](../notebooks/simple/README.md) contain the analysis and visible classifier fitting calls. Their reusable modules are:
+The core acquisition, cleaning, feature engineering, training and evaluation code is in the [four notebooks](../notebooks/simple/README.md). They have no project-script imports.
 
-| Module | Purpose |
+| Tool | Purpose |
 |---|---|
-| `simple_sources.py` | Decode the raw flight files and convert schedule times |
-| `simple_workflow.py` | Cleaning checks, feature stages, sklearn pipeline construction and result formatting; no model fitting |
-| `improvement_features.py` | Time/weather/history/traffic calculations used by the selected features |
-| `final_features.py` | Final pressure/wind features and independent feature reconstruction |
-| `final_modelling.py` | Frozen preprocessing recipes, shared sampling and metric utilities |
-| `fresh_test_data.py` | Reviewed source decoding and sampling used by feature reconstruction |
+| `run_simple_notebooks.py` | Run the four notebooks in fresh kernels and record execution |
+| `verify_simple_reproduction.py` | Compare notebook outputs with pre-refactor feature fingerprints, frozen models and published results |
+| `build_html_dashboard.py` | Build the standalone HTML dashboard from frozen evaluation exports |
+| `check_html_dashboard.mjs` | Check dashboard calculations and interactions |
+| `build_final_report.py` | Regenerate the published report from existing handoffs and exports |
+| `audit_raw_data.py` | Structural raw-source audit |
+| `improvement_exports.py` | Export formatting for the earlier Q2 experiment |
+| `finalize_raw_setup.py` | Historical setup publisher; it rewrites configuration and is not part of the current notebook run |
 
-Run `python3 scripts/run_simple_notebooks.py` from the project root to execute all four notebooks in fresh kernels. Outputs go to `reports/simple_reproduction/`. No old notebook or archive is needed.
-
-`verify_simple_reproduction.py` is an **optional** independent check of current features, fitted preprocessing, model results, ranks and dashboard totals. Its [latest result](../reports/simple_reproduction/verification.json) is included. It uses current raw/data/model/export files and `protected_checksums.json`; it does not depend on retired notebook copies.
-
-`build_simple_notebooks.py` authors the notebook sources. Rebuilding clears their outputs, so execute the sequence again afterwards. `build_html_dashboard.py` and `build_final_report.py` regenerate the current dashboard/report from frozen results. `build_tableau_workbook.py` is retained unchanged with the Tableau workspace.
-
-The `acquire_*` scripts, `audit_raw_data.py` and `finalize_raw_setup.py` preserve the source-acquisition history. The source files are already present; ordinary notebook runs need no downloads. The legacy setup publisher rewrites configuration and should not be used to rebuild the completed study. `improvement_exports.py` supports the saved historical export schema. Frozen machine-readable development, selection and evaluation records remain in `reports/`.
+Notebook 01 has one optional acquisition section for all source months. Normal runs reuse local raw files; set `DOWNLOAD_MISSING=True` there only when sources need downloading.

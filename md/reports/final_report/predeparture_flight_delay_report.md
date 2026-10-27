@@ -29,7 +29,7 @@ Richer inputs improved risk ranking, but the selected warning rule generated man
 
 All twelve 2025 BTS files contained 7,001,619 national records. Reading in chunks retained 957,315 scheduled departures at the three origins. Raw files were preserved; a stable flight ID used the source month and original row number. Only raw inputs were reused from the earlier unrelated project.
 
-![Figure 1. EDA uses January-September 2025; final refits cover all 2025 months. Late-2024 records supply history. July 2026 is the fresh test.](figures/01_study_periods.png)
+![Figure 1. EDA uses January-September 2025; final refits cover all 2025 months. Late-2024 records supply history. July 2026 is the fresh test.](../../../reports/final_report/figures/01_study_periods.png)
 
 Figure 1. EDA uses January-September 2025; final refits cover all 2025 months. Late-2024 records supply history. July 2026 is the fresh test.
 
@@ -71,7 +71,7 @@ Scheduled HHMM values became minutes after midnight, then origin-local timestamp
 
 Univariate analysis examines one variable at a time. The EDA population contains **698,670 eligible departures** from January-September 2025. Of these, **180,527 (25.84%)** departed at least 15 minutes late. This imbalance makes an always-on-time classifier look reasonably accurate even though it detects no delays.
 
-![Figure 2. Complete training counts and delay distribution, plus a fixed-seed 10,000-flight scatter sample. The histogram zoom omits 12,380 observations from view only; the full-range box plot retains every delay. The 15-minute line defines the target, not an input.](figures/02_univariate_and_scatter.png)
+![Figure 2. Complete training counts and delay distribution, plus a fixed-seed 10,000-flight scatter sample. The histogram zoom omits 12,380 observations from view only; the full-range box plot retains every delay. The 15-minute line defines the target, not an input.](../../../reports/final_report/figures/02_univariate_and_scatter.png)
 
 Figure 2. Complete training counts and delay distribution, plus a fixed-seed 10,000-flight scatter sample. The histogram zoom omits 12,380 observations from view only; the full-range box plot retains every delay. The 15-minute line defines the target, not an input.
 
@@ -87,7 +87,7 @@ These findings guided the later use of median imputation, scale-aware preprocess
 
 Bivariate analysis compares variables with each other or with the target. The graphs below use rates rather than raw delay counts, because a busy airline can have more delays simply by operating more flights. These are descriptive associations, not causal explanations or proof of predictive improvement.
 
-![Figure 3. All panels describe January-September 2025. The airline adjustment gives AA and F9 the same shared origin-month-time-band mix, requiring at least 30 flights per airline in a group; it retains 183,589 flights, or 99.4% of their combined population.](figures/03_bivariate_findings.png)
+![Figure 3. All panels describe January-September 2025. The airline adjustment gives AA and F9 the same shared origin-month-time-band mix, requiring at least 30 flights per airline in a group; it retains 183,589 flights, or 99.4% of their combined population.](../../../reports/final_report/figures/03_bivariate_findings.png)
 
 Figure 3. All panels describe January-September 2025. The airline adjustment gives AA and F9 the same shared origin-month-time-band mix, requiring at least 30 flights per airline in a group; it retains 183,589 flights, or 99.4% of their combined population.
 
@@ -107,7 +107,7 @@ The deeper EDA also found a sharp shock at ATL on 10 January: 643 of 764 schedul
 
 Weather was joined by origin and time, using the most recent qualifying earlier report. A report had to be at least **20 minutes older than the prediction cutoff**, allowing an assumed delivery buffer, and no more than **180 minutes old**. The code used a backward as-of match, which means it searched backward in time instead of taking the nearest report on either side.
 
-![Figure 4. Flight-weighted training missingness and matched-report age. Every training flight matched a qualifying report, but condition flags were unknown for 90.6% and gust values for 80.3%. The observed report ages were 20-139 minutes, with a median of 49 minutes.](figures/04_weather_quality.png)
+![Figure 4. Flight-weighted training missingness and matched-report age. Every training flight matched a qualifying report, but condition flags were unknown for 90.6% and gust values for 80.3%. The observed report ages were 20-139 minutes, with a median of 49 minutes.](../../../reports/final_report/figures/04_weather_quality.png)
 
 Figure 4. Flight-weighted training missingness and matched-report age. Every training flight matched a qualifying report, but condition flags were unknown for 90.6% and gust values for 80.3%. The observed report ages were 20-139 minutes, with a median of 49 minutes.
 
@@ -127,7 +127,7 @@ Another source convention matters: visibility was stored at exactly 10 miles for
 
 ## Building useful features and a fair model input
 
-![Figure 5. The timing diagram is a schematic of the history and prediction rules. Clock coordinates are a mathematical representation, not measured effects. They keep 23:55 close to 00:05 and avoid treating midnight as a large numerical jump.](figures/05_feature_logic.png)
+![Figure 5. The timing diagram is a schematic of the history and prediction rules. Clock coordinates are a mathematical representation, not measured effects. They keep 23:55 close to 00:05 and avoid treating midnight as a large numerical jump.](../../../reports/final_report/figures/05_feature_logic.png)
 
 Figure 5. The timing diagram is a schematic of the history and prediction rules. Clock coordinates are a mathematical representation, not measured effects. They keep 23:55 close to 00:05 and avoid treating midnight as a large numerical jump.
 
@@ -190,7 +190,7 @@ The July sample has 3,215 delays among 10,000 flights (population: 87,298). Prec
 
 **Logistic Regression B remains the validation choice.** Its July F1 is 0.540 and recall is 92.4%, but precision is 38.1%. It produced 2,971 correct warnings, 4,827 false warnings and 244 missed delays. Thus 61.9% of its warnings were false. KNN's higher July F1 does not change the earlier selection. LR fit in 0.37 seconds and scored 10,000 flights in 0.023 seconds; SVM took about 250 seconds and 14 seconds respectively on this run.
 
-![Figure 6. Richer B minus matched-settings schedule A on identical July flights. Points are observed gains; whiskers are paired 95% day-bootstrap intervals (300 draws, 31 days). They are conditional on the fitted models, not guarantees about future years.](figures/06_feature_gains.png)
+![Figure 6. Richer B minus matched-settings schedule A on identical July flights. Points are observed gains; whiskers are paired 95% day-bootstrap intervals (300 draws, 31 days). They are conditional on the fitted models, not guarantees about future years.](../../../reports/final_report/figures/06_feature_gains.png)
 
 Figure 6. Richer B minus matched-settings schedule A on identical July flights. Points are observed gains; whiskers are paired 95% day-bootstrap intervals (300 draws, 31 days). They are conditional on the fitted models, not guarantees about future years.
 
@@ -230,5 +230,5 @@ The organization follows the concise introduction, EDA, modeling and conclusion 
 
 [6] OurAirports. [Raw airport reference downloads](https://ourairports.com/data/). Accessed 19 October 2026.
 
-Project evidence: notebooks 01 and 02 (cleaning and features), 02a (deeper EDA), 06 and 07 (final modeling and July confirmation); reports/preparation_manifest.json; reports/final_models/selection.json; tableau/exports/final_july/. The interactive HTML dashboard presents O1-O4. Report figures are regenerated from saved data, without refitting models.
+Project evidence: the four notebooks in notebooks/simple/; reports/preparation_manifest.json; reports/final_models/selection.json; reports/evaluation_exports/final_july/. The interactive HTML dashboard presents O1-O4. Report figures are regenerated from saved data, without refitting models.
 
